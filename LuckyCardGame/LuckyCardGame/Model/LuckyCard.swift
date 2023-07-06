@@ -17,10 +17,11 @@ protocol Card{
  MARK: LuckyCard하나의 정보를 표현한 struct입니다. set이 없기 때문에 굳이 class로 만들 이유가 없다고 생각해서 struct를 사용했습니다.
  */
 struct LuckyCard: Card, Hashable{
-    
-    var number: CardNumber
-    var animal: Animal
-    
+    private(set) var number: CardNumber
+    private(set) var animal: Animal
+    var describe: String{
+        return "\(animal.rawValue)" + String(format:"%02d", number.rawValue)
+    }
     init(number: CardNumber, animal: Animal){
         self.number = number
         self.animal = animal
