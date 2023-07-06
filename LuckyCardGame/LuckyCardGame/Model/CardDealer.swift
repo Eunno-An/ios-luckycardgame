@@ -13,7 +13,9 @@ import Foundation
  */
 struct CardDealer{
     
-    
+    init(){
+        
+    }
 }
 extension CardDealer{
     
@@ -40,21 +42,21 @@ extension CardDealer{
         
         if attendeeNum == .three{
             for i in stride(from:0, through: 16, by: 8){
-                luckyCard2dArr.append(Array(cardPool[i..<i+8]))
+                luckyCard2dArr.append(Array(shuffledCardPool[i..<i+8]))
             }
-            luckyCard2dArr.append(Array(cardPool[24..<33]))
+            luckyCard2dArr.append(Array(shuffledCardPool[24..<33]))
         }
         else if attendeeNum == .four{
             for i in stride(from:0, through: 21, by: 7){
-                luckyCard2dArr.append(Array(cardPool[i..<i+8]))
+                luckyCard2dArr.append(Array(shuffledCardPool[i..<i+8]))
             }
-            luckyCard2dArr.append(Array(cardPool[28..<36]))
+            luckyCard2dArr.append(Array(shuffledCardPool[28..<36]))
         }
         else if attendeeNum == .five{
             for i in stride(from:0, through: 24, by: 6){
-                luckyCard2dArr.append(Array(cardPool[i..<i+8]))
+                luckyCard2dArr.append(Array(shuffledCardPool[i..<i+8]))
             }
-            luckyCard2dArr.append(Array(cardPool[30..<36]))
+            luckyCard2dArr.append(Array(shuffledCardPool[30..<36]))
         }
         
         return luckyCard2dArr

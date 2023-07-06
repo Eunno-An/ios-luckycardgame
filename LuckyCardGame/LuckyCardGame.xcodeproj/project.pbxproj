@@ -28,6 +28,7 @@
 		D4A6FA8A2A56F2CF00637995 /* ConstantValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA892A56F2CF00637995 /* ConstantValue.swift */; };
 		D4A6FA8F2A56F7C400637995 /* SegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA8E2A56F7C400637995 /* SegmentedControlView.swift */; };
 		D4A6FA912A571BAD00637995 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA902A571BAD00637995 /* GameView.swift */; };
+		D4A6FA932A571EDD00637995 /* LuckyCardGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA922A571EDD00637995 /* LuckyCardGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		D4A6FA892A56F2CF00637995 /* ConstantValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantValue.swift; sourceTree = "<group>"; };
 		D4A6FA8E2A56F7C400637995 /* SegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlView.swift; sourceTree = "<group>"; };
 		D4A6FA902A571BAD00637995 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		D4A6FA922A571EDD00637995 /* LuckyCardGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyCardGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				D4A6FA822A56B85C00637995 /* Tester.swift */,
 				D4A6FA842A56B93400637995 /* Attendee.swift */,
 				D4A6FA862A56B95600637995 /* CardDealer.swift */,
+				D4A6FA922A571EDD00637995 /* LuckyCardGame.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				D45D49D52A54727C00641A8F /* LuckyCard.swift in Sources */,
 				D4A6FA852A56B93400637995 /* Attendee.swift in Sources */,
 				D4988B072A53E1D7001456FF /* AppDelegate.swift in Sources */,
+				D4A6FA932A571EDD00637995 /* LuckyCardGame.swift in Sources */,
 				D4A6FA8F2A56F7C400637995 /* SegmentedControlView.swift in Sources */,
 				D4A6FA832A56B85C00637995 /* Tester.swift in Sources */,
 				D45D49CE2A5451D100641A8F /* RoundBoardView.swift in Sources */,
