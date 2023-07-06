@@ -25,6 +25,7 @@
 		D4A6FA832A56B85C00637995 /* Tester.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA822A56B85C00637995 /* Tester.swift */; };
 		D4A6FA852A56B93400637995 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA842A56B93400637995 /* Attendee.swift */; };
 		D4A6FA872A56B95600637995 /* CardDealer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA862A56B95600637995 /* CardDealer.swift */; };
+		D4A6FA8A2A56F2CF00637995 /* ConstantValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA892A56F2CF00637995 /* ConstantValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		D4A6FA822A56B85C00637995 /* Tester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tester.swift; sourceTree = "<group>"; };
 		D4A6FA842A56B93400637995 /* Attendee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		D4A6FA862A56B95600637995 /* CardDealer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDealer.swift; sourceTree = "<group>"; };
+		D4A6FA892A56F2CF00637995 /* ConstantValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 		D4988B052A53E1D7001456FF /* LuckyCardGame */ = {
 			isa = PBXGroup;
 			children = (
+				D4A6FA882A56F2B700637995 /* Constant */,
 				D45D49D12A5466BA00641A8F /* Model */,
 				D45D49CA2A54513A00641A8F /* View */,
 				D4988B062A53E1D7001456FF /* AppDelegate.swift */,
@@ -168,6 +171,14 @@
 				D4988B292A53E1D8001456FF /* LuckyCardGameUITestsLaunchTests.swift */,
 			);
 			path = LuckyCardGameUITests;
+			sourceTree = "<group>";
+		};
+		D4A6FA882A56F2B700637995 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				D4A6FA892A56F2CF00637995 /* ConstantValue.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +316,7 @@
 				D427E6FE2A5556EA001B2F8E /* Animal.swift in Sources */,
 				D4A6FA872A56B95600637995 /* CardDealer.swift in Sources */,
 				D4988B0B2A53E1D7001456FF /* ViewController.swift in Sources */,
+				D4A6FA8A2A56F2CF00637995 /* ConstantValue.swift in Sources */,
 				D4A6FA7D2A56B28B00637995 /* CardNumber.swift in Sources */,
 				D45D49D52A54727C00641A8F /* LuckyCard.swift in Sources */,
 				D4A6FA852A56B93400637995 /* Attendee.swift in Sources */,

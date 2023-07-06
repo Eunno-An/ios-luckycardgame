@@ -12,23 +12,6 @@ let screenHeight = UIScreen.main.bounds.size.height
 let screenWidth = UIScreen.main.bounds.size.width
 
 class ViewController: UIViewController {
-    
-    // MARK: 상수정보
-    struct Constant{
-        static let topRectHeight:CGFloat = 44
-        static let horizontalSpacing:CGFloat = 20
-        static let topSpacing:CGFloat = 60
-        static let bottomSpacing:CGFloat = 30
-        static let spacing:CGFloat = 10
-    }
-    
-    // MARK: Board의 공통 정보
-    struct Board{
-        static let height:CGFloat = CGFloat( screenHeight / 8) // board의 세로 길이
-        static let width:CGFloat = CGFloat(screenWidth) - Constant.bottomSpacing // board의 가로 길이
-        static let labels = ["A", "B", "C", "D", "E"] // board의 각 레이블
-    }
-    
     // MARK: 노란색 board의 정보
     private var rect_top: PlayerboardView = {
         let topboard = PlayerboardView(frame: CGRect(x: (CGFloat(Constant.horizontalSpacing)),
@@ -70,20 +53,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 카드 객체 인스턴스를 생성하는 곳에서 문자열로 콘솔에 출력하는 부분입니다.
-        
-        let deck = Deck()
-        deck.setCards()
-        Tester.printCardInfo(deck: deck)
-        
-        addsubview()
-    }
-    
-    func addsubview(){
-        let views = [rect_top, rect_bottom] + playerBoards
-        views.forEach{
-            self.view.addSubview($0)
-        }
     }
     
 }
