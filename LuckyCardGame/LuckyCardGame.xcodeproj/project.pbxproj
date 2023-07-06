@@ -27,6 +27,7 @@
 		D4A6FA872A56B95600637995 /* CardDealer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA862A56B95600637995 /* CardDealer.swift */; };
 		D4A6FA8A2A56F2CF00637995 /* ConstantValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA892A56F2CF00637995 /* ConstantValue.swift */; };
 		D4A6FA8F2A56F7C400637995 /* SegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA8E2A56F7C400637995 /* SegmentedControlView.swift */; };
+		D4A6FA912A571BAD00637995 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA902A571BAD00637995 /* GameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		D4A6FA862A56B95600637995 /* CardDealer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDealer.swift; sourceTree = "<group>"; };
 		D4A6FA892A56F2CF00637995 /* ConstantValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantValue.swift; sourceTree = "<group>"; };
 		D4A6FA8E2A56F7C400637995 /* SegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlView.swift; sourceTree = "<group>"; };
+		D4A6FA902A571BAD00637995 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				D4A6FA8E2A56F7C400637995 /* SegmentedControlView.swift */,
 				D45D49CD2A5451D100641A8F /* RoundBoardView.swift */,
 				D45D49CF2A54549B00641A8F /* PlayerboardView.swift */,
+				D4A6FA902A571BAD00637995 /* GameView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				D427E6FE2A5556EA001B2F8E /* Animal.swift in Sources */,
 				D4A6FA872A56B95600637995 /* CardDealer.swift in Sources */,
 				D4988B0B2A53E1D7001456FF /* ViewController.swift in Sources */,
+				D4A6FA912A571BAD00637995 /* GameView.swift in Sources */,
 				D4A6FA8A2A56F2CF00637995 /* ConstantValue.swift in Sources */,
 				D4A6FA7D2A56B28B00637995 /* CardNumber.swift in Sources */,
 				D45D49D52A54727C00641A8F /* LuckyCard.swift in Sources */,

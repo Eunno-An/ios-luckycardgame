@@ -12,5 +12,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(SegmentedControlView())
+        self.view.addSubview(GameView())
     }
 }
