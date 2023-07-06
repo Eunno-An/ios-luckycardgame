@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D427E6FE2A5556EA001B2F8E /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D427E6FD2A5556EA001B2F8E /* Animal.swift */; };
+		D45D49CE2A5451D100641A8F /* RoundBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45D49CD2A5451D100641A8F /* RoundBoardView.swift */; };
+		D45D49D02A54549B00641A8F /* PlayerboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45D49CF2A54549B00641A8F /* PlayerboardView.swift */; };
+		D45D49D52A54727C00641A8F /* LuckyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45D49D42A54727C00641A8F /* LuckyCard.swift */; };
+		D45D49D72A54F7ED00641A8F /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45D49D62A54F7ED00641A8F /* Deck.swift */; };
 		D4988B072A53E1D7001456FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4988B062A53E1D7001456FF /* AppDelegate.swift */; };
 		D4988B092A53E1D7001456FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4988B082A53E1D7001456FF /* SceneDelegate.swift */; };
 		D4988B0B2A53E1D7001456FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4988B0A2A53E1D7001456FF /* ViewController.swift */; };
@@ -36,6 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D427E6FD2A5556EA001B2F8E /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
+		D45D49CD2A5451D100641A8F /* RoundBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundBoardView.swift; sourceTree = "<group>"; };
+		D45D49CF2A54549B00641A8F /* PlayerboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerboardView.swift; sourceTree = "<group>"; };
+		D45D49D42A54727C00641A8F /* LuckyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyCard.swift; sourceTree = "<group>"; };
+		D45D49D62A54F7ED00641A8F /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		D4988B032A53E1D7001456FF /* LuckyCardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuckyCardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4988B062A53E1D7001456FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4988B082A53E1D7001456FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +86,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D45D49CA2A54513A00641A8F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D45D49CD2A5451D100641A8F /* RoundBoardView.swift */,
+				D45D49CF2A54549B00641A8F /* PlayerboardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D45D49D12A5466BA00641A8F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D45D49D42A54727C00641A8F /* LuckyCard.swift */,
+				D45D49D62A54F7ED00641A8F /* Deck.swift */,
+				D427E6FD2A5556EA001B2F8E /* Animal.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D4988AFA2A53E1D7001456FF = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +128,8 @@
 		D4988B052A53E1D7001456FF /* LuckyCardGame */ = {
 			isa = PBXGroup;
 			children = (
+				D45D49D12A5466BA00641A8F /* Model */,
+				D45D49CA2A54513A00641A8F /* View */,
 				D4988B062A53E1D7001456FF /* AppDelegate.swift */,
 				D4988B082A53E1D7001456FF /* SceneDelegate.swift */,
 				D4988B0A2A53E1D7001456FF /* ViewController.swift */,
@@ -258,9 +289,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D45D49D72A54F7ED00641A8F /* Deck.swift in Sources */,
+				D427E6FE2A5556EA001B2F8E /* Animal.swift in Sources */,
 				D4988B0B2A53E1D7001456FF /* ViewController.swift in Sources */,
+				D45D49D52A54727C00641A8F /* LuckyCard.swift in Sources */,
 				D4988B072A53E1D7001456FF /* AppDelegate.swift in Sources */,
+				D45D49CE2A5451D100641A8F /* RoundBoardView.swift in Sources */,
 				D4988B092A53E1D7001456FF /* SceneDelegate.swift in Sources */,
+				D45D49D02A54549B00641A8F /* PlayerboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

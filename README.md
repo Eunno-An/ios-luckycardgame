@@ -46,3 +46,14 @@ XCTest 기반 단위 테스트 코드 작성법 학습
 - 보드에 대한 공통 코드 함수화(createRectView 함수 작성)
 - Board 좌표 계산, 공통 정보를 구조체화
 
+### Step2
+ |기능|스크린샷|완성시간|
+ |:--:|:--:|:--:|
+ |- 럭키카드 클래스 구현 |<img width="648" alt="image" src="https://github.com/Eunno-An/ios-luckycardgame/assets/33450365/f67f066e-4afa-4524-86ea-1d30c4000f34">
+|2023.07.05 17:30|
+
+ 주요 작업 내용
+- 카드, 럭키카드, 덱 데이터 모델 파일 생성
+- 프로토콜과 class, struct, enum등 인스턴스와 메모리 관련된 고민을 통한 프로그래밍
+- 럭키카드의 잘못된 데이터 예외처리
+

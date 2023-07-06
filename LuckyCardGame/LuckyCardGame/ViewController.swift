@@ -13,83 +13,82 @@ let screenWidth = UIScreen.main.bounds.size.width
 
 class ViewController: UIViewController {
     
+    // MARK: 상수정보
+    struct Constant{
+        static let topRectHeight:CGFloat = 44
+        static let horizontalSpacing:CGFloat = 20
+        static let topSpacing:CGFloat = 60
+        static let bottomSpacing:CGFloat = 30
+        static let spacing:CGFloat = 10
+    }
+    
     // MARK: Board의 공통 정보
     struct Board{
-        static let height: CGFloat = screenHeight / 8 // board의 세로 길이
-        static let width: CGFloat = screenWidth - 20 // board의 가로 길이
+        static let height:CGFloat = CGFloat( screenHeight / 8) // board의 세로 길이
+        static let width:CGFloat = CGFloat(screenWidth) - Constant.bottomSpacing // board의 가로 길이
         static let labels = ["A", "B", "C", "D", "E"] // board의 각 레이블
-        static let spacing: CGFloat = 10 // board 사이의 spacing
-        static let radius: CGFloat = 10 // board의 corner radius값
     }
     
     // MARK: 노란색 board의 정보
-    let rect_Top: UIView = {
-        let rect = CGRect(x: 10, y: 60, width: Board.width, height: 44)
-        let view = UIView(frame: rect)
-        
-        view.backgroundColor = .yellow
-        view.layer.cornerRadius = Board.radius
-        
-        return view
+    private var rect_top: PlayerboardView = {
+        let topboard = PlayerboardView(frame: CGRect(x: (CGFloat(Constant.horizontalSpacing)),
+                                                     y : Constant.topSpacing,
+                                                     width: (CGFloat(Int(screenWidth)) - CGFloat(Constant.horizontalSpacing * 2)),
+                                                     height: Constant.topRectHeight),
+                                       name: "")
+        topboard.backgroundColor = .yellow
+        return topboard
+    }()
+    
+    private lazy var playerBoards: [PlayerboardView] = {
+        let boards = ["A", "B", "C", "D", "E"].enumerated().map{ i, name in
+            return PlayerboardView(frame:
+                                    CGRect(x: (CGFloat(Constant.horizontalSpacing)),
+                                        y: Constant.topSpacing + Constant.topRectHeight + Constant.spacing * CGFloat(i+1) + Board.height * CGFloat(i),
+                                    width: CGFloat(screenWidth) - CGFloat(Constant.horizontalSpacing * 2),
+                                        height: Board.height)
+                                    ,
+                                   name: name)
+        }
+        return boards
     }()
     
     // MARK: 중간 회색 board의 정보
-    let rect_Bottom: UIView = {
-        let lastBoardHeight: CGFloat = screenHeight - (Board.spacing * 6 + Board.height * 5 + 60 + 44) - 30 // 마지막 보드의 길이 = 전체 길이 - (board사이의 간격 * 간격 개수 + board의 높이 * board 개수 + rect_Top의 height) - 맨 아래 spacing
-        let rect = CGRect(x: 10, y: 114 + 5 * (Board.height + Board.spacing), width: Board.width, height: lastBoardHeight)
-        let view = UIView(frame: rect)
+    private lazy var rect_bottom: RoundBoardView = {
+        
+        let lastBoardHeight: CGFloat = CGFloat(screenHeight - (Constant.spacing * 6 + Board.height * 5 + Constant.topSpacing + Constant.topRectHeight) - Constant.bottomSpacing)
+        
+        let view = RoundBoardView(frame: CGRect(
+            x: Constant.horizontalSpacing, y: Constant.topSpacing + Constant.topRectHeight + Constant.spacing + 5 * (Board.height + Constant.spacing), width: (screenWidth) - Constant.horizontalSpacing * 2, height: lastBoardHeight
+        ))
         
         view.backgroundColor = .systemGray
-        view.layer.cornerRadius = Board.radius
         
         return view
     }()
     
-    // MARK: frame과 label을 받아서 보드를 반환하는 함수
-    
-    /// - Parameter frame : board의 CGRect정보
-    /// - Parameter terminator :board의 label
-    ///
-    /// - returns : Board의 View 반환
-    func createRectView(frame: CGRect, boardLabel: String) -> UIView {
-        
-        let view = UIView(frame: frame)
-        
-        view.backgroundColor = .systemGray5
-        view.layer.cornerRadius = Board.radius
-        
-        let label = UILabel(frame: CGRect(x: 20, y: 0, width: view.bounds.width, height: view.bounds.height))
-        
-        label.text = boardLabel
-        label.textAlignment = .left
-        
-        let descriptor = UIFont.systemFont(ofSize: 40, weight: .heavy).fontDescriptor
-            .withSymbolicTraits([.traitBold, .traitItalic]) // 이탈릭체와 볼드체를 같이 쓸 때 사용하는 descriptor
-        
-        label.font = UIFont(descriptor: descriptor!, size: 40)
-        
-        label.textColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-        
-        label.sizeToFit()
-        
-        label.frame = CGRect(origin: label.frame.origin, size: CGSize(width: label.frame.width, height: view.frame.height))
-        
-        view.addSubview(label)
-        
-        return view
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(rect_Top)
-        
-        for i in 0..<5{
-            self.view.addSubview(createRectView(frame:  CGRect(x: 10, y: CGFloat(114 + Int((Board.height + Board.spacing)) * i), width: Board.width, height: Board.height), boardLabel: Board.labels[i]))
+        // 카드 객체 인스턴스를 생성하는 곳에서 문자열로 콘솔에 출력하는 부분입니다.
+        do{
+            let deck = try Deck()
+            deck.printCardInfo(deck: deck)
+        }catch LuckyCardError.invalidAnimal{
+            print("이상한 동물이 존재합니다")
+        }catch LuckyCardError.invalidNumber{
+            print("이상한 번호가 존재합니다")
+        }catch{
+            print("다시 실행해주세요")
         }
-        
-        self.view.addSubview(rect_Bottom)
+        addsubview()
     }
-
-
+    
+    func addsubview(){
+        let views = [rect_top, rect_bottom] + playerBoards
+        views.forEach{
+            self.view.addSubview($0)
+        }
+    }
+    
 }
