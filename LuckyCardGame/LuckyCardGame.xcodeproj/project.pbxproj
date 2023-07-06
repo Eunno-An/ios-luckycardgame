@@ -23,6 +23,8 @@
 		D4988B2A2A53E1D8001456FF /* LuckyCardGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4988B292A53E1D8001456FF /* LuckyCardGameUITestsLaunchTests.swift */; };
 		D4A6FA7D2A56B28B00637995 /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA7C2A56B28B00637995 /* CardNumber.swift */; };
 		D4A6FA832A56B85C00637995 /* Tester.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA822A56B85C00637995 /* Tester.swift */; };
+		D4A6FA852A56B93400637995 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA842A56B93400637995 /* Attendee.swift */; };
+		D4A6FA872A56B95600637995 /* CardDealer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA862A56B95600637995 /* CardDealer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		D4988B292A53E1D8001456FF /* LuckyCardGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyCardGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D4A6FA7C2A56B28B00637995 /* CardNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumber.swift; sourceTree = "<group>"; };
 		D4A6FA822A56B85C00637995 /* Tester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tester.swift; sourceTree = "<group>"; };
+		D4A6FA842A56B93400637995 /* Attendee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
+		D4A6FA862A56B95600637995 /* CardDealer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDealer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 				D427E6FD2A5556EA001B2F8E /* Animal.swift */,
 				D4A6FA7C2A56B28B00637995 /* CardNumber.swift */,
 				D4A6FA822A56B85C00637995 /* Tester.swift */,
+				D4A6FA842A56B93400637995 /* Attendee.swift */,
+				D4A6FA862A56B95600637995 /* CardDealer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -297,9 +303,11 @@
 			files = (
 				D45D49D72A54F7ED00641A8F /* Deck.swift in Sources */,
 				D427E6FE2A5556EA001B2F8E /* Animal.swift in Sources */,
+				D4A6FA872A56B95600637995 /* CardDealer.swift in Sources */,
 				D4988B0B2A53E1D7001456FF /* ViewController.swift in Sources */,
 				D4A6FA7D2A56B28B00637995 /* CardNumber.swift in Sources */,
 				D45D49D52A54727C00641A8F /* LuckyCard.swift in Sources */,
+				D4A6FA852A56B93400637995 /* Attendee.swift in Sources */,
 				D4988B072A53E1D7001456FF /* AppDelegate.swift in Sources */,
 				D4A6FA832A56B85C00637995 /* Tester.swift in Sources */,
 				D45D49CE2A5451D100641A8F /* RoundBoardView.swift in Sources */,
