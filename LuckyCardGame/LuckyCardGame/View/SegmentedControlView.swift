@@ -16,7 +16,7 @@ class SegmentedControlView: UIView{
     init(){
         super.init(frame: CGRect(x: (CGFloat(Constant.horizontalSpacing)),
                                  y : Constant.topSpacing,
-                                 width: (CGFloat(Int(screenWidth)) - CGFloat(Constant.horizontalSpacing * 2)), height: Constant.topRectHeight))
+                                 width: (CGFloat(Int(Constant.screenWidth)) - CGFloat(Constant.horizontalSpacing * 2)), height: Constant.topRectHeight))
         self.addSubview(getUISegmentedControlView())
         
     }
