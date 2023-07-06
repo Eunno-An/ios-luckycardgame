@@ -72,7 +72,8 @@ class ViewController: UIViewController {
         
         // 카드 객체 인스턴스를 생성하는 곳에서 문자열로 콘솔에 출력하는 부분입니다.
         do{
-            let deck = try Deck()
+            let deck = Deck()
+            try deck.setCards()
             deck.printCardInfo(deck: deck)
         }catch LuckyCardError.invalidAnimal{
             print("이상한 동물이 존재합니다")

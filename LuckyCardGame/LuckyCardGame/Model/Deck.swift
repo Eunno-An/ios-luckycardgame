@@ -18,15 +18,14 @@ import Foundation
  */
 class Deck{
     
-    var cards: [LuckyCard] = []
+    var cards: [LuckyCard]
     
-    init() throws{
-        do{
-            try setCards()
-        }catch{
-            cards = []
-            throw error
-        }
+    init() {
+        self.cards = []
+    }
+    convenience init(cards: [LuckyCard]){
+        self.init()
+        self.cards = cards
     }
 }
 
