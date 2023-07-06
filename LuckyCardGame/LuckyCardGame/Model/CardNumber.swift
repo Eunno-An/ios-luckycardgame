@@ -23,7 +23,6 @@ enum CardNumber: Int, CaseIterable{
     case eight
     case nine
     case ten
-    case J
-    case Q
-    case K
+    case eleven
+    case twelve
 }

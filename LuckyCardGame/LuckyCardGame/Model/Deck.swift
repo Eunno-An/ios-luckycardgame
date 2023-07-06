@@ -38,16 +38,9 @@ class Deck{
  */
 extension Deck{
     
-    func setCards() throws{
-        let numbers:[Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].shuffled()
-        for number in numbers{
-            let luckyCard = LuckyCard(number: number, animal: Animal.allCases.randomElement()!)
-            if(luckyCard.isValidNum == false){
-                throw LuckyCardError.invalidNumber
-            }
-            if(luckyCard.isValidAnimal == false){
-                throw LuckyCardError.invalidAnimal
-            }
+    func setCards(){
+        for _ in 0..<12{
+            let luckyCard = LuckyCard(number: CardNumber.allCases.randomElement()!, animal: Animal.allCases.randomElement()!)
             self.cards.append(luckyCard)
         }
     }
@@ -68,7 +61,7 @@ extension Deck{
         var printString: String = ""
         for card in deck.cards{
             printString += "\(card.animal.rawValue)"
-            printString += String(format:"%02d", card.number)
+            printString += String(format:"%02d", card.number.rawValue)
             printString += ", "
         }
         if(printString.count >= 2){

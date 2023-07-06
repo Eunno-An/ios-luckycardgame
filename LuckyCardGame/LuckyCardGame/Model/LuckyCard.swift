@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: Card 프로토콜입니다. 추후 구현사항이 더 있을수도 있어 따로 Protocol을 채택하도록 만들었습니다.
 protocol Card{
-    var number: Int{get}
+    var number: CardNumber{get}
     var animal: Animal{get}
 }
 
@@ -18,28 +18,12 @@ protocol Card{
  */
 struct LuckyCard: Card, Hashable{
     
-    var number: Int
+    var number: CardNumber
     var animal: Animal
     
-    init(number: Int, animal: Animal){
+    init(number: CardNumber, animal: Animal){
         self.number = number
         self.animal = animal
     }
-}
-
-// MARK: LuckyCard의 Validator를 따로 구조체나 클래스 혹은 enum으로 만들기 보다는 extension으로 사용하는게 더 좋은 방법인것 같아서 이렇게 사용했습니다.
-extension LuckyCard{
-    var isValidNum: Bool{
-        return (1...12).contains(number)
-    }
-    var isValidAnimal: Bool{
-        return Animal.allCases.contains(animal)
-    }
-}
-
-// MARK: LuckyCard에서 발생할 수 있는 Error의 열거형입니다.
-enum LuckyCardError: Error{
-    case invalidNumber
-    case invalidAnimal
 }
 

@@ -71,17 +71,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 카드 객체 인스턴스를 생성하는 곳에서 문자열로 콘솔에 출력하는 부분입니다.
-        do{
-            let deck = Deck()
-            try deck.setCards()
-            deck.printCardInfo(deck: deck)
-        }catch LuckyCardError.invalidAnimal{
-            print("이상한 동물이 존재합니다")
-        }catch LuckyCardError.invalidNumber{
-            print("이상한 번호가 존재합니다")
-        }catch{
-            print("다시 실행해주세요")
-        }
+        
+        let deck = Deck()
+        deck.setCards()
+        deck.printCardInfo(deck: deck)
+        
         addsubview()
     }
     
