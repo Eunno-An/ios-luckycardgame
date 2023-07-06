@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         
         let deck = Deck()
         deck.setCards()
-        deck.printCardInfo(deck: deck)
+        Tester.printCardInfo(deck: deck)
         
         addsubview()
     }

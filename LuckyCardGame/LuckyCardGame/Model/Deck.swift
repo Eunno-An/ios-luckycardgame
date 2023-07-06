@@ -46,28 +46,3 @@ extension Deck{
     }
     
 }
-
-/*
- MARK: Deck의 cards 프로퍼티 정보를 출력하는 부분입니다.
- card의 number가 한자리 숫자일 때,
- 두자리로 만들어주기 위한 format 처리를 해주었습니다.
- 출력 형식을 맞추기 위해, printString의 마지막 두 문자 ", "를 지워줬습니다.
- 또한 처리 부분과 분리했습니다.
-*/
-extension Deck{
-    
-    // MARK: deck의 card들의 정보를 출력하는 함수. 숫자 두자리료 표현하기위해 format을 사용.
-    func printCardInfo(deck: Deck){
-        var printString: String = ""
-        for card in deck.cards{
-            printString += "\(card.animal.rawValue)"
-            printString += String(format:"%02d", card.number.rawValue)
-            printString += ", "
-        }
-        if(printString.count >= 2){
-            printString.removeLast(2) // 카드에 이상한 번호가 들어있거나, 이상한 심볼이 들어가있으면 cards배열이 비게되는데, 이를 막기위한 예외처리입니다.
-            print(printString)
-        }
-        
-    }
-}
