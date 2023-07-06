@@ -21,6 +21,7 @@
 		D4988B1E2A53E1D8001456FF /* LuckyCardGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4988B1D2A53E1D8001456FF /* LuckyCardGameTests.swift */; };
 		D4988B282A53E1D8001456FF /* LuckyCardGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4988B272A53E1D8001456FF /* LuckyCardGameUITests.swift */; };
 		D4988B2A2A53E1D8001456FF /* LuckyCardGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4988B292A53E1D8001456FF /* LuckyCardGameUITestsLaunchTests.swift */; };
+		D4A6FA7D2A56B28B00637995 /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA7C2A56B28B00637995 /* CardNumber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		D4988B232A53E1D8001456FF /* LuckyCardGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuckyCardGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4988B272A53E1D8001456FF /* LuckyCardGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyCardGameUITests.swift; sourceTree = "<group>"; };
 		D4988B292A53E1D8001456FF /* LuckyCardGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyCardGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D4A6FA7C2A56B28B00637995 /* CardNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumber.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				D45D49D42A54727C00641A8F /* LuckyCard.swift */,
 				D45D49D62A54F7ED00641A8F /* Deck.swift */,
 				D427E6FD2A5556EA001B2F8E /* Animal.swift */,
+				D4A6FA7C2A56B28B00637995 /* CardNumber.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				D45D49D72A54F7ED00641A8F /* Deck.swift in Sources */,
 				D427E6FE2A5556EA001B2F8E /* Animal.swift in Sources */,
 				D4988B0B2A53E1D7001456FF /* ViewController.swift in Sources */,
+				D4A6FA7D2A56B28B00637995 /* CardNumber.swift in Sources */,
 				D45D49D52A54727C00641A8F /* LuckyCard.swift in Sources */,
 				D4988B072A53E1D7001456FF /* AppDelegate.swift in Sources */,
 				D45D49CE2A5451D100641A8F /* RoundBoardView.swift in Sources */,
