@@ -116,10 +116,7 @@
 		D45D49D12A5466BA00641A8F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D45D49D42A54727C00641A8F /* LuckyCard.swift */,
-				D45D49D62A54F7ED00641A8F /* Deck.swift */,
-				D427E6FD2A5556EA001B2F8E /* Animal.swift */,
-				D4A6FA7C2A56B28B00637995 /* CardNumber.swift */,
+				D4A6FA942A57D3C400637995 /* AboutCard */,
 				D4A6FA822A56B85C00637995 /* Tester.swift */,
 				D4A6FA842A56B93400637995 /* Attendee.swift */,
 				D4A6FA862A56B95600637995 /* CardDealer.swift */,
@@ -188,6 +185,17 @@
 				D4A6FA892A56F2CF00637995 /* ConstantValue.swift */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		D4A6FA942A57D3C400637995 /* AboutCard */ = {
+			isa = PBXGroup;
+			children = (
+				D4A6FA7C2A56B28B00637995 /* CardNumber.swift */,
+				D427E6FD2A5556EA001B2F8E /* Animal.swift */,
+				D45D49D62A54F7ED00641A8F /* Deck.swift */,
+				D45D49D42A54727C00641A8F /* LuckyCard.swift */,
+			);
+			path = AboutCard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
