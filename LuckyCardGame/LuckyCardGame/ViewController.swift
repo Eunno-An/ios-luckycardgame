@@ -43,8 +43,8 @@ class ViewController: UIViewController {
         case 2:
             luckyCardGame.gameStart(attendeeNum: .five)//gameStart
         default:
-            print("OOps")
+            print("Oops, segmentedControlValueChanged has error!")
         }
-        
+        GameView(luckyCardGame: luckyCardGame).setNeedsLayout()
     }
 }
