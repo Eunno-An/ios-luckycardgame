@@ -17,9 +17,13 @@ enum AttendeeNum: Int{
 }
 
 struct Attendee{
-    var deck: [LuckyCard]
+    var deck: Deck
     
     init(){
-        deck = []
+        deck = Deck()
+    }
+    
+    init(deck: Deck){
+        self.deck = deck
     }
 }

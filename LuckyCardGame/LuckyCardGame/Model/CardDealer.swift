@@ -20,11 +20,11 @@ struct CardDealer{
 extension CardDealer{
     
     // MARK: 참석자 수를 받으면, 딜러가 카드 풀을 생성해주는 함수입니다.
-    func makeCardPool(attendeeNum: Int) -> [LuckyCard]{
+    func makeCardPool(attendeeNum: AttendeeNum) -> [LuckyCard]{
         var cardPool : [LuckyCard] = []
         for animal in Animal.allCases{
             for number in CardNumber.allCases{
-                if(attendeeNum == 3 && number.rawValue == 12){
+                if(attendeeNum.rawValue == 3 && number.rawValue == 12){
                     continue
                 }
                 cardPool.append(LuckyCard(number: number, animal: animal))
@@ -35,28 +35,28 @@ extension CardDealer{
     }
     
     // MARK: 참석자 수와 cardPool을 받으면, 참석자 수만큼 럭키카드 배열과, 마지막 바닥에 놔야하는 카드를 구분해주는 함수입니다.
-    func splitCard(attendeeNum: AttendeeNum, cardPool: [LuckyCard]) -> [[LuckyCard]]{
+    func splitCard(attendeeNum: AttendeeNum, cardPool: [LuckyCard]) -> [Deck]{
         //attendeeNum에 따라서 참가자들이 가질 럭키카드의 배열들과, 바닥에 둘 카드를 나눠줍니다.
-        var luckyCard2dArr = [[LuckyCard]]()
+        var luckyCard2dArr = [Deck]()
         var shuffledCardPool = cardPool.shuffled()
         
         if attendeeNum == .three{
             for i in stride(from:0, through: 16, by: 8){
-                luckyCard2dArr.append(Array(shuffledCardPool[i..<i+8]))
+                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+8])))
             }
-            luckyCard2dArr.append(Array(shuffledCardPool[24..<33]))
+            luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[24..<33])))
         }
         else if attendeeNum == .four{
             for i in stride(from:0, through: 21, by: 7){
-                luckyCard2dArr.append(Array(shuffledCardPool[i..<i+8]))
+                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+8])))
             }
-            luckyCard2dArr.append(Array(shuffledCardPool[28..<36]))
+            luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[28..<36])))
         }
         else if attendeeNum == .five{
             for i in stride(from:0, through: 24, by: 6){
-                luckyCard2dArr.append(Array(shuffledCardPool[i..<i+8]))
+                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+8])))
             }
-            luckyCard2dArr.append(Array(shuffledCardPool[30..<36]))
+            luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[30..<36])))
         }
         
         return luckyCard2dArr
