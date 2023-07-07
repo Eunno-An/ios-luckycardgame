@@ -38,7 +38,7 @@ extension CardDealer{
     func splitCard(attendeeNum: AttendeeNum, cardPool: [LuckyCard]) -> [Deck]{
         //attendeeNum에 따라서 참가자들이 가질 럭키카드의 배열들과, 바닥에 둘 카드를 나눠줍니다.
         var luckyCard2dArr = [Deck]()
-        var shuffledCardPool = cardPool.shuffled()
+        let shuffledCardPool = cardPool.shuffled()
         
         if attendeeNum == .three{
             for i in stride(from:0, through: 16, by: 8){

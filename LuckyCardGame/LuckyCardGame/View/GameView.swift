@@ -11,17 +11,15 @@ import UIKit
 class GameView: UIView{
     var luckyCardGame: LuckyCardGame
     init(){
-        luckyCardGame = LuckyCardGame()
+        self.luckyCardGame = LuckyCardGame()
         super.init(frame: CGRect(x: (CGFloat(Constant.horizontalSpacing)),
                                  y : (Constant.topSpacing + Constant.topRectHeight + Constant.spacing),
                                  width: (CGFloat(Int(Constant.screenWidth)) - CGFloat(Constant.horizontalSpacing * 2)), height: (Constant.screenHeight) - (Constant.topSpacing + Constant.topRectHeight + Constant.spacing)))
     }
     
-    init(luckyCardGame: LuckyCardGame){
+    convenience init(luckyCardGame: LuckyCardGame){
+        self.init()
         self.luckyCardGame = luckyCardGame
-        super.init(frame: CGRect(x: (CGFloat(Constant.horizontalSpacing)),
-                                 y : (Constant.topSpacing + Constant.topRectHeight + Constant.spacing),
-                                 width: (CGFloat(Int(Constant.screenWidth)) - CGFloat(Constant.horizontalSpacing * 2)), height: (Constant.screenHeight) - (Constant.topSpacing + Constant.topRectHeight + Constant.spacing)))
     }
     
     required init?(coder: NSCoder) {
