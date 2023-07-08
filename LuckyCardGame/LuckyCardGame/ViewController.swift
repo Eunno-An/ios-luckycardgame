@@ -34,8 +34,8 @@ class ViewController: UIViewController {
         self.view.addSubview(segmentedControlView)
         segmentedControl.selectedSegmentIndex = 0//처음에는 세명을 기본 선택으로 지정합니다.
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
-        gameView = GameView(luckyCardGame: self.luckyCardGame)
-        self.view.addSubview(gameView ?? GameView(luckyCardGame: self.luckyCardGame))
+        gameView = GameView()
+        self.view.addSubview(gameView ?? GameView())
     }
     
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl){
@@ -50,7 +50,32 @@ class ViewController: UIViewController {
             print("Oops, segmentedControlValueChanged has error!")
         }
         gameView?.removeFromSuperview()
-        gameView = GameView(luckyCardGame: self.luckyCardGame)
+        gameView?.setBottomBoardViewFrame(frame: calculateBottomFrame())
         self.view.addSubview(gameView!)
+    }
+    
+    //LuckyCardGame.belowLuckyCards가 담길 공간을 표시하는 bottomBoardView
+    func calculateBottomFrame() -> CGRect{
+        
+        let numOfAttendee: Int = luckyCardGame.getNumOfAttendee()
+        let lastBoardWidth: CGFloat = Constant.screenWidth - Constant.horizontalSpacing * 2
+        
+        var yPos: CGFloat = 0
+        var lastBoardHeight: CGFloat = 0
+        
+        if numOfAttendee == 5{
+            yPos = 5 * (Board.height + Constant.spacing)
+            lastBoardHeight = Board.height
+        }
+        else if numOfAttendee == 3 || numOfAttendee == 4{//참가자가 3명 또는 4명일 때
+            yPos = 4 * (Board.height + Constant.spacing)
+            lastBoardHeight = Board.height * 2
+        }
+        
+        let frame = CGRect(
+            x: 0, y: yPos, width: lastBoardWidth, height: lastBoardHeight
+        )
+        
+        return frame
     }
 }
