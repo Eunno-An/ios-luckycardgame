@@ -48,13 +48,13 @@ extension CardDealer{
         }
         else if attendeeNum == .four{
             for i in stride(from:0, through: 21, by: 7){
-                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+8])))
+                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+7])))
             }
             luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[28..<36])))
         }
         else if attendeeNum == .five{
             for i in stride(from:0, through: 24, by: 6){
-                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+8])))
+                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+6])))
             }
             luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[30..<36])))
         }

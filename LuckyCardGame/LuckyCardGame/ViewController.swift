@@ -10,14 +10,20 @@ import UIKit
 class ViewController: UIViewController {
     
     private var luckyCardGame: LuckyCardGame
-    
+    private var gameView: GameView?
     init(){
-        luckyCardGame = LuckyCardGame()
+        self.luckyCardGame = LuckyCardGame()
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(luckyCardGame: LuckyCardGame){
+        self.luckyCardGame = luckyCardGame
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        luckyCardGame = LuckyCardGame()
+        self.luckyCardGame = LuckyCardGame()
+        self.luckyCardGame.gameStart(attendeeNum: .three)
         super.init(coder: coder)
     }
     
@@ -28,10 +34,8 @@ class ViewController: UIViewController {
         self.view.addSubview(segmentedControlView)
         segmentedControl.selectedSegmentIndex = 0//처음에는 세명을 기본 선택으로 지정합니다.
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
-        
-        
-        
-        self.view.addSubview(GameView())
+        gameView = GameView(luckyCardGame: self.luckyCardGame)
+        self.view.addSubview(gameView ?? GameView(luckyCardGame: self.luckyCardGame))
     }
     
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl){
@@ -45,6 +49,8 @@ class ViewController: UIViewController {
         default:
             print("Oops, segmentedControlValueChanged has error!")
         }
-        GameView(luckyCardGame: luckyCardGame).setNeedsLayout()
+        gameView?.removeFromSuperview()
+        gameView = GameView(luckyCardGame: self.luckyCardGame)
+        self.view.addSubview(gameView!)
     }
 }

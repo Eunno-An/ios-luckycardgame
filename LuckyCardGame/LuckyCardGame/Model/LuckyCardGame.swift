@@ -20,13 +20,18 @@ class LuckyCardGame{
     }
     
     func gameStart(attendeeNum: AttendeeNum){
+        var gameAttendees: [Attendee] = []
         let luckyCardPool:[LuckyCard] = cardDealer.makeCardPool(attendeeNum: attendeeNum)
         let luckyCardDecks: [Deck] = cardDealer.splitCard(attendeeNum: attendeeNum, cardPool: luckyCardPool)
         
         for i in 0..<(attendeeNum.rawValue){
-            attendees.append(Attendee(deck: luckyCardDecks[i]))
+            gameAttendees.append(Attendee(deck: luckyCardDecks[i]))
         }
-        
+        attendees = gameAttendees
         belowLuckyCards = luckyCardDecks.last?.cards ?? []
+    }
+    
+    func getNumOfAttendee() -> Int{
+        return attendees.count
     }
 }

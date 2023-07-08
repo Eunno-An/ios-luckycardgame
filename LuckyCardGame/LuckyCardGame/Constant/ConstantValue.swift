@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// TODO: enum에 대해서 좀 더 공통정보를 어떻게 정리하는게 좋을지 고민해보고, nested enum과 typealias를 고민해보자.
 // MARK: 상수정보
 enum Constant{
     
@@ -24,7 +25,7 @@ enum Constant{
 
 // MARK: Board의 공통 정보
 enum Board{
-    static let height:CGFloat = CGFloat(Constant.screenHeight / 8) // board의 세로 길이
+    static let height:CGFloat = CGFloat((Constant.screenHeight - Constant.topSpacing - Constant.topRectHeight - Constant.spacing - Constant.bottomSpacing) / 6.5) // board의 세로 길이
     static let width:CGFloat = CGFloat(Constant.screenWidth) - Constant.bottomSpacing // board의 가로 길이
     static let labels = ["A", "B", "C", "D", "E"] // board의 각 레이블
 }
