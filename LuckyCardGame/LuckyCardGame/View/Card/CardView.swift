@@ -10,10 +10,11 @@ import UIKit
 
 class CardView: UIView{
     
-    init(frame: CGRect, radius: Int = 16, borderWidth: Int = 1){
+    init(frame: CGRect, radius: Int = 16, borderWidth: Int = 1, backgroundColor: UIColor = .white){
         super.init(frame: frame)
         setRound(radius: radius)
         setBorderWidth(borderWidth: borderWidth)
+        setBackgroundColor(backgroundColor: backgroundColor)
     }
     
     required init?(coder: NSCoder) {
@@ -27,6 +28,10 @@ class CardView: UIView{
     
     func setBorderWidth(borderWidth: Int){
         self.layer.borderWidth = CGFloat(borderWidth)
+    }
+    
+    func setBackgroundColor(backgroundColor: UIColor){
+        self.backgroundColor = backgroundColor
     }
     
 }

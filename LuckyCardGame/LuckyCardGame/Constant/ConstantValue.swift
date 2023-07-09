@@ -21,6 +21,11 @@ enum Constant{
     static let topSpacing:CGFloat = 60
     static let bottomSpacing:CGFloat = 30
     static let spacing:CGFloat = 10
+    
+    enum CardConstant{
+        static let height:CGFloat = (Board.height - Constant.spacing * 2)
+        static let width:CGFloat = (Board.width - Constant.spacing * 2)/6
+    }
 }
 
 // MARK: Board의 공통 정보
@@ -29,3 +34,5 @@ enum Board{
     static let width:CGFloat = CGFloat(Constant.screenWidth) - Constant.bottomSpacing // board의 가로 길이
     static let labels = ["A", "B", "C", "D", "E"] // board의 각 레이블
 }
+
+

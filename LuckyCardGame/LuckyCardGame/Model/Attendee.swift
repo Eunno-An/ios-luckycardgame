@@ -16,6 +16,12 @@ enum AttendeeNum: Int{
     case five
 }
 
+enum AttendeeCardNum: Int{
+    case threeAttendeeHave = 8
+    case fourAttendeeHave = 7
+    case fiveAttendeeHave = 6
+}
+
 struct Attendee{
     var deck: Deck
     

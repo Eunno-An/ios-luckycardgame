@@ -41,20 +41,20 @@ extension CardDealer{
         let shuffledCardPool = cardPool.shuffled()
         
         if attendeeNum == .three{
-            for i in stride(from:0, through: 16, by: 8){
-                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+8])))
+            for i in stride(from:0, through: 16, by: AttendeeCardNum.threeAttendeeHave.rawValue){
+                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+AttendeeCardNum.threeAttendeeHave.rawValue])))
             }
             luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[24..<33])))
         }
         else if attendeeNum == .four{
-            for i in stride(from:0, through: 21, by: 7){
-                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+7])))
+            for i in stride(from:0, through: 21, by: AttendeeCardNum.fourAttendeeHave.rawValue){
+                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+AttendeeCardNum.fourAttendeeHave.rawValue])))
             }
             luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[28..<36])))
         }
         else if attendeeNum == .five{
-            for i in stride(from:0, through: 24, by: 6){
-                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+6])))
+            for i in stride(from:0, through: 24, by: AttendeeCardNum.fiveAttendeeHave.rawValue){
+                luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[i..<i+AttendeeCardNum.fiveAttendeeHave.rawValue])))
             }
             luckyCard2dArr.append(Deck(cards: Array(shuffledCardPool[30..<36])))
         }
