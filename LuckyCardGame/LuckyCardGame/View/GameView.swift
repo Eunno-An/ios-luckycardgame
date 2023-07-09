@@ -20,11 +20,28 @@ class GameView: UIView{
         bottomBoard.backgroundColor = .systemGray
         return bottomBoard
     }()
+    
+    private var playerBoardViews: [PlayerboardView] = {
+        var views: [PlayerboardView] = []
+        for i in 1...AttendeeNum.three.rawValue{
+            views.append(PlayerboardView(frame:
+                                            CGRect(x: 0,
+                                                y:  Constant.spacing * CGFloat(i-1) + Board.height * CGFloat(i-1),
+                                                   width: CGFloat(Constant.screenWidth) - CGFloat(Constant.horizontalSpacing * 2),
+                                                   height: Board.height), name: Board.labels[i-1]))
+        }
+        return views
+    }()
+    
     init(){
         super.init(frame: CGRect(x: (CGFloat(Constant.horizontalSpacing)),
                                  y : (Constant.topSpacing + Constant.topRectHeight + Constant.spacing),
                                  width: (CGFloat(Int(Constant.screenWidth)) - CGFloat(Constant.horizontalSpacing * 2)), height: (Constant.screenHeight) - (Constant.topSpacing + Constant.topRectHeight + Constant.spacing)))
         self.addSubview(bottomBoardView)
+        for playerBoardView in playerBoardViews{
+            self.addSubview(playerBoardView)
+        }
+        
     }
     
     override init(frame: CGRect){
@@ -33,6 +50,9 @@ class GameView: UIView{
                                  width: (CGFloat(Int(Constant.screenWidth)) - CGFloat(Constant.horizontalSpacing * 2)), height: (Constant.screenHeight) - (Constant.topSpacing + Constant.topRectHeight + Constant.spacing)))
         self.bottomBoardView.frame = frame
         self.addSubview(bottomBoardView)
+        for playerBoardView in playerBoardViews{
+            self.addSubview(playerBoardView)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -41,6 +61,20 @@ class GameView: UIView{
     
     public func setBottomBoardViewFrame(frame: CGRect){
         self.bottomBoardView.frame = frame
+    }
+    
+    /*
+     playerBoardViews 프로퍼티를 다시 수정하고, addSubView를 다시 호출해주는 함수입니다.
+     addSubView까지 호출하는게 정답인지는 모르겠지만, layoutIfNeeded로 리팩토링이 가능하다면 하고 싶습니다.
+     */
+    public func setPlayerBoardViews(playerBoardViews: [PlayerboardView]){
+        for playerBoardView in self.playerBoardViews {
+            playerBoardView.removeFromSuperview()
+        }
+        self.playerBoardViews = playerBoardViews
+        for playerBoardView in self.playerBoardViews{
+            self.addSubview(playerBoardView)
+        }
     }
     
 }

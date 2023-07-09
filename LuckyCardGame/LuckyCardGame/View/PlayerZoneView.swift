@@ -14,8 +14,8 @@ class PlayerZoneView: UIView{
         var views: [PlayerboardView] = []
         for i in 1...AttendeeNum.three.rawValue{
             views.append(PlayerboardView(frame:
-                                            CGRect(x: (CGFloat(Constant.horizontalSpacing)),
-                                                y: Constant.topSpacing + Constant.topRectHeight + Constant.spacing * CGFloat(i+1) + Board.height * CGFloat(i),
+                                            CGRect(x: 0,
+                                                y:  Constant.spacing * CGFloat(i+1) + Board.height * CGFloat(i-1),
                                                    width: CGFloat(Constant.screenWidth) - CGFloat(Constant.horizontalSpacing * 2),
                                                    height: Board.height), name: Board.labels[i-1]))
         }

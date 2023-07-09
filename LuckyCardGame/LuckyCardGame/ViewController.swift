@@ -39,18 +39,24 @@ class ViewController: UIViewController {
     }
     
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl){
+        gameView?.removeFromSuperview()
+        
         switch sender.selectedSegmentIndex{
         case 0:
             luckyCardGame.gameStart(attendeeNum: .three)//gameStart
+            gameView?.setPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .three))
         case 1:
             luckyCardGame.gameStart(attendeeNum: .four)//gameStart
+            gameView?.setPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .four))
         case 2:
             luckyCardGame.gameStart(attendeeNum: .five)//gameStart
+            gameView?.setPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .five))
         default:
             print("Oops, segmentedControlValueChanged has error!")
         }
-        gameView?.removeFromSuperview()
+        
         gameView?.setBottomBoardViewFrame(frame: calculateBottomFrame())
+        
         self.view.addSubview(gameView!)
     }
     
@@ -78,4 +84,17 @@ class ViewController: UIViewController {
         
         return frame
     }
+    
+    func calculatePlayerBoards(numOfAttendee: AttendeeNum) -> [PlayerboardView]{
+        var views: [PlayerboardView] = []
+        for i in 1...numOfAttendee.rawValue{
+            views.append(PlayerboardView(frame:
+                                            CGRect(x: 0,
+                                                y:  Constant.spacing * CGFloat(i-1) + Board.height * CGFloat(i-1),
+                                                   width: CGFloat(Constant.screenWidth) - CGFloat(Constant.horizontalSpacing * 2),
+                                                   height: Board.height), name: Board.labels[i-1]))
+        }
+        return views
+    }
+    
 }
