@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 class GameView: UIView{
-    private var bottomBoardView: BottomBoardView = {
+    
+    public var bottomBoardView: BottomBoardView = {
         let yPos = 4 * (Board.height + Constant.spacing)
         let lastBoardWidth: CGFloat = Constant.screenWidth - Constant.horizontalSpacing * 2
         let lastBoardHeight = Board.height * 2
@@ -68,7 +69,7 @@ class GameView: UIView{
      addSubView까지 호출하는게 정답인지는 모르겠지만, layoutIfNeeded로 리팩토링이 가능하다면 하고 싶습니다.
      */
     public func setOtherPlayerBoardViews(playerBoardViews: [PlayerboardView]){
-        for i in 1..<self.playerBoardViews.count {
+        for i in 0..<self.playerBoardViews.count {
             self.playerBoardViews[i].removeFromSuperview()
         }
         self.playerBoardViews = playerBoardViews
@@ -80,6 +81,6 @@ class GameView: UIView{
     public func setMyPlayerBoardViews(myBoardView: PlayerboardView){
         self.playerBoardViews[0].removeFromSuperview()
         self.playerBoardViews[0] = myBoardView
-        self.addSubview(myBoardView)
+        self.addSubview(self.playerBoardViews[0])
     }
 }

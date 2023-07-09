@@ -44,25 +44,27 @@ class ViewController: UIViewController {
         switch sender.selectedSegmentIndex{
         case 0:
             luckyCardGame.gameStart(attendeeNum: .three)//gameStart
-            gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .three))
-            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave)
-            
+            gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .three))//나를 제외한 '다를 플레이어'보드를 초기화
+            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave)//나의 플레이어 보드에 있는 카드들을 다시 그림
+            gameView?.bottomBoardView.setBottomCards(attendeeNum: .three)//bottomBoard에 있는 카드들을 다시 그림
             
         case 1:
             luckyCardGame.gameStart(attendeeNum: .four)//gameStart
             gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .four))
             gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fourAttendeeHave)
+            gameView?.bottomBoardView.setBottomCards(attendeeNum: .four)
         case 2:
             luckyCardGame.gameStart(attendeeNum: .five)//gameStart
             gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .five))
             gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fiveAttendeeHave)
+            gameView?.bottomBoardView.setBottomCards(attendeeNum: .five)
             
         default:
             print("Oops, segmentedControlValueChanged has error!")
         }
-        gameView?.setMyPlayerBoardViews(myBoardView: (gameView?.playerBoardViews.first)!)
+        gameView?.setMyPlayerBoardViews(myBoardView: (gameView?.playerBoardViews.first)!)//내 플레이어 보드를 다시 그림
         
-        gameView?.setBottomBoardViewFrame(frame: calculateBottomFrame())
+        gameView?.setBottomBoardViewFrame(frame: calculateBottomFrame())//bottomBoard의 프레임 재지정
         
         self.view.addSubview(gameView!)
     }

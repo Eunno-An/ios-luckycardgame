@@ -16,10 +16,25 @@ enum AttendeeNum: Int{
     case five
 }
 
+//플레이어 한명당 갖고 있는 카드 개수
 enum AttendeeCardNum: Int{
     case threeAttendeeHave = 8
     case fourAttendeeHave = 7
     case fiveAttendeeHave = 6
+}
+
+//BottomBoard에 한 row당 놓는 카드 개수
+enum BottomBoardOneRowCardNum: Int{
+    case fiveCardsByOneRow = 5
+    case fourCardsByOneRow = 4
+    case sixCardsByOneRow = 6
+}
+
+//플레이어에게 카드 분배하고 남은 개수
+enum RemainingCardNum: Int{
+    case nine = 9
+    case eight = 8
+    case six = 6
 }
 
 struct Attendee{

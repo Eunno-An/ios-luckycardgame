@@ -11,7 +11,7 @@ import UIKit
 class BehindCardView: CardView{
     var imageView : UIImage = UIImage(named: "cardBackSideImage.png")!
     
-    init(frame: CGRect, imageView: UIImage){
+    init(frame: CGRect, imageView: UIImage = UIImage(named: "cardBackSideImage.png")!){
         super.init(frame: frame)
         self.imageView = imageView
     }
