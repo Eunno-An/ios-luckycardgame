@@ -18,13 +18,21 @@ import Foundation
  */
 class Deck{
     
-    var cards: [LuckyCard]
+    private var cards: [LuckyCard]
     
     init() {
         self.cards = []
     }
     convenience init(cards: [LuckyCard]){
         self.init()
+        self.cards = cards
+    }
+    
+    public func getCards() -> [LuckyCard]{
+        return cards
+    }
+    
+    public func setCards(cards: [LuckyCard]){
         self.cards = cards
     }
 }

@@ -26,5 +26,13 @@ struct LuckyCard: Card, Hashable{
         self.number = number
         self.animal = animal
     }
+    
+    public mutating func setNumber(number: CardNumber){
+        self.number = number
+    }
+    
+    public mutating func setAnimal(animal: Animal){
+        self.animal = animal
+    }
 }
 

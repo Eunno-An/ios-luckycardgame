@@ -23,11 +23,11 @@ class PlayerboardView: RoundBoardView{
      MARK: PlayerBoardView에 담길 [CardView]를 표현하는 부분입니다.
      x좌표를 방정식으로 계산하였습니다
      */
-    private var cardViews: [CardView] = {
-        var views: [CardView] = []
+    private var cardViews: [FrontCardView] = {
+        var views: [FrontCardView] = []
         var xPos: CGFloat = (Board.width - Constant.spacing * 2 - CardSize.width) / CGFloat(AttendeeCardNum.threeAttendeeHave.rawValue - 1)
         for i in 0..<AttendeeCardNum.threeAttendeeHave.rawValue{
-            views.append(CardView(frame: CGRect(x: Constant.spacing/2 + xPos * CGFloat(i), y: Constant.spacing, width: CardSize.width, height: CardSize.height)))
+            views.append(FrontCardView(frame: CGRect(x: Constant.spacing/2 + xPos * CGFloat(i), y: Constant.spacing, width: CardSize.width, height: CardSize.height), cardAnimal: Animal.dog, cardNumber: CardNumber.one))
         }
         return views
     }()
@@ -73,15 +73,14 @@ class PlayerboardView: RoundBoardView{
         return (Board.width - Constant.spacing * 2 - CardSize.width) / CGFloat(attendeeCardNum.rawValue - 1)
     }
     
-    //논리적으로 안맞는 부분인것 같음. Playerboard에서 공통적으로 관리하는 것도 아니고. 이건 나중에 MyBoardView로 따로 빼야겠다.
-    public func setMyCardView(attendeeCardNum: AttendeeCardNum){
+    public func setMyCardView(attendeeCardNum: AttendeeCardNum, deck: Deck){
         for cardView in cardViews{
             cardView.removeFromSuperview()
         }
-        var views: [CardView] = []
+        var views: [FrontCardView] = []
         let xPos: CGFloat = (Board.width - Constant.spacing * 2 - CardSize.width) / CGFloat(attendeeCardNum.rawValue - 1)
         for i in 0..<attendeeCardNum.rawValue{
-            views.append(CardView(frame: CGRect(x: Constant.spacing/2 + xPos * CGFloat(i), y: Constant.spacing, width: CardSize.width, height: CardSize.height)))
+            views.append(FrontCardView(frame: CGRect(x: Constant.spacing/2 + xPos * CGFloat(i), y: Constant.spacing, width: CardSize.width, height: CardSize.height), cardAnimal: deck.getCards()[i].animal, cardNumber: deck.getCards()[i].number))
         }
        
         for cardView in views{

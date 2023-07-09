@@ -42,7 +42,6 @@ class GameView: UIView{
         for playerBoardView in playerBoardViews{
             self.addSubview(playerBoardView)
         }
-        
     }
     
     override init(frame: CGRect){

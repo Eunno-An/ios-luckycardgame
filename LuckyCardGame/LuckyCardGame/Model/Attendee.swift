@@ -38,7 +38,7 @@ enum RemainingCardNum: Int{
 }
 
 struct Attendee{
-    var deck: Deck
+    private var deck: Deck
     
     init(){
         deck = Deck()
@@ -46,5 +46,9 @@ struct Attendee{
     
     init(deck: Deck){
         self.deck = deck
+    }
+    
+    public func getDeck() -> Deck{
+        return self.deck
     }
 }
