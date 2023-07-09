@@ -57,7 +57,6 @@ class PlayerboardView: RoundBoardView{
         for cardView in cardViews{
             self.addSubview(cardView)
         }
-        var red = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
         layer.borderWidth = 3
         layer.borderColor = UIColor.blue.cgColor
     }
@@ -72,5 +71,22 @@ class PlayerboardView: RoundBoardView{
     //PlayerBoard안에서 각각 카드의 x좌표에 대한 방정식입니다.
     public func calFirstCard_xPos(attendeeCardNum: AttendeeCardNum) -> CGFloat{
         return (Board.width - Constant.spacing * 2 - CardSize.width) / CGFloat(attendeeCardNum.rawValue - 1)
+    }
+    
+    //논리적으로 안맞는 부분인것 같음. Playerboard에서 공통적으로 관리하는 것도 아니고. 이건 나중에 MyBoardView로 따로 빼야겠다.
+    public func setMyCardView(attendeeCardNum: AttendeeCardNum){
+        for cardView in cardViews{
+            cardView.removeFromSuperview()
+        }
+        var views: [CardView] = []
+        let xPos: CGFloat = (Board.width - Constant.spacing * 2 - CardSize.width) / CGFloat(attendeeCardNum.rawValue - 1)
+        for i in 0..<attendeeCardNum.rawValue{
+            views.append(CardView(frame: CGRect(x: Constant.spacing/2 + xPos * CGFloat(i), y: Constant.spacing, width: CardSize.width, height: CardSize.height)))
+        }
+       
+        for cardView in views{
+            self.addSubview(cardView)
+        }
+        self.cardViews = views
     }
 }

@@ -21,7 +21,7 @@ class GameView: UIView{
         return bottomBoard
     }()
     
-    private var playerBoardViews: [PlayerboardView] = {
+    public var playerBoardViews: [PlayerboardView] = {
         var views: [PlayerboardView] = []
         for i in 1...AttendeeNum.three.rawValue{
             views.append(PlayerboardView(frame:
@@ -67,14 +67,19 @@ class GameView: UIView{
      playerBoardViews 프로퍼티를 다시 수정하고, addSubView를 다시 호출해주는 함수입니다.
      addSubView까지 호출하는게 정답인지는 모르겠지만, layoutIfNeeded로 리팩토링이 가능하다면 하고 싶습니다.
      */
-    public func setPlayerBoardViews(playerBoardViews: [PlayerboardView]){
-        for playerBoardView in self.playerBoardViews {
-            playerBoardView.removeFromSuperview()
+    public func setOtherPlayerBoardViews(playerBoardViews: [PlayerboardView]){
+        for i in 1..<self.playerBoardViews.count {
+            self.playerBoardViews[i].removeFromSuperview()
         }
         self.playerBoardViews = playerBoardViews
-        for playerBoardView in self.playerBoardViews{
-            self.addSubview(playerBoardView)
+        for i in 1..<playerBoardViews.count {
+            self.addSubview(playerBoardViews[i])
         }
     }
     
+    public func setMyPlayerBoardViews(myBoardView: PlayerboardView){
+        self.playerBoardViews[0].removeFromSuperview()
+        self.playerBoardViews[0] = myBoardView
+        self.addSubview(myBoardView)
+    }
 }

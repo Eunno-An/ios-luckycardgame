@@ -44,16 +44,23 @@ class ViewController: UIViewController {
         switch sender.selectedSegmentIndex{
         case 0:
             luckyCardGame.gameStart(attendeeNum: .three)//gameStart
-            gameView?.setPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .three))
+            gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .three))
+            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave)
+            
+            
         case 1:
             luckyCardGame.gameStart(attendeeNum: .four)//gameStart
-            gameView?.setPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .four))
+            gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .four))
+            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fourAttendeeHave)
         case 2:
             luckyCardGame.gameStart(attendeeNum: .five)//gameStart
-            gameView?.setPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .five))
+            gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .five))
+            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fiveAttendeeHave)
+            
         default:
             print("Oops, segmentedControlValueChanged has error!")
         }
+        gameView?.setMyPlayerBoardViews(myBoardView: (gameView?.playerBoardViews.first)!)
         
         gameView?.setBottomBoardViewFrame(frame: calculateBottomFrame())
         
