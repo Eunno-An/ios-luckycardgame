@@ -18,6 +18,9 @@ class PlayerboardView: RoundBoardView{
         label.font = UIFont(descriptor: descriptor!, size: 50)
         return label
     }()
+    private var cardViews: [CardView] = {
+        
+    }()
     
     init(frame: CGRect, name: String)
     {
