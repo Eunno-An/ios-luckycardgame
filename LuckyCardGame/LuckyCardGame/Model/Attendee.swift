@@ -21,6 +21,17 @@ enum AttendeeCardNum: Int{
     case threeAttendeeHave = 8
     case fourAttendeeHave = 7
     case fiveAttendeeHave = 6
+    static func getAttendeeCardNum(attendeeNum: AttendeeNum) -> AttendeeCardNum{
+        switch attendeeNum{
+        case .three:
+            return threeAttendeeHave
+        case .four:
+            return fourAttendeeHave
+        case .five:
+            return fiveAttendeeHave
+        }
+    }
+    
 }
 
 //BottomBoard에 한 row당 놓는 카드 개수

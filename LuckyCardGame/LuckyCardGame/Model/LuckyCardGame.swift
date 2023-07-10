@@ -43,4 +43,16 @@ class LuckyCardGame{
         return attendees[0]
     }
     
+    public func getAttendeesInfo() -> [Attendee]{
+        return attendees
+    }
+    
+    public func getLuckyCardPool() -> [LuckyCard]{
+        var ret : [LuckyCard] = []
+        for attendee in attendees{
+            ret += attendee.getDeck().getCards()
+        }
+        ret += belowLuckyCards
+        return ret
+    }
 }
