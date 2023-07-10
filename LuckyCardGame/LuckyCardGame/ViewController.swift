@@ -7,88 +7,109 @@
 
 import UIKit
 
-// MARK: - 기기의 height, width
-let screenHeight = UIScreen.main.bounds.size.height
-let screenWidth = UIScreen.main.bounds.size.width
-
 class ViewController: UIViewController {
     
-    // MARK: 상수정보
-    struct Constant{
-        static let topRectHeight:CGFloat = 44
-        static let horizontalSpacing:CGFloat = 20
-        static let topSpacing:CGFloat = 60
-        static let bottomSpacing:CGFloat = 30
-        static let spacing:CGFloat = 10
+    private var luckyCardGame: LuckyCardGame
+    private var gameView: GameView?
+    
+    init(){
+        self.luckyCardGame = LuckyCardGame()
+        super.init(nibName: nil, bundle: nil)
     }
     
-    // MARK: Board의 공통 정보
-    struct Board{
-        static let height:CGFloat = CGFloat( screenHeight / 8) // board의 세로 길이
-        static let width:CGFloat = CGFloat(screenWidth) - Constant.bottomSpacing // board의 가로 길이
-        static let labels = ["A", "B", "C", "D", "E"] // board의 각 레이블
+    init(luckyCardGame: LuckyCardGame){
+        self.luckyCardGame = luckyCardGame
+        super.init(nibName: nil, bundle: nil)
     }
     
-    // MARK: 노란색 board의 정보
-    private var rect_top: PlayerboardView = {
-        let topboard = PlayerboardView(frame: CGRect(x: (CGFloat(Constant.horizontalSpacing)),
-                                                     y : Constant.topSpacing,
-                                                     width: (CGFloat(Int(screenWidth)) - CGFloat(Constant.horizontalSpacing * 2)),
-                                                     height: Constant.topRectHeight),
-                                       name: "")
-        topboard.backgroundColor = .yellow
-        return topboard
-    }()
-    
-    private lazy var playerBoards: [PlayerboardView] = {
-        let boards = ["A", "B", "C", "D", "E"].enumerated().map{ i, name in
-            return PlayerboardView(frame:
-                                    CGRect(x: (CGFloat(Constant.horizontalSpacing)),
-                                        y: Constant.topSpacing + Constant.topRectHeight + Constant.spacing * CGFloat(i+1) + Board.height * CGFloat(i),
-                                    width: CGFloat(screenWidth) - CGFloat(Constant.horizontalSpacing * 2),
-                                        height: Board.height)
-                                    ,
-                                   name: name)
-        }
-        return boards
-    }()
-    
-    // MARK: 중간 회색 board의 정보
-    private lazy var rect_bottom: RoundBoardView = {
-        
-        let lastBoardHeight: CGFloat = CGFloat(screenHeight - (Constant.spacing * 6 + Board.height * 5 + Constant.topSpacing + Constant.topRectHeight) - Constant.bottomSpacing)
-        
-        let view = RoundBoardView(frame: CGRect(
-            x: Constant.horizontalSpacing, y: Constant.topSpacing + Constant.topRectHeight + Constant.spacing + 5 * (Board.height + Constant.spacing), width: (screenWidth) - Constant.horizontalSpacing * 2, height: lastBoardHeight
-        ))
-        
-        view.backgroundColor = .systemGray
-        
-        return view
-    }()
+    required init?(coder: NSCoder) {
+        self.luckyCardGame = LuckyCardGame()
+        self.luckyCardGame.gameStart(attendeeNum: .three)
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 카드 객체 인스턴스를 생성하는 곳에서 문자열로 콘솔에 출력하는 부분입니다.
-        do{
-            let deck = try Deck()
-            deck.printCardInfo(deck: deck)
-        }catch LuckyCardError.invalidAnimal{
-            print("이상한 동물이 존재합니다")
-        }catch LuckyCardError.invalidNumber{
-            print("이상한 번호가 존재합니다")
-        }catch{
-            print("다시 실행해주세요")
-        }
-        addsubview()
+        let segmentedControlView = SegmentedControlView()
+        let segmentedControl = segmentedControlView.getUISegmentedControlView()
+        self.view.addSubview(segmentedControlView)
+        segmentedControl.selectedSegmentIndex = 0//처음에는 세명을 기본 선택으로 지정합니다.
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+        gameView = GameView()
+        initMyBoardCards()//처음 게임에 시작했을 때 
+        self.view.addSubview(gameView ?? GameView())
     }
     
-    func addsubview(){
-        let views = [rect_top, rect_bottom] + playerBoards
-        views.forEach{
-            self.view.addSubview($0)
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl){
+        gameView?.removeFromSuperview()
+        
+        switch sender.selectedSegmentIndex{
+        case 0:
+            luckyCardGame.gameStart(attendeeNum: .three)//gameStart
+            gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .three))//나를 제외한 '다를 플레이어'보드를 초기화
+            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())//나의 플레이어 보드에 있는 카드들을 다시 그림
+            gameView?.bottomBoardView.setBottomCards(attendeeNum: .three)//bottomBoard에 있는 카드들을 다시 그림
+            
+        case 1:
+            luckyCardGame.gameStart(attendeeNum: .four)//gameStart
+            gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .four))
+            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fourAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())
+            gameView?.bottomBoardView.setBottomCards(attendeeNum: .four)
+        case 2:
+            luckyCardGame.gameStart(attendeeNum: .five)//gameStart
+            gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .five))
+            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fiveAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())
+            gameView?.bottomBoardView.setBottomCards(attendeeNum: .five)
+            
+        default:
+            print("Oops, segmentedControlValueChanged has error!")
         }
+        gameView?.setMyPlayerBoardViews(myBoardView: (gameView?.playerBoardViews.first)!)//내 플레이어 보드를 다시 그림
+        
+        gameView?.setBottomBoardViewFrame(frame: calculateBottomFrame())//bottomBoard의 프레임 재지정
+        
+        self.view.addSubview(gameView!)
+    }
+    
+    //LuckyCardGame.belowLuckyCards가 담길 공간을 표시하는 bottomBoardView
+    func calculateBottomFrame() -> CGRect{
+        
+        let numOfAttendee: Int = luckyCardGame.getNumOfAttendee()
+        let lastBoardWidth: CGFloat = Constant.screenWidth - Constant.horizontalSpacing * 2
+        
+        var yPos: CGFloat = 0
+        var lastBoardHeight: CGFloat = 0
+        
+        if numOfAttendee == 5{
+            yPos = 5 * (Board.height + Constant.spacing)
+            lastBoardHeight = Board.height
+        }
+        else if numOfAttendee == 3 || numOfAttendee == 4{//참가자가 3명 또는 4명일 때
+            yPos = 4 * (Board.height + Constant.spacing)
+            lastBoardHeight = Board.height * 2
+        }
+        
+        let frame = CGRect(
+            x: 0, y: yPos, width: lastBoardWidth, height: lastBoardHeight
+        )
+        
+        return frame
+    }
+    
+    func calculatePlayerBoards(numOfAttendee: AttendeeNum) -> [PlayerboardView]{
+        var views: [PlayerboardView] = []
+        for i in 1...numOfAttendee.rawValue{
+            views.append(PlayerboardView(frame:
+                                            CGRect(x: 0,
+                                                y:  Constant.spacing * CGFloat(i-1) + Board.height * CGFloat(i-1),
+                                                   width: CGFloat(Constant.screenWidth) - CGFloat(Constant.horizontalSpacing * 2),
+                                                   height: Board.height), name: Board.labels[i-1]))
+        }
+        return views
+    }
+    
+    func initMyBoardCards(){
+        gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())
     }
     
 }
