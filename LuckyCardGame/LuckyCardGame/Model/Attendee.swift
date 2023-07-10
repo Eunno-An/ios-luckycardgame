@@ -10,10 +10,44 @@ import Foundation
 /*
  MARK: 카드 객체 인스턴스를 소유하는 참가자 구조체
  */
+enum AttendeeName: String{
+    case first = "A"
+    case second = "B"
+    case third = "C"
+    case fourth = "D"
+    case fifth = "E"
+    static func getPlayerName(attendeeIdx: Int) -> String{
+        switch attendeeIdx {
+        case 0:
+            return AttendeeName.first.rawValue
+        case 1:
+            return AttendeeName.second.rawValue
+        case 2:
+            return AttendeeName.third.rawValue
+        case 3:
+            return AttendeeName.fourth.rawValue
+        case 4:
+            return AttendeeName.fifth.rawValue
+        default:
+            return "?"
+        }
+    }
+}
 enum AttendeeNum: Int{
     case three = 3
     case four
     case five
+    
+    static func getPlayerNames(attendeeNum: AttendeeNum) -> [String]{
+        switch attendeeNum{
+        case .three:
+            return ["A", "B", "C"]
+        case .four:
+            return ["A", "B", "C", "D"]
+        case .five:
+            return ["A", "B", "C", "D", "E"]
+        }
+    }
 }
 
 //플레이어 한명당 갖고 있는 카드 개수
@@ -61,5 +95,9 @@ struct Attendee{
     
     public func getDeck() -> Deck{
         return self.deck
+    }
+    
+    public mutating func setDeck(deck: Deck){
+        self.deck = deck
     }
 }
