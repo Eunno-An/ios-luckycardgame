@@ -256,26 +256,8 @@ final class LuckyCardGameTests: XCTestCase {
     /*
      특정 참가자와 해당 참가자 카드 중에 가장 낮은 숫자 또는 가장 높은 숫자, 바닥 카드 중 아무거나를 선택해서 3개가 같은지 판단할 수 있어야 합니다.
      */
+    
     func testSameThreeNumber_MinMaxVal_of_Deck_and_AnyCardInBottomDeck(me: Attendee, other: Attendee, bottomCardIdx: Int) throws{
-        //나의 최대 카드 또는 최소 카드를 선택한다.
-        let myLuckyCards: [LuckyCard] = me.getDeck().getCards().sorted{
-            $0.number.rawValue < $1.number.rawValue
-        }
-        let theOtherLuckyCards: [LuckyCard] = other.getDeck().getCards().sorted{
-            $0.number.rawValue < $1.number.rawValue
-        }
-        
-        let myMinNumLuckyCard: LuckyCard = myLuckyCards.first!
-        let myMaxNumLuckyCard: LuckyCard = myLuckyCards.last!
-        
-        let theOtherMinNumLuckyCard: LuckyCard = theOtherLuckyCards.first!
-        let theOtherMaxNumLuckyCard: LuckyCard = theOtherLuckyCards.last!
-        
-        let bottomCard: LuckyCard = luckyCardGame.getBelowLuckyCards()[bottomCardIdx]
-        
-        let flag: Bool = (bottomCard == myMinNumLuckyCard || bottomCard == myMaxNumLuckyCard) && (bottomCard == theOtherMinNumLuckyCard || bottomCard == theOtherMaxNumLuckyCard)
-        
-        XCTAssertFalse(flag, "선택하신 바닥 카드 \(bottomCard.describe)와 동일한 두개의 카드가 공개 카드에 존재합니다.")
         
         
     }

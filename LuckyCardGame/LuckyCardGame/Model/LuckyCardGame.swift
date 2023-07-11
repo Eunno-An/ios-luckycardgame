@@ -13,6 +13,8 @@ class LuckyCardGame{
     private var belowLuckyCards: [LuckyCard]
     private var cardDealer: CardDealer
     
+    
+    
     init(){
         attendees = []
         belowLuckyCards = []

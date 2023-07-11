@@ -12,6 +12,7 @@
 		D45D49D02A54549B00641A8F /* PlayerboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45D49CF2A54549B00641A8F /* PlayerboardView.swift */; };
 		D45D49D52A54727C00641A8F /* LuckyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45D49D42A54727C00641A8F /* LuckyCard.swift */; };
 		D45D49D72A54F7ED00641A8F /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45D49D62A54F7ED00641A8F /* Deck.swift */; };
+		D471EA152A5D3A400008D4E4 /* AttendeeRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D471EA142A5D3A400008D4E4 /* AttendeeRule.swift */; };
 		D4988B072A53E1D7001456FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4988B062A53E1D7001456FF /* AppDelegate.swift */; };
 		D4988B092A53E1D7001456FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4988B082A53E1D7001456FF /* SceneDelegate.swift */; };
 		D4988B0B2A53E1D7001456FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4988B0A2A53E1D7001456FF /* ViewController.swift */; };
@@ -58,6 +59,7 @@
 		D45D49CF2A54549B00641A8F /* PlayerboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerboardView.swift; sourceTree = "<group>"; };
 		D45D49D42A54727C00641A8F /* LuckyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyCard.swift; sourceTree = "<group>"; };
 		D45D49D62A54F7ED00641A8F /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		D471EA142A5D3A400008D4E4 /* AttendeeRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendeeRule.swift; sourceTree = "<group>"; };
 		D4988B032A53E1D7001456FF /* LuckyCardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuckyCardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4988B062A53E1D7001456FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4988B082A53E1D7001456FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,13 +125,22 @@
 		D45D49D12A5466BA00641A8F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D4A6FA842A56B93400637995 /* Attendee.swift */,
+				D471EA162A5D3DB00008D4E4 /* AboutPlayer */,
+				D4A6FA942A57D3C400637995 /* AboutCard */,
 				D4A6FA862A56B95600637995 /* CardDealer.swift */,
 				D4A6FA922A571EDD00637995 /* LuckyCardGame.swift */,
 				D4A6FA822A56B85C00637995 /* Tester.swift */,
-				D4A6FA942A57D3C400637995 /* AboutCard */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D471EA162A5D3DB00008D4E4 /* AboutPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				D471EA142A5D3A400008D4E4 /* AttendeeRule.swift */,
+				D4A6FA842A56B93400637995 /* Attendee.swift */,
+			);
+			path = AboutPlayer;
 			sourceTree = "<group>";
 		};
 		D4988AFA2A53E1D7001456FF = {
@@ -371,6 +382,7 @@
 				D4A6FA872A56B95600637995 /* CardDealer.swift in Sources */,
 				D4A6FAA52A5A44CF00637995 /* FrontCardView.swift in Sources */,
 				D4988B0B2A53E1D7001456FF /* ViewController.swift in Sources */,
+				D471EA152A5D3A400008D4E4 /* AttendeeRule.swift in Sources */,
 				D4A6FA912A571BAD00637995 /* GameView.swift in Sources */,
 				D4A6FA8A2A56F2CF00637995 /* ConstantValue.swift in Sources */,
 				D4A6FA7D2A56B28B00637995 /* CardNumber.swift in Sources */,
