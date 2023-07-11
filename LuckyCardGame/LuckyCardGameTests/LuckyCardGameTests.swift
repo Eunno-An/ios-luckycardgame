@@ -26,13 +26,13 @@ final class LuckyCardGameTests: XCTestCase {
             //try testBottomCardIsSortedDescending(bottomLuckyCards: luckyCardGame.getBelowLuckyCards()) // 참가자 중에 같은 숫자 카드 3장을 가진 경우가 있는지 판단할 수 있다
             //try testPlayerDeckHasThreeDuplicatedNum(attendees: luckyCardGame.getAttendeesInfo()) // 특정 참가자와 해당 참가자 카드 중에 가장 낮은 숫자 또는 가장 높은 숫자, 바닥 카드 중 아무거나를 선택해서 3개가 같은지 판단할 수 있어야 한다.
             
-            try testSameThreeNumber_MinMaxVal_of_Deck_and_AnyCardInBottomDeck(attendee: luckyCardGame.getMyInfo(), bottomCards: luckyCardGame.getBelowLuckyCards())
+            /*
+             특정 참가자와 해당 참가자 카드 중에
+             가장 낮은 숫자 또는 가장 높은 숫자, 바닥 카드 중 아무거나를 선택해서 3개가 같은지 판단할 수 있어야 합니다.
+             TODO: 현재는 다른 참가자와 bottomCardIdx를 고정값으로 놓았습니다. 추후에 조정해야합니다.
+             */
+            try testSameThreeNumber_MinMaxVal_of_Deck_and_AnyCardInBottomDeck(me: luckyCardGame.getMyInfo(), other: luckyCardGame.getAttendeesInfo()[1], bottomCardIdx: 0)
             //printGameInfoBefore_Or_AfterTest(attendeeNum: .three)
-            
-            
-            
-            
-            
         } catch{
             
         }
@@ -254,20 +254,30 @@ final class LuckyCardGameTests: XCTestCase {
     }
     
     /*
-     참가자의 카드 숫자 최댓값과 최솟값이 같은지 확인하고, 같다면 이 숫자가 bottomCards에 있는지 확인합니다.
-     카드 숫자의 최댓값과 최솟값이 다르면 Assert되고, 만약 같다면 이 숫자가 bottomCards에 없으면 Assert합니다.
+     특정 참가자와 해당 참가자 카드 중에 가장 낮은 숫자 또는 가장 높은 숫자, 바닥 카드 중 아무거나를 선택해서 3개가 같은지 판단할 수 있어야 합니다.
      */
-    func testSameThreeNumber_MinMaxVal_of_Deck_and_AnyCardInBottomDeck(attendee: Attendee, bottomCards: [LuckyCard]) throws{
-        let sortedLuckyCards: [LuckyCard] = attendee.getDeck().getCards().sorted{
-            $0.number.rawValue > $1.number.rawValue
+    func testSameThreeNumber_MinMaxVal_of_Deck_and_AnyCardInBottomDeck(me: Attendee, other: Attendee, bottomCardIdx: Int) throws{
+        //나의 최대 카드 또는 최소 카드를 선택한다.
+        let myLuckyCards: [LuckyCard] = me.getDeck().getCards().sorted{
+            $0.number.rawValue < $1.number.rawValue
         }
-        let isMinMaxValSame: Bool = (sortedLuckyCards.first?.number == sortedLuckyCards.last?.number)
+        let theOtherLuckyCards: [LuckyCard] = other.getDeck().getCards().sorted{
+            $0.number.rawValue < $1.number.rawValue
+        }
         
-        XCTAssertTrue(isMinMaxValSame, "플레이어 덱의 가장 낮은 숫자와 가장 높은 숫자가 서로 다릅니다!")
+        let myMinNumLuckyCard: LuckyCard = myLuckyCards.first!
+        let myMaxNumLuckyCard: LuckyCard = myLuckyCards.last!
         
-        let is_BottomCards_contains_MinMaxVal_of_LuckyCardArray: Bool = bottomCards.map{$0.number.rawValue}.contains(sortedLuckyCards[0].number.rawValue)
+        let theOtherMinNumLuckyCard: LuckyCard = theOtherLuckyCards.first!
+        let theOtherMaxNumLuckyCard: LuckyCard = theOtherLuckyCards.last!
         
-        XCTAssertTrue(is_BottomCards_contains_MinMaxVal_of_LuckyCardArray, "바닥 카드에는 플레이어 덱의 가장 낮은 숫자(혹은 가장 높은 숫자)와 일치하는 숫자가 없습니다!")
+        let bottomCard: LuckyCard = luckyCardGame.getBelowLuckyCards()[bottomCardIdx]
+        
+        let flag: Bool = (bottomCard == myMinNumLuckyCard || bottomCard == myMaxNumLuckyCard) && (bottomCard == theOtherMinNumLuckyCard || bottomCard == theOtherMaxNumLuckyCard)
+        
+        XCTAssertFalse(flag, "선택하신 바닥 카드 \(bottomCard.describe)와 동일한 두개의 카드가 공개 카드에 존재합니다.")
+        
+        
     }
     
     
