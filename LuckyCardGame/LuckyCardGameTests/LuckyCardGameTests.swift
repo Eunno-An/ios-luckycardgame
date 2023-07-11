@@ -14,21 +14,12 @@ final class LuckyCardGameTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         luckyCardGame = LuckyCardGame()
-        testStart(attendeeNum: .three)
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        luckyCardGame = nil
-    }
-
-    func testStart(attendeeNum: AttendeeNum){
-        luckyCardGame.gameStart(attendeeNum: attendeeNum)
+        luckyCardGame.gameStart(attendeeNum: .three)
         do {
             
-            try testAppropriateSplit(attendeeNum: attendeeNum) // 참가자수를 지정하고 게임을 초기화하면 적절하게 카드를 나눠줘야 한다
+            try testAppropriateSplit(attendeeNum: .three) // 참가자수를 지정하고 게임을 초기화하면 적절하게 카드를 나눠줘야 한다
             
-            printGameInfoBefore_Or_AfterTest(attendeeNum: attendeeNum)
+            printGameInfoBefore_Or_AfterTest(attendeeNum: .three)
             //try testPlayerCardIsSortedAscending(attendeeIdx: 0) // 참가자별로 카드를 숫자 오름차순으로 정렬할 수 있어야 한다
             //try testPlayerCardIsSortedDescending(attendeeIdx: 0)
             //try testBottomCardIsSortedAscending(bottomLuckyCards: luckyCardGame.getBelowLuckyCards()) // 바닥에 깔린 카드도 숫자 오름차순으로 정렬할 수 있어야 한다
@@ -46,13 +37,20 @@ final class LuckyCardGameTests: XCTestCase {
             
         }
     }
+
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        luckyCardGame = nil
+    }
+
+    
     //참가자 수가 주어지면, 참가자들의 [card]정보를 출력하는 함수
     func printAttendeesDeckInfo(attendeeNum: AttendeeNum){
         let attendeeNames: [String] = AttendeeNum.getPlayerNames(attendeeNum: attendeeNum)
         
         for attendeeIdx in 0..<attendeeNum.rawValue{
             print(attendeeNames[attendeeIdx], terminator: " ")
-            printPlayerCardsInfo(cards: luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getDeck())
+            printPlayerCardsInfo(cards: luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getCards())
         }
     }
     
@@ -114,7 +112,7 @@ final class LuckyCardGameTests: XCTestCase {
         //각 attendee에게 맞는 장수만큼 분배되었는지에 대한 검사
         let playerShouldHaveCardsNum: AttendeeCardNum = AttendeeCardNum.getAttendeeCardNum(attendeeNum: attendeeNum)
         for attendeeIdx in 0..<attendeeNum.rawValue{
-            let nowCardNum : Int = attendees[attendeeIdx].getDeck().getDeck().count
+            let nowCardNum : Int = attendees[attendeeIdx].getDeck().getCards().count
             XCTAssertEqual(nowCardNum, playerShouldHaveCardsNum.rawValue, "카드 장수가 \(playerShouldHaveCardsNum)가 아니고 \(nowCardNum)장이네요, 분배가 제대로 이루어지지 않았습니다")
         }
         
@@ -152,7 +150,7 @@ final class LuckyCardGameTests: XCTestCase {
 
     //참가자의 카드를 오름차순으로 정렬할 수 있는지 확인합니다.
     func testPlayerCardIsSortedAscending(attendeeIdx: Int) throws{
-        let luckyCards: [LuckyCard] = luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getDeck()
+        let luckyCards: [LuckyCard] = luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getCards()
         let sortedLuckyCards: [LuckyCard] = luckyCards.sorted {
             $0.number.rawValue < $1.number.rawValue
         }
@@ -174,7 +172,7 @@ final class LuckyCardGameTests: XCTestCase {
     
     //참가자의 카드를 내림차순으로 정렬할 수 있는지 확인합니다.
     func testPlayerCardIsSortedDescending(attendeeIdx: Int) throws{
-        let luckyCards: [LuckyCard] = luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getDeck()
+        let luckyCards: [LuckyCard] = luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getCards()
         let sortedLuckyCards: [LuckyCard] = luckyCards.sorted{
             $0.number.rawValue > $1.number.rawValue
         }
@@ -242,7 +240,7 @@ final class LuckyCardGameTests: XCTestCase {
         var isDeckHasThreeDupNum: Bool = false
         let attendeeNum : Int = attendees.count
         for attendeeIdx in 0..<attendeeNum{
-            for card in attendees[attendeeIdx].getDeck().getDeck(){
+            for card in attendees[attendeeIdx].getDeck().getCards(){
                 numCountArr[card.number.rawValue] += 1
                 if numCountArr[card.number.rawValue] == attendeeNum{
                     isDeckHasThreeDupNum = true
@@ -260,10 +258,10 @@ final class LuckyCardGameTests: XCTestCase {
      */
     func testSameThreeNumber_MinMaxVal_of_Deck_and_AnyCardInBottomDeck(me: Attendee, other: Attendee, bottomCardIdx: Int) throws{
         //나의 최대 카드 또는 최소 카드를 선택한다.
-        let myLuckyCards: [LuckyCard] = me.getDeck().getDeck().sorted{
+        let myLuckyCards: [LuckyCard] = me.getDeck().getCards().sorted{
             $0.number.rawValue < $1.number.rawValue
         }
-        let theOtherLuckyCards: [LuckyCard] = other.getDeck().getDeck().sorted{
+        let theOtherLuckyCards: [LuckyCard] = other.getDeck().getCards().sorted{
             $0.number.rawValue < $1.number.rawValue
         }
         
@@ -278,6 +276,8 @@ final class LuckyCardGameTests: XCTestCase {
         let flag: Bool = (bottomCard == myMinNumLuckyCard || bottomCard == myMaxNumLuckyCard) && (bottomCard == theOtherMinNumLuckyCard || bottomCard == theOtherMaxNumLuckyCard)
         
         XCTAssertFalse(flag, "선택하신 바닥 카드 \(bottomCard.describe)와 동일한 두개의 카드가 공개 카드에 존재합니다.")
+        
+        
     }
     
     

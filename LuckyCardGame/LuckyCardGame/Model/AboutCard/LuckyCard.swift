@@ -18,10 +18,13 @@ protocol Card{
  */
 struct LuckyCard: Card, Hashable, Equatable{
     
+    static func == (lhs: LuckyCard, rhs: LuckyCard) -> Bool {
+        return lhs.number == rhs.number && lhs.animal == rhs.animal
+    }
+    
     private(set) var number: CardNumber
     private(set) var animal: Animal
     private(set) var isFlipped: Bool
-    
     var describe: String{
         return "\(animal.rawValue)" + String(format:"%02d", number.rawValue)
     }
@@ -43,11 +46,5 @@ struct LuckyCard: Card, Hashable, Equatable{
     public mutating func flipCard(){
         self.isFlipped = !self.isFlipped
     }
-    
-    static func == (lhs: LuckyCard, rhs: LuckyCard) -> Bool {
-        return lhs.number == rhs.number && lhs.animal == rhs.animal
-    }
-    
-    
 }
 

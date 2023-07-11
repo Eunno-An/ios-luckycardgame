@@ -12,7 +12,7 @@ enum Tester{
     
     static func printCardInfo(deck: Deck){
         var printString: String = ""
-        for card in deck.getDeck(){
+        for card in deck.getCards(){
             printString += "\(card.describe)"
             printString += ", "
         }

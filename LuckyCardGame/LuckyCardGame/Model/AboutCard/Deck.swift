@@ -23,21 +23,18 @@ class Deck{
     init() {
         self.cards = []
     }
-    
     convenience init(cards: [LuckyCard]){
         self.init()
         self.cards = cards
     }
     
-    public func getDeck() -> [LuckyCard]{
+    public func getCards() -> [LuckyCard]{
         return cards
     }
     
-    public func setDeck(cards: [LuckyCard]){
+    public func setCards(cards: [LuckyCard]){
         self.cards = cards
     }
-    
-    
 }
 
 /*
