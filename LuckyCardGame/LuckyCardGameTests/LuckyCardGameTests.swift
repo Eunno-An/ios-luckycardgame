@@ -52,7 +52,7 @@ final class LuckyCardGameTests: XCTestCase {
         
         for attendeeIdx in 0..<attendeeNum.rawValue{
             print(attendeeNames[attendeeIdx], terminator: " ")
-            printPlayerCardsInfo(cards: luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getCards())
+            printPlayerCardsInfo(cards: luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getDeck())
         }
     }
     
@@ -114,7 +114,7 @@ final class LuckyCardGameTests: XCTestCase {
         //각 attendee에게 맞는 장수만큼 분배되었는지에 대한 검사
         let playerShouldHaveCardsNum: AttendeeCardNum = AttendeeCardNum.getAttendeeCardNum(attendeeNum: attendeeNum)
         for attendeeIdx in 0..<attendeeNum.rawValue{
-            let nowCardNum : Int = attendees[attendeeIdx].getDeck().getCards().count
+            let nowCardNum : Int = attendees[attendeeIdx].getDeck().getDeck().count
             XCTAssertEqual(nowCardNum, playerShouldHaveCardsNum.rawValue, "카드 장수가 \(playerShouldHaveCardsNum)가 아니고 \(nowCardNum)장이네요, 분배가 제대로 이루어지지 않았습니다")
         }
         
@@ -152,7 +152,7 @@ final class LuckyCardGameTests: XCTestCase {
 
     //참가자의 카드를 오름차순으로 정렬할 수 있는지 확인합니다.
     func testPlayerCardIsSortedAscending(attendeeIdx: Int) throws{
-        let luckyCards: [LuckyCard] = luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getCards()
+        let luckyCards: [LuckyCard] = luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getDeck()
         let sortedLuckyCards: [LuckyCard] = luckyCards.sorted {
             $0.number.rawValue < $1.number.rawValue
         }
@@ -174,7 +174,7 @@ final class LuckyCardGameTests: XCTestCase {
     
     //참가자의 카드를 내림차순으로 정렬할 수 있는지 확인합니다.
     func testPlayerCardIsSortedDescending(attendeeIdx: Int) throws{
-        let luckyCards: [LuckyCard] = luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getCards()
+        let luckyCards: [LuckyCard] = luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getDeck()
         let sortedLuckyCards: [LuckyCard] = luckyCards.sorted{
             $0.number.rawValue > $1.number.rawValue
         }
@@ -242,7 +242,7 @@ final class LuckyCardGameTests: XCTestCase {
         var isDeckHasThreeDupNum: Bool = false
         let attendeeNum : Int = attendees.count
         for attendeeIdx in 0..<attendeeNum{
-            for card in attendees[attendeeIdx].getDeck().getCards(){
+            for card in attendees[attendeeIdx].getDeck().getDeck(){
                 numCountArr[card.number.rawValue] += 1
                 if numCountArr[card.number.rawValue] == attendeeNum{
                     isDeckHasThreeDupNum = true
@@ -260,10 +260,10 @@ final class LuckyCardGameTests: XCTestCase {
      */
     func testSameThreeNumber_MinMaxVal_of_Deck_and_AnyCardInBottomDeck(me: Attendee, other: Attendee, bottomCardIdx: Int) throws{
         //나의 최대 카드 또는 최소 카드를 선택한다.
-        let myLuckyCards: [LuckyCard] = me.getDeck().getCards().sorted{
+        let myLuckyCards: [LuckyCard] = me.getDeck().getDeck().sorted{
             $0.number.rawValue < $1.number.rawValue
         }
-        let theOtherLuckyCards: [LuckyCard] = other.getDeck().getCards().sorted{
+        let theOtherLuckyCards: [LuckyCard] = other.getDeck().getDeck().sorted{
             $0.number.rawValue < $1.number.rawValue
         }
         

@@ -28,7 +28,7 @@ class LuckyCardGame{
             gameAttendees.append(Attendee(deck: luckyCardDecks[i]))
         }
         attendees = gameAttendees
-        belowLuckyCards = luckyCardDecks.last?.getCards() ?? []
+        belowLuckyCards = luckyCardDecks.last?.getDeck() ?? []
     }
     
     public func getNumOfAttendee() -> Int{
@@ -58,7 +58,7 @@ class LuckyCardGame{
     public func getLuckyCardPool() -> [LuckyCard]{
         var ret : [LuckyCard] = []
         for attendee in attendees{
-            ret += attendee.getDeck().getCards()
+            ret += attendee.getDeck().getDeck()
         }
         ret += belowLuckyCards
         return ret
