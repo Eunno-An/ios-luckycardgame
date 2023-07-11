@@ -16,9 +16,11 @@ class BottomBoardView : RoundBoardView{
         var views: [BehindCardView] = []
         let bottomBoardHeight: CGFloat = Board.height * 2
         let cardsByOneCol: Int = Int(ceil(CGFloat(RemainingCardNum.nine.rawValue) / CGFloat(BottomBoardOneRowCardNum.fiveCardsByOneRow .rawValue)))
-        print(cardsByOneCol)
         
         var xPos: CGFloat = (Board.width - CardSize.width * CGFloat(BottomBoardOneRowCardNum.fiveCardsByOneRow.rawValue)) / CGFloat(BottomBoardOneRowCardNum.fiveCardsByOneRow.rawValue + 1)
+        
+        //print(xPos * 6 + CardSize.width * 5)
+        //print(Board.width)
         
         var yPos: CGFloat = (bottomBoardHeight - CardSize.height * CGFloat(cardsByOneCol)) / CGFloat(cardsByOneCol + 1)
         
@@ -57,7 +59,7 @@ class BottomBoardView : RoundBoardView{
         let cardsByOneRow: BottomBoardOneRowCardNum = BottomBoardOneRowCardNum.getOneRowCardNumByAttendeeNum(attendeeNum: attendeeNum)
         let cardsByOneCol: Int = Int(ceil(CGFloat(cardNumInBottomBoard.rawValue) / CGFloat(cardsByOneRow.rawValue)))
         
-        let xPos: CGFloat = (Board.width - CardSize.width * CGFloat(cardsByOneRow.rawValue)) / CGFloat(cardsByOneRow.rawValue + 1)
+        let xPos: CGFloat = (attendeeNum == .five ? (Board.width - CardSize.width * CGFloat(cardsByOneRow.rawValue)) / 2 : (Board.width - CardSize.width * CGFloat(cardsByOneRow.rawValue)) / CGFloat(cardsByOneRow.rawValue + 1))
         let yPos: CGFloat = (bottomBoardHeight - CardSize.height * CGFloat(cardsByOneCol)) / CGFloat(cardsByOneCol + 1)
         
         for i in 0..<cardNumInBottomBoard.rawValue{
