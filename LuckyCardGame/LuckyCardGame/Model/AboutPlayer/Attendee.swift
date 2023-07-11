@@ -73,6 +73,17 @@ enum BottomBoardOneRowCardNum: Int{
     case fiveCardsByOneRow = 5
     case fourCardsByOneRow = 4
     case sixCardsByOneRow = 6
+    
+    static func getOneRowCardNumByAttendeeNum(attendeeNum: AttendeeNum) -> BottomBoardOneRowCardNum{
+        switch attendeeNum{
+        case .three:
+            return BottomBoardOneRowCardNum.fiveCardsByOneRow
+        case .four:
+            return BottomBoardOneRowCardNum.fourCardsByOneRow
+        case .five:
+            return BottomBoardOneRowCardNum.sixCardsByOneRow
+        }
+    }
 }
 
 //플레이어에게 카드 분배하고 남은 개수
@@ -80,6 +91,17 @@ enum RemainingCardNum: Int{
     case nine = 9
     case eight = 8
     case six = 6
+    
+    static func getRemainingCardNumByAttendeeNum(attendeeNum: AttendeeNum) -> RemainingCardNum{
+        switch attendeeNum{
+        case .three:
+            return RemainingCardNum.nine
+        case .four:
+            return RemainingCardNum.eight
+        case .five:
+            return RemainingCardNum.six
+        }
+    }
 }
 
 class Attendee: AttendeeRule{

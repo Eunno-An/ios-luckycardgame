@@ -22,6 +22,7 @@ class FrontCardView: CardView{
     private var cardAnimalLabel: UILabel = {
         let label = UILabel()
         label.text = Animal.dog.rawValue
+        label.textAlignment = .center
         return label
     }()
     
