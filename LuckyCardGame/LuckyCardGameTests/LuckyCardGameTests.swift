@@ -14,12 +14,21 @@ final class LuckyCardGameTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         luckyCardGame = LuckyCardGame()
-        luckyCardGame.gameStart(attendeeNum: .three)
+        testStart(attendeeNum: .three)
+    }
+
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        luckyCardGame = nil
+    }
+
+    func testStart(attendeeNum: AttendeeNum){
+        luckyCardGame.gameStart(attendeeNum: attendeeNum)
         do {
             
-            try testAppropriateSplit(attendeeNum: .three) // 참가자수를 지정하고 게임을 초기화하면 적절하게 카드를 나눠줘야 한다
+            try testAppropriateSplit(attendeeNum: attendeeNum) // 참가자수를 지정하고 게임을 초기화하면 적절하게 카드를 나눠줘야 한다
             
-            printGameInfoBefore_Or_AfterTest(attendeeNum: .three)
+            printGameInfoBefore_Or_AfterTest(attendeeNum: attendeeNum)
             //try testPlayerCardIsSortedAscending(attendeeIdx: 0) // 참가자별로 카드를 숫자 오름차순으로 정렬할 수 있어야 한다
             //try testPlayerCardIsSortedDescending(attendeeIdx: 0)
             //try testBottomCardIsSortedAscending(bottomLuckyCards: luckyCardGame.getBelowLuckyCards()) // 바닥에 깔린 카드도 숫자 오름차순으로 정렬할 수 있어야 한다
@@ -37,13 +46,6 @@ final class LuckyCardGameTests: XCTestCase {
             
         }
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        luckyCardGame = nil
-    }
-
-    
     //참가자 수가 주어지면, 참가자들의 [card]정보를 출력하는 함수
     func printAttendeesDeckInfo(attendeeNum: AttendeeNum){
         let attendeeNames: [String] = AttendeeNum.getPlayerNames(attendeeNum: attendeeNum)
@@ -276,8 +278,6 @@ final class LuckyCardGameTests: XCTestCase {
         let flag: Bool = (bottomCard == myMinNumLuckyCard || bottomCard == myMaxNumLuckyCard) && (bottomCard == theOtherMinNumLuckyCard || bottomCard == theOtherMaxNumLuckyCard)
         
         XCTAssertFalse(flag, "선택하신 바닥 카드 \(bottomCard.describe)와 동일한 두개의 카드가 공개 카드에 존재합니다.")
-        
-        
     }
     
     
