@@ -82,7 +82,7 @@ enum RemainingCardNum: Int{
     case six = 6
 }
 
-struct Attendee: AttendeeRule{
+class Attendee: AttendeeRule{
     
     //Protocol AttendeeRule stubs
     func flipFirstNumberCard_In_PlayerCards() {
@@ -150,17 +150,17 @@ struct Attendee: AttendeeRule{
         return self.deck
     }
     
-    public mutating func setDeck(deck: Deck){
+    public func setDeck(deck: Deck){
         self.deck = deck
     }
     
-    public mutating func sortDeckByNumberASC(){
+    public func sortDeckByNumberASC(){
         deck = Deck(cards: deck.getCards().sorted{
             $0.number.rawValue < $1.number.rawValue
         })
     }
     
-    public mutating func sortDeckByNumberDESC(){
+    public func sortDeckByNumberDESC(){
         deck = Deck(cards: deck.getCards().sorted{
             $0.number.rawValue > $1.number.rawValue
         })

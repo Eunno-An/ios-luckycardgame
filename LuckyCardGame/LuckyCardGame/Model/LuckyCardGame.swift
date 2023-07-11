@@ -13,8 +13,6 @@ class LuckyCardGame{
     private var belowLuckyCards: [LuckyCard]
     private var cardDealer: CardDealer
     
-    
-    
     init(){
         attendees = []
         belowLuckyCards = []
@@ -45,8 +43,18 @@ class LuckyCardGame{
         self.belowLuckyCards = belowLuckyCards
     }
     
+    public func sortBelowLuckyCards_by_CardNumber(){
+        self.belowLuckyCards.sort{
+            $0.number.rawValue < $1.number.rawValue
+        }
+    }
+    
     public func getMyInfo() -> Attendee{
         return attendees[0]
+    }
+    
+    public func get_xth_AttendeeInfo(attendeeIdx: Int) -> Attendee{
+        return attendees[attendeeIdx]
     }
     
     public func getAttendeesInfo() -> [Attendee]{

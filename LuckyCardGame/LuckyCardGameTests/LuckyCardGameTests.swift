@@ -10,97 +10,30 @@ import XCTest
 
 final class LuckyCardGameTests: XCTestCase {
     var luckyCardGame: LuckyCardGame!
+    let attendeeNum: AttendeeNum = .three
+    override func setUp() async throws {
+        try await super.setUp()
+        
+        luckyCardGame = LuckyCardGame()
+        luckyCardGame.gameStart(attendeeNum: attendeeNum)
+        for attendee in luckyCardGame.getAttendeesInfo(){
+            attendee.sortDeckByNumberASC()
+        }
+        luckyCardGame.sortBelowLuckyCards_by_CardNumber()
+        
+    }
     
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        luckyCardGame = LuckyCardGame()
-        luckyCardGame.gameStart(attendeeNum: .three)
-        do {
-            
-            try testAppropriateSplit(attendeeNum: .three) // 참가자수를 지정하고 게임을 초기화하면 적절하게 카드를 나눠줘야 한다
-            
-            printGameInfoBefore_Or_AfterTest(attendeeNum: .three)
-            //try testPlayerCardIsSortedAscending(attendeeIdx: 0) // 참가자별로 카드를 숫자 오름차순으로 정렬할 수 있어야 한다
-            //try testPlayerCardIsSortedDescending(attendeeIdx: 0)
-            //try testBottomCardIsSortedAscending(bottomLuckyCards: luckyCardGame.getBelowLuckyCards()) // 바닥에 깔린 카드도 숫자 오름차순으로 정렬할 수 있어야 한다
-            //try testBottomCardIsSortedDescending(bottomLuckyCards: luckyCardGame.getBelowLuckyCards()) // 참가자 중에 같은 숫자 카드 3장을 가진 경우가 있는지 판단할 수 있다
-            //try testPlayerDeckHasThreeDuplicatedNum(attendees: luckyCardGame.getAttendeesInfo()) // 특정 참가자와 해당 참가자 카드 중에 가장 낮은 숫자 또는 가장 높은 숫자, 바닥 카드 중 아무거나를 선택해서 3개가 같은지 판단할 수 있어야 한다.
-            
-            /*
-             특정 참가자와 해당 참가자 카드 중에
-             가장 낮은 숫자 또는 가장 높은 숫자, 바닥 카드 중 아무거나를 선택해서 3개가 같은지 판단할 수 있어야 합니다.
-             TODO: 현재는 다른 참가자와 bottomCardIdx를 고정값으로 놓았습니다. 추후에 조정해야합니다.
-             */
-            try testSameThreeNumber_MinMaxVal_of_Deck_and_AnyCardInBottomDeck(me: luckyCardGame.getMyInfo(), other: luckyCardGame.getAttendeesInfo()[1], bottomCardIdx: 0)
-            //printGameInfoBefore_Or_AfterTest(attendeeNum: .three)
-        } catch{
-            
-        }
+        
     }
-
+    
     override func tearDownWithError() throws {
+        
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         luckyCardGame = nil
     }
-
     
-    //참가자 수가 주어지면, 참가자들의 [card]정보를 출력하는 함수
-    func printAttendeesDeckInfo(attendeeNum: AttendeeNum){
-        let attendeeNames: [String] = AttendeeNum.getPlayerNames(attendeeNum: attendeeNum)
-        
-        for attendeeIdx in 0..<attendeeNum.rawValue{
-            print(attendeeNames[attendeeIdx], terminator: " ")
-            printPlayerCardsInfo(cards: luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getCards())
-        }
-    }
-    
-    //바닥의 [card]정보를 출력하는 함수
-    func printBottomCardsInfo(attendeeNum: AttendeeNum){
-        print("바닥 [", terminator: "")
-        let bottomCardSize: Int = luckyCardGame.getBelowLuckyCards().count
-        for bottomCardIdx in 0..<bottomCardSize{
-            print(luckyCardGame.getBelowLuckyCards()[bottomCardIdx].describe, terminator: "")
-            if bottomCardIdx != bottomCardSize - 1{
-                print(",", terminator: "")
-            }
-        }
-        print("]")
-    }
-    
-    //테스트 전의 덱 정보를 출력하는 함수
-    func printGameInfoBefore_Or_AfterTest(attendeeNum: AttendeeNum){
-        printAttendeesDeckInfo(attendeeNum: attendeeNum)
-        printBottomCardsInfo(attendeeNum: attendeeNum)
-    }
-    
-    //주어진 [card]를 출력하는 함수
-    func printPlayerCardsInfo(cards: [LuckyCard]){
-        print("[", terminator: "")
-        let cardSize = cards.count
-        for cardIdx in 0..<cardSize {
-            print(cards[cardIdx].describe, terminator: "")
-            if cardIdx != cardSize - 1{
-                print(", ", terminator: "")
-            }
-        }
-        print("]")
-    }
-    
-    
-    /*
-     카드를 적절하게 섞었는지 확인하는 함수입니다.
-     1. 카드가 모든 참가자에게 같은 숫자만큼 분배되었는지 확인합니다.
-     2. 전체 카드 풀이 모든 경우를 포함하는지 확인합니다.
-        2-1. 참가자가 세명일 때는 12가 없다는 사실을 고려해야합니다.
-        2-2. 그 외에는 카드가 종류별로 참가자 수만큼 나와야합니다.
-        2-3. 동물도 종류별로 나오는지 확인합니다.
-     */
-    func testAppropriateSplit(attendeeNum: AttendeeNum) throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func test_Cards_are_Split_Appripriately() throws{
         
         let attendees: [Attendee] = luckyCardGame.getAttendeesInfo()
         
@@ -115,7 +48,6 @@ final class LuckyCardGameTests: XCTestCase {
             let nowCardNum : Int = attendees[attendeeIdx].getDeck().getCards().count
             XCTAssertEqual(nowCardNum, playerShouldHaveCardsNum.rawValue, "카드 장수가 \(playerShouldHaveCardsNum)가 아니고 \(nowCardNum)장이네요, 분배가 제대로 이루어지지 않았습니다")
         }
-        
         //전체 카드 풀이 랜덤한지를 검사
         let luckyCardPool : [LuckyCard] = luckyCardGame.getLuckyCardPool()
         
@@ -147,62 +79,34 @@ final class LuckyCardGameTests: XCTestCase {
         }
         
     }
-
-    //참가자의 카드를 오름차순으로 정렬할 수 있는지 확인합니다.
-    func testPlayerCardIsSortedAscending(attendeeIdx: Int) throws{
-        let luckyCards: [LuckyCard] = luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getCards()
-        let sortedLuckyCards: [LuckyCard] = luckyCards.sorted {
-            $0.number.rawValue < $1.number.rawValue
-        }
+    
+    func test_PlayerCards_are_Sorted_by_CardNumber() throws{
         
-        var isSortedASC: Bool = true
-        let sortedLuckyCardArrSize: Int = sortedLuckyCards.count
+        let attendees: [Attendee] = luckyCardGame.getAttendeesInfo()
+        let deckSize: AttendeeCardNum = AttendeeCardNum.getAttendeeCardNum(attendeeNum: attendeeNum)
         
-        for i in 0..<sortedLuckyCardArrSize-1{
-            if sortedLuckyCards[i].number.rawValue > sortedLuckyCards[i+1].number.rawValue{
-                isSortedASC = false
-                break
+        
+        for attendee in attendees {
+            var isSortedASC = true
+            let attendeeCards: [LuckyCard] = attendee.getDeck().getCards()
+            for idx in 0..<deckSize.rawValue-1{
+                if attendeeCards[idx].number.rawValue > attendeeCards[idx+1].number.rawValue{
+                    isSortedASC =  false
+                    break
+                }
             }
+            XCTAssertTrue(isSortedASC, "참가자의 카드 덱 오름차순 정렬기능에 문제가 있습니다.")
         }
-        
-        XCTAssertTrue(isSortedASC, "참가자의 카드 덱 오름차순 정렬기능에 문제가 있습니다.")
-        
-        luckyCardGame.set_xth_AttendeeCardInfo(attendeeIdx: attendeeIdx, deck: Deck(cards: sortedLuckyCards))
     }
     
-    //참가자의 카드를 내림차순으로 정렬할 수 있는지 확인합니다.
-    func testPlayerCardIsSortedDescending(attendeeIdx: Int) throws{
-        let luckyCards: [LuckyCard] = luckyCardGame.getAttendeesInfo()[attendeeIdx].getDeck().getCards()
-        let sortedLuckyCards: [LuckyCard] = luckyCards.sorted{
-            $0.number.rawValue > $1.number.rawValue
-        }
-        
-        var isSortedDESC: Bool = true
-        let sortedLuckyCardArrSize: Int = sortedLuckyCards.count
-        
-        for i in 0..<sortedLuckyCardArrSize-1{
-            if sortedLuckyCards[i].number.rawValue < sortedLuckyCards[i+1].number.rawValue{
-                isSortedDESC = false
-                break
-            }
-        }
-        
-        XCTAssertTrue(isSortedDESC, "참가자의 카드 덱 내림차순 정렬기능에 문제가 있습니다.")
-        
-        luckyCardGame.set_xth_AttendeeCardInfo(attendeeIdx: attendeeIdx, deck: Deck(cards: sortedLuckyCards))
-    }
-
-    //바닥에 있는 카드를 오름차순으로 정렬할 수 있는지 확인합니다.
-    func testBottomCardIsSortedAscending(bottomLuckyCards: [LuckyCard]) throws{
-        let sortedLuckyCards: [LuckyCard] = bottomLuckyCards.sorted{
-            $0.number.rawValue < $1.number.rawValue
-        }
+    func test_BelowCards_are_Sorted_by_CardNumber() throws{
         
         var isSortedASC: Bool = true
-        let sortedLuckyCardArrSize: Int = sortedLuckyCards.count
+        let sortedLuckyCardArrSize: Int = luckyCardGame.getBelowLuckyCards().count
+        let belowCards: [LuckyCard] = luckyCardGame.getBelowLuckyCards()
         
-        for i in 0..<sortedLuckyCardArrSize-1{
-            if sortedLuckyCards[i].number.rawValue > sortedLuckyCards[i].number.rawValue{
+        for idx in 0..<sortedLuckyCardArrSize-1{
+            if belowCards[idx].number.rawValue > belowCards[idx+1].number.rawValue{
                 isSortedASC = false
                 break
             }
@@ -210,32 +114,11 @@ final class LuckyCardGameTests: XCTestCase {
         
         XCTAssertTrue(isSortedASC, "바닥에 깔린 카드 덱 오름차순 정렬에 문제가 있습니다.")
         
-        luckyCardGame.setBelowLuckyCards(belowLuckyCards: sortedLuckyCards)
     }
     
-    //바닥에 있는 카드를 내림차순으로 정렬할 수 있는지 확인합니다.
-    func testBottomCardIsSortedDescending(bottomLuckyCards: [LuckyCard]) throws{
-        let sortedLuckyCards: [LuckyCard] = bottomLuckyCards.sorted{
-            $0.number.rawValue > $1.number.rawValue
-        }
+    func test_PlayerDeck_has_ThreeDuplicatedCardNumber() throws{
+        let attendees:[Attendee] = luckyCardGame.getAttendeesInfo()
         
-        var isSortedDESC: Bool = true
-        let sortedLuckyCardArrSize: Int = sortedLuckyCards.count
-        
-        for i in 0..<(sortedLuckyCardArrSize-1){
-            if sortedLuckyCards[i].number.rawValue < sortedLuckyCards[i+1].number.rawValue{
-                isSortedDESC = false
-                break
-            }
-        }
-        
-        XCTAssertTrue(isSortedDESC, "바닥에 깔린 카드 덱 내림차순 정렬에 문제가 있습니다.")
-        
-        luckyCardGame.setBelowLuckyCards(belowLuckyCards: sortedLuckyCards)
-    }
-    
-    //참가자의 덱에 같은 숫자 세개가 있는지 확인합니다.
-    func testPlayerDeckHasThreeDuplicatedNum(attendees: [Attendee]) throws{
         var numCountArr: [Int] = Array(repeating: 0, count: 12)
         var isDeckHasThreeDupNum: Bool = false
         let attendeeNum : Int = attendees.count
@@ -251,16 +134,58 @@ final class LuckyCardGameTests: XCTestCase {
             isDeckHasThreeDupNum = false
             numCountArr = Array(repeating: 0, count: 12)
         }
+    
     }
     
     /*
-     특정 참가자와 해당 참가자 카드 중에 가장 낮은 숫자 또는 가장 높은 숫자, 바닥 카드 중 아무거나를 선택해서 3개가 같은지 판단할 수 있어야 합니다.
+     이 테스트는 세개의 숫자가 같다는 조건만 검사합니다.
+    추후의 조건은 Assert가 발생했을 때 처리해주는 로직을 따로 짜는게 훨씬 코드를 간결화 할 수 있을 것 같아서 이런 방식으로 진행했습니다.
+     랜덤은 바텀 카드를 무작위로 고를 때만 사용했습니다.
+     패를 고르는 상대는 "첫번째" 플레이어로 고정했습니다.
      */
-    
-    func testSameThreeNumber_MinMaxVal_of_Deck_and_AnyCardInBottomDeck(me: Attendee, other: Attendee, bottomCardIdx: Int) throws{
+    func test_SameThreeNumber_MinMaxVal_of_Deck_and_AnyCardInBottomDeck() throws{
         
+        //만약 내꺼에서 두개가 연속으로 있다면?
+        let myDeck: [LuckyCard] = luckyCardGame.get_xth_AttendeeInfo(attendeeIdx: 0) .getDeck().getCards()
+        let otherDeck: [LuckyCard] = luckyCardGame.get_xth_AttendeeInfo(attendeeIdx: 1).getDeck().getCards()
+        let bottomCards: [LuckyCard] = luckyCardGame.getBelowLuckyCards()
         
+        if myDeck[0].number == myDeck[1].number{ //최솟값과 그 오른쪽 값이 같을 때
+            //다른 참가자들을 랜덤하게 선택해서, 그 참가자의 최대, 최소를 랜덤하게 선택한다는 가정이지만, 뭔가 그냥 고정값으로 하자.
+            if otherDeck[0].number == myDeck[0].number {
+                XCTAssertEqual(otherDeck[0].number, otherDeck[1].number, "세개의 카드가 같습니다.")
+            }else if otherDeck[otherDeck.count-1].number == myDeck[0].number{
+                XCTAssertEqual(otherDeck[0].number, otherDeck[1].number, "세개의 카드가 같습니다.")
+            }
+        }else if myDeck[myDeck.count - 1].number == myDeck[myDeck.count-2].number{
+            
+            if otherDeck[otherDeck.count-1].number == myDeck[myDeck.count-1].number {
+                XCTAssertEqual(otherDeck[0].number, otherDeck[1].number, "세개의 카드가 같습니다.")
+            }else if otherDeck[0].number == myDeck[myDeck.count-1].number{
+                XCTAssertEqual(otherDeck[0].number, otherDeck[1].number, "세개의 카드가 같습니다.")
+            }
+        }
+        /*
+         그렇지 않다면 가능성 두가지입니다. 1. 남에꺼에서 뽑고, 2. 바닥에서 뽑고.
+         내 덱의 첫번째 패를 골랐을 때, 바닥에서 랜덤하게 카드를 선택합니다.
+         */
+        else if myDeck[0].number == otherDeck[0].number{
+            
+            XCTAssertEqual(myDeck[0].number, bottomCards[Int.random(in: 0...bottomCards.count-1)].number, "세개의 카드가 같습니다.")
+        }else if myDeck[0].number == otherDeck[otherDeck.count-1].number{
+            
+            XCTAssertEqual(myDeck[0].number, bottomCards[Int.random(in: 0...bottomCards.count-1)].number, "세개의 카드가 같습니다.")
+        }
+        //내 덱의 마지막 패를 골랐을 때
+        else if myDeck[myDeck.count-1].number == otherDeck[0].number{
+            
+            XCTAssertEqual(myDeck[myDeck.count-1].number, bottomCards[Int.random(in: 0...bottomCards.count-1)].number, "세개의 카드가 같습니다.")
+        }else if myDeck[myDeck.count-1].number == otherDeck[otherDeck.count-1].number{
+            
+            XCTAssertEqual(myDeck[myDeck.count-1].number, bottomCards[Int.random(in: 0...bottomCards.count-1)].number, "세개의 카드가 같습니다.")
+        }
     }
+    
     
     
     func testPerformanceExample() throws {
@@ -269,5 +194,5 @@ final class LuckyCardGameTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
+    
 }
