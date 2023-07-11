@@ -108,6 +108,7 @@ class ViewController: UIViewController {
         return views
     }
     
+    //TODO: 리팩토링 필요
     func initMyBoardCards(){
         gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())
     }
