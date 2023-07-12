@@ -16,14 +16,14 @@ import Foundation
  에러 처리는 setCards에서 던진 에러가 있다면 이를 그대로 받아서 Deck 생성자를 호출한 쪽으로 에러를 던집니다.
  에러를 던지기 전, 카드 배열을 초기화해주는 작업을 수행해야합니다.
  */
-class Deck{
+struct Deck{
     
     private var cards: [LuckyCard]
     
     init() {
         self.cards = []
     }
-    convenience init(cards: [LuckyCard]){
+    init(cards: [LuckyCard]){
         self.init()
         self.cards = cards
     }
@@ -32,7 +32,7 @@ class Deck{
         return cards
     }
     
-    public func setCards(cards: [LuckyCard]){
+    public mutating func setCards(cards: [LuckyCard]){
         self.cards = cards
     }
 }
@@ -46,7 +46,7 @@ class Deck{
  */
 extension Deck{
     
-    func setCards(){
+    mutating func setCards(){
         for _ in 0..<12{
             let luckyCard = LuckyCard(number: CardNumber.allCases.randomElement()!, animal: Animal.allCases.randomElement()!)
             self.cards.append(luckyCard)

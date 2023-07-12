@@ -16,9 +16,11 @@ class BottomBoardView : RoundBoardView{
         var views: [BehindCardView] = []
         let bottomBoardHeight: CGFloat = Board.height * 2
         let cardsByOneCol: Int = Int(ceil(CGFloat(RemainingCardNum.nine.rawValue) / CGFloat(BottomBoardOneRowCardNum.fiveCardsByOneRow .rawValue)))
-        print(cardsByOneCol)
         
         var xPos: CGFloat = (Board.width - CardSize.width * CGFloat(BottomBoardOneRowCardNum.fiveCardsByOneRow.rawValue)) / CGFloat(BottomBoardOneRowCardNum.fiveCardsByOneRow.rawValue + 1)
+        
+        //print(xPos * 6 + CardSize.width * 5)
+        //print(Board.width)
         
         var yPos: CGFloat = (bottomBoardHeight - CardSize.height * CGFloat(cardsByOneCol)) / CGFloat(cardsByOneCol + 1)
         
@@ -53,11 +55,11 @@ class BottomBoardView : RoundBoardView{
         }
         var views: [BehindCardView] = []
         
-        let cardNumInBottomBoard: RemainingCardNum = getRemainingCardNumByAttendeeNum(attendeeNum: attendeeNum)
-        let cardsByOneRow: BottomBoardOneRowCardNum = getOneRowCardNumByAttendeeNum(attendeeNum: attendeeNum)
+        let cardNumInBottomBoard: RemainingCardNum = RemainingCardNum.getRemainingCardNumByAttendeeNum(attendeeNum: attendeeNum)
+        let cardsByOneRow: BottomBoardOneRowCardNum = BottomBoardOneRowCardNum.getOneRowCardNumByAttendeeNum(attendeeNum: attendeeNum)
         let cardsByOneCol: Int = Int(ceil(CGFloat(cardNumInBottomBoard.rawValue) / CGFloat(cardsByOneRow.rawValue)))
         
-        let xPos: CGFloat = (Board.width - CardSize.width * CGFloat(cardsByOneRow.rawValue)) / CGFloat(cardsByOneRow.rawValue + 1)
+        let xPos: CGFloat = (attendeeNum == .five ? (Board.width - CardSize.width * CGFloat(cardsByOneRow.rawValue)) / 2 : (Board.width - CardSize.width * CGFloat(cardsByOneRow.rawValue)) / CGFloat(cardsByOneRow.rawValue + 1))
         let yPos: CGFloat = (bottomBoardHeight - CardSize.height * CGFloat(cardsByOneCol)) / CGFloat(cardsByOneCol + 1)
         
         for i in 0..<cardNumInBottomBoard.rawValue{
@@ -68,30 +70,6 @@ class BottomBoardView : RoundBoardView{
         
         for behindCardView in behindCardViews{
             self.addSubview(behindCardView)
-        }
-    }
-    
-    //TODO: 뷰 컨트롤러로 기능 따로 빼기
-    private func getOneRowCardNumByAttendeeNum(attendeeNum: AttendeeNum) -> BottomBoardOneRowCardNum{
-        switch attendeeNum{
-        case .three:
-            return BottomBoardOneRowCardNum.fiveCardsByOneRow
-        case .four:
-            return BottomBoardOneRowCardNum.fourCardsByOneRow
-        case .five:
-            return BottomBoardOneRowCardNum.sixCardsByOneRow
-        }
-    }
-    
-    //TODO: 뷰 컨트롤러로 기능 따로 뺴기
-    private func getRemainingCardNumByAttendeeNum(attendeeNum: AttendeeNum) -> RemainingCardNum{
-        switch attendeeNum{
-        case .three:
-            return RemainingCardNum.nine
-        case .four:
-            return RemainingCardNum.eight
-        case .five:
-            return RemainingCardNum.six
         }
     }
 }

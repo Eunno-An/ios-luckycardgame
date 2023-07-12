@@ -86,6 +86,7 @@ class PlayerboardView: RoundBoardView{
         for cardView in views{
             self.addSubview(cardView)
         }
+        
         self.cardViews = views
     }
 }

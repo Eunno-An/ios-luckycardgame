@@ -14,4 +14,16 @@ enum Animal: String, CaseIterable{
     case dog = "\u{1F436}"
     case cat = "\u{1F431}"
     case cow = "\u{1F42E}"
+    
+    static func getAnimalIdx(animal: Animal) -> Int{
+        switch animal{
+        case .dog:
+            return 0
+        case .cat:
+            return 1
+        case .cow:
+            return 2
+        }
+    }
 }
+

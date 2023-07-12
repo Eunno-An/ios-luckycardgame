@@ -31,7 +31,7 @@ enum Constant{
 // MARK: Board의 공통 정보
 enum Board{
     static let height:CGFloat = CGFloat((Constant.screenHeight - Constant.topSpacing - Constant.topRectHeight - Constant.spacing - Constant.bottomSpacing) / 6.5) // board의 세로 길이
-    static let width:CGFloat = CGFloat(Constant.screenWidth) - Constant.bottomSpacing // board의 가로 길이
+    static let width:CGFloat = CGFloat(Constant.screenWidth) - Constant.horizontalSpacing * 2 // board의 가로 길이
     static let labels = ["A", "B", "C", "D", "E"] // board의 각 레이블
 }
 
