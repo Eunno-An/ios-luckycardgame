@@ -114,8 +114,6 @@ final class LuckyCardGameTests: XCTestCase {
         XCTAssertTrue(areThreeNumbersAreSameBetween, "세개의 숫자가 같지 않습니다.")
         
     }
-
-    
     
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

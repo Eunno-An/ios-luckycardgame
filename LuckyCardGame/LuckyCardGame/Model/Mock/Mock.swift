@@ -12,7 +12,7 @@ import Foundation
  */
 class Mock: LuckyCardGame{
     
-    //모든 숫자가 정확히 들어있는지 체크하는 함수
+    //MARK: 모든 숫자가 정확히 들어있는지 체크하는 함수입니다.
     public func checkAllNumbersInCards(attendeeNum: AttendeeNum) -> Bool {
         
         var numCountArr: [Int] = Array(repeating: 0, count: 12)
@@ -32,7 +32,7 @@ class Mock: LuckyCardGame{
         return answerNumCountArr == numCountArr
     }
     
-    //모든 심볼이 정확히 들어있는지 체크하는 함수
+    //MARK: 모든 심볼이 정확히 들어있는지 체크하는 함수입니다.
     public func checkAllSymbolsInCards(attendeeNum: AttendeeNum) -> Bool{
         
         var animalCountArr: [Int] = Array(repeating: 0, count: attendeeNum.rawValue)
@@ -51,7 +51,7 @@ class Mock: LuckyCardGame{
         return answerAnimalCountArr == animalCountArr
     }
     
-    //정렬이 잘 되는지 확인하는 함수
+    //MARK: 정렬이 잘 되는지 확인하는 함수입니다.
     public func sortCardArrayASCByCardNumber(cards: [LuckyCard]) -> Bool{
         let sortedCards: [LuckyCard] = cards.sorted{
             $0.number.rawValue < $1.number.rawValue
@@ -64,7 +64,7 @@ class Mock: LuckyCardGame{
         return true
     }
     
-    //세개의 카드의 숫자가 똑같은게 주어진 덱에 있는지 확인하는 함수
+    //MARK: 세개의 카드의 숫자가 똑같은게 주어진 덱에 있는지 확인하는 함수입니다.
     public func checkThreeNumbersAreInDeck(cards: [LuckyCard], attendeeNum: AttendeeNum) -> Bool{
         
         var numCountArr: [Int] = Array(repeating: 0, count: 12)
@@ -78,7 +78,7 @@ class Mock: LuckyCardGame{
         return false
     }
     
-    //세개의 주어진 카드 숫자가 똑같은지 확인하는 함수
+    //MARK: 세개의 주어진 카드 숫자가 똑같은지 확인하는 함수입니다.
     public func checkThreeNumbersAreSame(card1: LuckyCard, card2: LuckyCard, card3: LuckyCard) -> Bool{
         return card1.number == card2.number && card2.number == card3.number
     }
