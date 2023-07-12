@@ -17,6 +17,7 @@ import Foundation
  */
 
 class TestingPlayerRuleMock: LuckyCardGame{
+    
     private var tempCardChoices: [TempSavedCardInfo] = []
     
     //MARK: 가장 왼쪽에 있는 카드를 뒤집습니다.
@@ -41,6 +42,11 @@ class TestingPlayerRuleMock: LuckyCardGame{
     
     //MARK: 아래로 뒤집혀져 있는 카드를 앞면이 보이도록 뒤집습니다.
     func flipDownSideCard() -> Bool{
+        return false
+    }
+    
+    //MARK: 현재 turn에 세장의 카드가 선택되어있는지를 검사합니다.
+    func areThreeCardsChoiced() -> Bool{
         return false
     }
     
