@@ -16,6 +16,7 @@ class FrontCardView: CardView{
         let label = UILabel()
         label.text = "01"
         label.textColor = .black
+        label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
     
