@@ -19,6 +19,7 @@ import Foundation
 class TestingPlayerRuleMock: LuckyCardGame{
     
     private var tempCardChoices: [TempSavedCardInfo] = []
+    private var finalResult: FinalResult = FinalResult(attendeeNum: .three)//세명으로 고정합니다.
     
     //MARK: 가장 왼쪽에 있는 카드를 뒤집습니다.
     func flipLeftMostSideCard() -> Bool{
