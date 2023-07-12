@@ -104,7 +104,7 @@ enum RemainingCardNum: Int{
     }
 }
 
-class Attendee: AttendeeRule{
+class Attendee: PlayerRule{
     
     //Protocol AttendeeRule stubs
     func flipFirstNumberCard_In_PlayerCards() {

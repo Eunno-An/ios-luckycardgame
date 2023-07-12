@@ -10,7 +10,7 @@ import Foundation
 /*
  MARK: 실제 LuckyCardGame와 가장 비슷하게 구현된 수준의 객체인 Mock class를 만들었습니다.
  */
-class Mock: LuckyCardGame{
+class TestingLuckyCardGameMock: LuckyCardGame{
     
     //MARK: 모든 숫자가 정확히 들어있는지 체크하는 함수입니다.
     public func checkAllNumbersInCards(attendeeNum: AttendeeNum) -> Bool {

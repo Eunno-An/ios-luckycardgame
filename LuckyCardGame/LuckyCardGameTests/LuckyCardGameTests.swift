@@ -9,13 +9,13 @@ import XCTest
 @testable import LuckyCardGame
 
 final class LuckyCardGameTests: XCTestCase {
-    var luckyCardGame: Mock!
+    var luckyCardGame: TestingLuckyCardGameMock!
     let attendeeNum: AttendeeNum = .three
     
     override func setUpWithError() throws {
         
         try super.setUpWithError()
-        luckyCardGame = Mock() // Dummy를 생성합니다.
+        luckyCardGame = TestingLuckyCardGameMock() // Dummy를 생성합니다.
     }
     
     override func tearDownWithError() throws {
