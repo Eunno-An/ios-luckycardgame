@@ -72,6 +72,21 @@ final class PlayerRuleTests: XCTestCase {
         XCTAssertTrue(canPlayersFlipOnlyThreeCards, "세장의 카드가 선택되어있지 않습니다.")
     }
     
+    /*
+     MARK: 세장의 카드 숫자가 같으면 표시화면에서 제거하고, 결과 화면으로 보내버리는 테스트함수입니다.
+     */
+    func testAllThreeCardsSameAndEliminateThenInGameViewAndMoveCardsToFinalResult() throws{
+        let isAllCardsHaveThreeSameNumber:Bool = luckyCardGame.areThreeCardsNumberSame()
+        XCTAssertTrue(isAllCardsHaveThreeSameNumber, "선택한 세개의 숫자들이 모두 같은 번호가 아닙니다!")
+        
+        let canEliminateCards: Bool = luckyCardGame.canEliminateCard()
+        XCTAssertTrue(canEliminateCards, "모든 카드를 삭제할 수 없습니다.")
+        
+        let canSendTempResultToFinalResult: Bool = luckyCardGame.sendTempResultToFinalResult()
+        XCTAssertTrue(canSendTempResultToFinalResult, "카드를 결과 화면으로 보낼 수 없습니다.")
+    }
+
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         measure {

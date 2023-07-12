@@ -51,4 +51,23 @@ class TestingPlayerRuleMock: LuckyCardGame{
         return false
     }
     
+    //MARK: tempCardChoices에 저장된 숫자들이 다 같은지 검사합니다.
+    func areThreeCardsNumberSame() -> Bool{
+        return false
+    }
+    
+    /*
+     MARK: tempCardChoices를 순회하면서 해당 카드가 있었던 곳을 찾아가서 제거하고, tempCardChoices를 비웁니다.
+     일단 모든 카드들을 지울 수 있는지에 대한 검사가 선행되어야합니다. 인덱스 접근은 지양합니다.
+     마지막에는 tempCardChoices를 비워야합니다.
+     */
+    func canEliminateCard() -> Bool{
+        return false
+    }
+    
+    //MARK: 결과 화면으로 보내는 함수입니다.
+    func sendTempResultToFinalResult() -> Bool{
+        return false
+    }
+    
 }
