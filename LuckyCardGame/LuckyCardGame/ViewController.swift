@@ -30,13 +30,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let segmentedControlView = SegmentedControlView()
         let segmentedControl = segmentedControlView.getUISegmentedControlView()
         self.view.addSubview(segmentedControlView)
+        
         segmentedControl.selectedSegmentIndex = 0//처음에는 세명을 기본 선택으로 지정합니다.
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+        
         gameView = GameView()
-        initMyBoardCards()//처음 게임에 시작했을 때 
+        drawDeckForAllBoards(attendeeNum: .three)
         self.view.addSubview(gameView ?? GameView())
     }
     
@@ -47,18 +50,18 @@ class ViewController: UIViewController {
         case 0:
             luckyCardGame.gameStart(attendeeNum: .three)//gameStart
             gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .three))//나를 제외한 '다를 플레이어'보드를 초기화
-            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())//나의 플레이어 보드에 있는 카드들을 다시 그림
+            drawDeckForAllBoards(attendeeNum: .three)
             gameView?.bottomBoardView.setBottomCards(attendeeNum: .three)//bottomBoard에 있는 카드들을 다시 그림
             
         case 1:
             luckyCardGame.gameStart(attendeeNum: .four)//gameStart
             gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .four))
-            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fourAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())
+            drawDeckForAllBoards(attendeeNum: .four)
             gameView?.bottomBoardView.setBottomCards(attendeeNum: .four)
         case 2:
             luckyCardGame.gameStart(attendeeNum: .five)//gameStart
             gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .five))
-            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fiveAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())
+            drawDeckForAllBoards(attendeeNum: .five)
             gameView?.bottomBoardView.setBottomCards(attendeeNum: .five)
             
         default:
@@ -108,9 +111,11 @@ class ViewController: UIViewController {
         return views
     }
     
-    //TODO: 리팩토링 필요
-    func initMyBoardCards(){
-        gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())
+    //초기 뷰를 그리는 함수입니다.
+    ///- Parameter attendeeNum: 참가자 수 입니다.
+    func drawDeckForAllBoards(attendeeNum: AttendeeNum){
+        for attendeeIdx in 0..<attendeeNum.rawValue{
+            gameView?.playerBoardViews[attendeeIdx].setCardsInXthPlayerBoard(attendeeCardNum: .getAttendeeCardNum(attendeeNum: attendeeNum), deck: luckyCardGame.getMyInfo().getDeck(), attendeeIdx: attendeeIdx)//나의 플레이어 보드에 있는 카드들을 다시 그림
+        }
     }
-    
 }
