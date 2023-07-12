@@ -9,13 +9,13 @@ import XCTest
 @testable import LuckyCardGame
 
 final class LuckyCardGameTests: XCTestCase {
-    var luckyCardGame: LuckyCardGame!
+    var luckyCardGame: Mock!
     let attendeeNum: AttendeeNum = .three
     
     override func setUpWithError() throws {
         
         try super.setUpWithError()
-        luckyCardGame = LuckyCardGame() // Dummy 생성
+        luckyCardGame = Mock() // Dummy를 생성합니다.
     }
     
     override func tearDownWithError() throws {
@@ -24,7 +24,12 @@ final class LuckyCardGameTests: XCTestCase {
         luckyCardGame = nil
     }
     
+    /*
+     MARK: 카드가 적절하게 split됐는지를 확인하는 테스트함수입니다.
+     전체 카드의 숫자 개수와 symbol 개수를 체크합니다.
+     */
     func testCardsAreSplitAppropriately() throws{
+        luckyCardGame.gameStart(attendeeNum: .three)//dummy를 mock으로 변경합니다.
         let numberCheckingFlag: Bool = luckyCardGame.checkAllNumbersInCards(attendeeNum: .three)
         XCTAssertTrue(numberCheckingFlag, "카드의 숫자가 잘못 분배되어있습니다.")
         
@@ -33,6 +38,10 @@ final class LuckyCardGameTests: XCTestCase {
         
     }
     
+    /*
+     MARK: 카드를 오름차순으로 정렬할 수 있는지를 확인하는 테스트함수입니다.
+     dummy를 mock으로 만들지 않고, stub으로 일부 필요한 객체만 만들어서 테스트를 진행했습니다.
+     */
     func testCanSortCardsASCbyCardNumber() throws{
         let cardsDummy:[LuckyCard] = [
             LuckyCard(number: .five, animal: .cat),
@@ -47,8 +56,10 @@ final class LuckyCardGameTests: XCTestCase {
         
     }
     
+    /*
+     MARK: 덱에 있는 카드 중, 같은 숫자 세개가 있는지 확인하는 테스트함수입니다.
+     */
     func testThreeNumbersAreSameInDeck() throws{
-        
         //스텁 생성
         let cardsDummy: [LuckyCard] = [
             LuckyCard(number: .five, animal: .cat),
@@ -57,11 +68,15 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .five, animal: .cat),
             LuckyCard(number: .five, animal: .dog)
         ]
-        let areThreeNumbersAreSameInDeck: Bool = luckyCardGame.checkThreeNumbersAreInDeck(cards: cardsDummy)
+        let areThreeNumbersAreSameInDeck: Bool = luckyCardGame.checkThreeNumbersAreInDeck(cards: cardsDummy, attendeeNum: .three)
         XCTAssertTrue(areThreeNumbersAreSameInDeck, "세개의 숫자가 없습니다.")
     }
     
+    /*
+     MARK: 내가 선택한 카드들이 똑같은지를 확인하는 테스트함수입니다.
+     */
     func testThreeNumbersAreSameInMyChoice() throws{
+        //스텁 생성
         let myCards: [LuckyCard] = [
             LuckyCard(number: .one, animal: .cat),
             LuckyCard(number: .two, animal: .cat),
