@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TempSavedCardInfo{
+struct TempChoicedCardInfo{
     
     private(set) var cardIdx: Int // 덱에서의 카드 인덱스
     private(set) var isBottomCard: Bool // 바닥에서 온 카드인지, 플레이어에서 온 카드인지

@@ -31,6 +31,9 @@ struct Deck{
     public mutating func setCards(cards: [LuckyCard]){
         self.cards = cards
     }
+    public mutating func appendCard(card: LuckyCard){
+        cards.append(card)
+    }
 }
 
 /*

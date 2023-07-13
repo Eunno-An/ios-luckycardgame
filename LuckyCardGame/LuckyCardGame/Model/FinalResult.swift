@@ -17,4 +17,8 @@ class FinalResult{
     init(attendeeNum : AttendeeNum){
         attendees = Array(repeating: Attendee(), count: attendeeNum.rawValue)
     }
+    
+    public func addCardsToFinalResult(temporaryChoicedCard: TempChoicedCardInfo){
+        attendees[temporaryChoicedCard.playerIdx].addCardToMyDeck(card: temporaryChoicedCard.card)
+    }
 }
