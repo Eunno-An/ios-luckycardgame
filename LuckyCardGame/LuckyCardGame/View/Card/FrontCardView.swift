@@ -16,7 +16,7 @@ class FrontCardView: CardView{
     
     private var cardNumberLabel_up: UILabel = {
         let label = UILabel()
-        label.text = "01"
+        label.text = "1"
         label.textColor = .black
         label.font = .boldSystemFont(ofSize: 16)
         label.textAlignment = .left
@@ -25,7 +25,7 @@ class FrontCardView: CardView{
     
     private var cardNumberLabel_down: UILabel = {
         let label = UILabel()
-        label.text = "01"
+        label.text = "1"
         label.textColor = .black
         label.font = .boldSystemFont(ofSize: 16)
         //label.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
@@ -75,8 +75,8 @@ class FrontCardView: CardView{
     }
     
     func setCardNumberLabelText(_ number: CardNumber){
-        cardNumberLabel_up.text = String(format: "%02d", number.rawValue)
-        cardNumberLabel_down.text = String(format: "%02d", number.rawValue)
+        cardNumberLabel_up.text = String(number.rawValue)
+        cardNumberLabel_down.text = String(number.rawValue)
     }
     
     func setCardAnimalLabelText(_ animal: Animal){

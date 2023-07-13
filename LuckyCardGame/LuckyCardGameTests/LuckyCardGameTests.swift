@@ -85,6 +85,39 @@ final class LuckyCardGameTests: XCTestCase {
         XCTAssertEqual(resultOfMock, resultOfReal, "세개의 숫자가 없습니다.")
     }
     
+    func testTouchMostLeftCardWhenDownSide() throws{
+        let cardsDummy: [LuckyCard] = [
+            LuckyCard(number: .five, animal: .cat, isFlipped: false),
+            LuckyCard(number: .three, animal: .cow),
+            LuckyCard(number: .seven, animal: .dog),
+            LuckyCard(number: .five, animal: .cat),
+            LuckyCard(number: .five, animal: .dog)
+        ]
+        let realAttendee: Attendee = Attendee(deck: Deck(cards: cardsDummy))
+        
+        let canFlipLeftMostCard: Bool = realAttendee.canFlipLeftMostSideCard()
+        XCTAssertTrue(canFlipLeftMostCard, "가장 왼쪽 카드를 뒤집을 수 없습니다.")
+        //realAttendee.deck.cards[0].flipCard()
+    }
+    
+    func testTouchSecondMostLeftCardWhenDownSide() throws{
+        let cardsDummy: [LuckyCard] = [
+            LuckyCard(number: .five, animal: .cat, isFlipped: true),
+            LuckyCard(number: .three, animal: .cow, isFlipped: false),
+            LuckyCard(number: .seven, animal: .dog),
+            LuckyCard(number: .five, animal: .cat),
+            LuckyCard(number: .five, animal: .dog)
+        ]
+        let realAttendee: Attendee = Attendee(deck: Deck(cards: cardsDummy))
+        
+        let canFlipLeftMostCard: Bool = realAttendee.canFlipLeftMostSideCard()
+        if canFlipLeftMostCard == false{
+            let canFlipSecondLeftMostCard: Bool = realAttendee.canFlipSecondLeftMostSideCard()
+            XCTAssertTrue(canFlipSecondLeftMostCard, "왼쪽에서 두번재 카드를 뒤집을 수 없습니다.")
+        }
+        //realAttendee.deck.cards[1].flipCard()
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

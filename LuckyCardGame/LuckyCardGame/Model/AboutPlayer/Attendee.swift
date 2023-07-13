@@ -102,56 +102,46 @@ class Attendee: Player, PlayerRule{
         })
     }
     
-    //Protocol AttendeeRule stubs
-    func flipFirstNumberCard_In_PlayerCards() {
-        
-        // 가장 왼쪽 숫자가 현재 앞면이 보이는 상태라면 바로 오른쪽 숫자를 터치합니다.
-        if deck.cards.first?.isFlipped == true{
-            deck.cards[1].flipCard()
-        }else{
-            deck.cards.first?.flipCard()
-        }
-        
-    }
-    
-    func flipLastNumberCard_In_PlayerCards() {
-        
-        // 가장 오른쪽 숫자가 현재 앞면이 보이는 상태라면, 바로 왼쪽 숫자를 터치합니다.
-        if deck.cards.last?.isFlipped == true{
-            deck.cards[deck.cards.count-2].flipCard()
-        }else{
-            deck.cards.last?.flipCard()
-        }
-        
-    }
-    
-    func flipFirstNumberCard_In_the_OtherPlayerCards(attendee: Attendee) {
-        
-        //가장 왼쪽 숫자가 현재 앞면이 보이는 상태라면 바로 오른쪽 숫자를 터치합니다.
-        if attendee.deck.cards.first?.isFlipped == true{
-            attendee.deck.cards[1].flipCard()
-        }else{
-            attendee.deck.cards.first?.flipCard()
-        }
-        
-    }
-    
-    func flipLastNumberCard_In_the_OtherPlayerCards(attendee: Attendee) {
-        
-        // 가장 오른쪽 숫자가 현재 앞면이 보이는 상태라면 바로 왼쪽 숫자를 터치합니다.
-        
-        if attendee.deck.cards.last?.isFlipped == true{
-            attendee.deck.cards[attendee.deck.cards.count-2].flipCard()
+    func canFlipLeftMostSideCard() -> Bool {
+        if deck.cards.count < 1 || deck.cards[0].isSideFront == true{
+            return false
         }
         else{
-            attendee.deck.cards.last?.flipCard()
+            return true
         }
-        
+    }
+
+    func canFlipSecondLeftMostSideCard() -> Bool {
+        if deck.cards.count < 2 || deck.cards[1].isSideFront == true{
+            return false
+        }else{
+            return true
+        }
     }
     
-    func flipCard_In_BottomBoard(bottomLuckyCards: [LuckyCard], bottomLuckyCardIdx: Int) {
-        
-        bottomLuckyCards[bottomLuckyCardIdx].flipCard()
+    func canFlipRightMostSideCard() -> Bool{
+        if deck.cards.count < 1 || deck.cards.last?.isSideFront == true{
+            return false
+        }else{
+            return true
+        }
+    }
+    
+    func canFlipSecnodRightMostSideCard() -> Bool{
+        if deck.cards.count < 2 || deck.cards[deck.cards.count-2].isSideFront == true{
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
+    func canFlipDownSideCard(card: LuckyCard) -> Bool {
+        if card.isSideFront == true{
+            return false
+        }else{
+            return true
+        }
     }
     
     private(set) var deck: Deck

@@ -24,7 +24,7 @@ class LuckyCard: Card, Equatable{
     
     private(set) var number: CardNumber
     private(set) var animal: Animal
-    private(set) var isFlipped: Bool
+    private(set) var isSideFront: Bool // 처음에는 false값, 즉 뒤집어져 있다는것을 말합니다.
     
     var describe: String{
         return "\(animal.rawValue)" + String(format:"%02d", number.rawValue)
@@ -33,7 +33,7 @@ class LuckyCard: Card, Equatable{
     init(number: CardNumber, animal: Animal, isFlipped: Bool = false){
         self.number = number
         self.animal = animal
-        self.isFlipped = isFlipped
+        self.isSideFront = isFlipped
     }
     
     public func setNumber(number: CardNumber){
@@ -45,7 +45,7 @@ class LuckyCard: Card, Equatable{
     }
     
     public func flipCard(){
-        self.isFlipped = !self.isFlipped
+        self.isSideFront = !self.isSideFront
     }
 }
 
