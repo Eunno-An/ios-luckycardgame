@@ -80,7 +80,7 @@ class PlayerboardView: RoundBoardView{
         var views: [FrontCardView] = []
         let xPos: CGFloat = (Board.width - Constant.spacing * 2 - CardSize.width) / CGFloat(attendeeCardNum.rawValue - 1)
         for i in 0..<attendeeCardNum.rawValue{
-            views.append(FrontCardView(frame: CGRect(x: Constant.spacing/2 + xPos * CGFloat(i), y: Constant.spacing, width: CardSize.width, height: CardSize.height), cardAnimal: deck.getCards()[i].animal, cardNumber: deck.getCards()[i].number))
+            views.append(FrontCardView(frame: CGRect(x: Constant.spacing/2 + xPos * CGFloat(i), y: Constant.spacing, width: CardSize.width, height: CardSize.height), cardAnimal: deck.cards[i].animal, cardNumber: deck.cards[i].number))
         }
        
         for cardView in views{

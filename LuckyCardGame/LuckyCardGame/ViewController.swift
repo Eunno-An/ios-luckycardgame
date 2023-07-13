@@ -47,18 +47,18 @@ class ViewController: UIViewController {
         case 0:
             luckyCardGame.gameStart(attendeeNum: .three)//gameStart
             gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .three))//나를 제외한 '다를 플레이어'보드를 초기화
-            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())//나의 플레이어 보드에 있는 카드들을 다시 그림
+            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave, deck: luckyCardGame.attendees[0].deck)//나의 플레이어 보드에 있는 카드들을 다시 그림
             gameView?.bottomBoardView.setBottomCards(attendeeNum: .three)//bottomBoard에 있는 카드들을 다시 그림
             
         case 1:
             luckyCardGame.gameStart(attendeeNum: .four)//gameStart
             gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .four))
-            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fourAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())
+            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fourAttendeeHave, deck: luckyCardGame.attendees[0].deck)
             gameView?.bottomBoardView.setBottomCards(attendeeNum: .four)
         case 2:
             luckyCardGame.gameStart(attendeeNum: .five)//gameStart
             gameView?.setOtherPlayerBoardViews(playerBoardViews: calculatePlayerBoards(numOfAttendee: .five))
-            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fiveAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())
+            gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .fiveAttendeeHave, deck: luckyCardGame.attendees[0].deck)
             gameView?.bottomBoardView.setBottomCards(attendeeNum: .five)
             
         default:
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
     
     //TODO: 리팩토링 필요
     func initMyBoardCards(){
-        gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave, deck: luckyCardGame.getMyInfo().getDeck())
+        gameView?.playerBoardViews[0].setMyCardView(attendeeCardNum: .threeAttendeeHave, deck: luckyCardGame.attendees[0].deck)
     }
     
 }

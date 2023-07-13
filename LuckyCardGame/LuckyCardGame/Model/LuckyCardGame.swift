@@ -28,7 +28,7 @@ class LuckyCardGame{
             gameAttendees.append(Attendee(deck: luckyCardDecks[i]))
         }
         attendees = gameAttendees
-        belowLuckyCards = luckyCardDecks.last?.getCards() ?? []
+        belowLuckyCards = luckyCardDecks.last?.cards ?? []
     }
     
     public func getNumOfAttendee() -> Int{
@@ -49,18 +49,6 @@ class LuckyCardGame{
         }
     }
     
-    public func getMyInfo() -> Attendee{
-        return attendees[0]
-    }
-    
-    public func get_xth_AttendeeInfo(attendeeIdx: Int) -> Attendee{
-        return attendees[attendeeIdx]
-    }
-    
-    public func getAttendeesInfo() -> [Attendee]{
-        return attendees
-    }
-    
     public func set_xth_AttendeeCardInfo(attendeeIdx: Int, deck: Deck){
         attendees[attendeeIdx].setDeck(deck: deck)
     }
@@ -68,10 +56,49 @@ class LuckyCardGame{
     public func getLuckyCardPool() -> [LuckyCard]{
         var ret : [LuckyCard] = []
         for attendee in attendees{
-            ret += attendee.getDeck().getCards()
+            ret += attendee.deck.cards
         }
         ret += belowLuckyCards
         return ret
     }
     
+    //MARK: 모든 숫자가 정확히 들어있는지 체크하는 함수입니다.
+    public func checkAllNumbersInCards(attendeeNum: AttendeeNum) -> Bool {
+        
+        var numCountArr: [Int] = Array(repeating: 0, count: 12)
+        
+        for luckyCard in getLuckyCardPool(){
+            numCountArr[luckyCard.number.rawValue-1] += 1
+        }
+        
+        var answerNumCountArr: [Int] = []
+        
+        if attendeeNum == .three{
+            answerNumCountArr = Array(repeating: attendeeNum.rawValue, count : 12)
+            answerNumCountArr[answerNumCountArr.count-1] = 0
+        } else {
+            answerNumCountArr = Array(repeating: attendeeNum.rawValue, count: 12)
+        }
+        return answerNumCountArr == numCountArr
+    }
+    
+    //MARK: 모든 심볼이 정확히 들어있는지 체크하는 함수입니다.
+    public func checkAllSymbolsInCards(attendeeNum: AttendeeNum) -> Bool{
+        
+        var animalCountArr: [Int] = Array(repeating: 0, count: attendeeNum.rawValue)
+        
+        for luckyCard in getLuckyCardPool(){
+            animalCountArr[Animal.getAnimalIdx(animal: luckyCard.animal)] += 1
+        }
+        
+        var answerAnimalCountArr: [Int] = []
+        
+        if attendeeNum == .three{
+            answerAnimalCountArr = Array(repeating: 11, count: attendeeNum.rawValue)
+        }else{
+            answerAnimalCountArr = Array(repeating: 12, count: attendeeNum.rawValue)
+        }
+        return answerAnimalCountArr == animalCountArr
+    }
+
 }

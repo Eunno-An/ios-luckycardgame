@@ -18,7 +18,7 @@ import Foundation
  */
 struct Deck{
     
-    private var cards: [LuckyCard]
+    private(set) var cards: [LuckyCard]
     
     init() {
         self.cards = []
@@ -26,10 +26,6 @@ struct Deck{
     init(cards: [LuckyCard]){
         self.init()
         self.cards = cards
-    }
-    
-    public func getCards() -> [LuckyCard]{
-        return cards
     }
     
     public mutating func setCards(cards: [LuckyCard]){
