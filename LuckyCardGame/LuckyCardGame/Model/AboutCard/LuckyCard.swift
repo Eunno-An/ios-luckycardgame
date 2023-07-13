@@ -30,10 +30,10 @@ class LuckyCard: Card, Equatable{
         return "\(animal.rawValue)" + String(format:"%02d", number.rawValue)
     }
     
-    init(number: CardNumber, animal: Animal, isFlipped: Bool = false){
+    init(number: CardNumber, animal: Animal, isUpSide: Bool = false){
         self.number = number
         self.animal = animal
-        self.isSideFront = isFlipped
+        self.isSideFront = isUpSide
     }
     
     public func setNumber(number: CardNumber){

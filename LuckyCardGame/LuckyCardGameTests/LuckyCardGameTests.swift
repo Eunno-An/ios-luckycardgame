@@ -88,7 +88,7 @@ final class LuckyCardGameTests: XCTestCase {
     //MARK: 덱의 가장 왼쪽에 있는 카드를 뒤집을 수 있는지 검사하는 카드입니다.
     func testTouchMostLeftCardWhenDownSide() throws{
         let cardsDummy: [LuckyCard] = [
-            LuckyCard(number: .five, animal: .cat, isFlipped: false),
+            LuckyCard(number: .five, animal: .cat, isUpSide: false),
             LuckyCard(number: .three, animal: .cow),
             LuckyCard(number: .seven, animal: .dog),
             LuckyCard(number: .five, animal: .cat),
@@ -104,8 +104,8 @@ final class LuckyCardGameTests: XCTestCase {
     //MARK: 덱의 왼쪽에서 두번째 카드를 뒤집을 수 있는지 확인하는 테스트함수입니다.
     func testTouchSecondMostLeftCardWhenDownSide() throws{
         let cardsDummy: [LuckyCard] = [
-            LuckyCard(number: .five, animal: .cat, isFlipped: true),
-            LuckyCard(number: .three, animal: .cow, isFlipped: false),
+            LuckyCard(number: .five, animal: .cat, isUpSide: true),
+            LuckyCard(number: .three, animal: .cow, isUpSide: false),
             LuckyCard(number: .seven, animal: .dog),
             LuckyCard(number: .five, animal: .cat),
             LuckyCard(number: .five, animal: .dog)
@@ -127,7 +127,7 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .three, animal: .cow),
             LuckyCard(number: .seven, animal: .dog),
             LuckyCard(number: .five, animal: .cat),
-            LuckyCard(number: .five, animal: .dog, isFlipped: false)
+            LuckyCard(number: .five, animal: .dog, isUpSide: false)
         ]
         let realAttendee: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
@@ -142,8 +142,8 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .five, animal: .cat),
             LuckyCard(number: .three, animal: .cow),
             LuckyCard(number: .seven, animal: .dog),
-            LuckyCard(number: .five, animal: .cat, isFlipped: false),
-            LuckyCard(number: .five, animal: .dog, isFlipped: true)
+            LuckyCard(number: .five, animal: .cat, isUpSide: false),
+            LuckyCard(number: .five, animal: .dog, isUpSide: true)
         ]
         let realAttendee: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
@@ -153,6 +153,17 @@ final class LuckyCardGameTests: XCTestCase {
             XCTAssertTrue(canFlipSecondLeftMostCard, "오른쪽에서 두번재 카드를 뒤집을 수 없습니다.")
         }
         //realAttendee.deck.cards[1].flipCard()
+    }
+    
+    //MARK: 뒤집혀 있는 카드를 터치하면 앞면이 될 수 있는지 확인하는 테스트함수입니다.
+    func testTouchBehindCardAndFlipCard() throws{
+        
+        var tempCard: LuckyCard = LuckyCard(number: .five, animal: .cat, isUpSide: true)
+            
+        tempCard.flipCard()
+        
+        XCTAssertFalse(tempCard.isSideFront, "카드가 뒷면에서 앞면으로 뒤집혀지지 않았습니다.")
+        
     }
     
     
