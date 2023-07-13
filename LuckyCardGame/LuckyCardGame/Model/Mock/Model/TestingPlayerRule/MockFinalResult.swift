@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FinalResult{
+class MockFinalResult{
     private(set) var attendees: [Attendee] = []
     init(attendeeNum: AttendeeNum){
         for _ in 0..<attendeeNum.rawValue{

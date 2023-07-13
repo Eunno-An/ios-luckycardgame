@@ -13,11 +13,13 @@ class LuckyCardGame{
     private(set) var belowLuckyCards: [LuckyCard]
     private(set) var cardDealer: CardDealer
     private(set) var temporaryChoicedCards: [TempSavedCardInfo]
+    private(set) var finalResult: FinalResult
     init(){
         attendees = []
         belowLuckyCards = []
         cardDealer = CardDealer()
         temporaryChoicedCards = []
+        finalResult = FinalResult()
     }
     
     public func gameStart(attendeeNum: AttendeeNum){
@@ -30,6 +32,8 @@ class LuckyCardGame{
         }
         attendees = gameAttendees
         belowLuckyCards = luckyCardDecks.last?.cards ?? []
+        
+        finalResult = FinalResult(attendeeNum: attendeeNum)
     }
     
     public func getNumOfAttendee() -> Int{
@@ -68,9 +72,16 @@ class LuckyCardGame{
         self.temporaryChoicedCards.append(tempSavedCardInfo)
     }
     
-    //MARK: temporaryChoicedCards의 사이즈가 세개라면, 최종 결과로 보내주는 함수입니다.
+    //MARK: temporaryChoicedCards의 사이즈가 세개인지 확인하는 함수입니다.
     public func checkThreeCardsInTemporaryChoiceCards() -> Bool{
         return temporaryChoicedCards.count == 3
+    }
+    
+    //MARK: temporaryChoicedCards의 사이즈가 세개라면, 결과로 데이터를 보내주는 함수입니다.
+    public func sendCardsToFinalResults(){
+        for temporaryChoicedCard in temporaryChoicedCards {
+            <#body#>
+        }
     }
     
     //MARK: temporaryChoiceCards를 비워주는 함수입니다.

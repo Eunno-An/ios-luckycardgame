@@ -79,10 +79,16 @@ protocol Player{
     //MARK: 카드를 오름차순으로 정렬하는 함수입니다.
     func sortDeckByNumberASC()
     
-    //MARK: 상대방의 덱 중 왼쪽의 카드를 뒤집는 함수입니다.
+    /*
+     MARK: 상대방의 덱 중 왼쪽의 카드를 뒤집는 함수입니다.
+     하위 객체(Attendee)에서 상위 객체의 상태를 바꿔야 하므로, 매개변수로 이를 받았습니다.
+     */
     func choiceLeftSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame)
     
-    //MARK: 상대방의 덱 중 오른쪽의 카드를 뒤집는 함수입니다.
+    /*
+     MARK: 상대방의 덱 중 오른쪽의 카드를 뒤집는 함수입니다.
+     하위 객체(Attendee)에서 상위 객체의 상태를 바꿔야 하므로, 매개변수로 이를 받았습니다.
+     */
     func choiceRightSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame)
 }
 
@@ -116,6 +122,9 @@ class Attendee: Player, PlayerRule{
             }
         }
         
+        if luckyCardGame.checkThreeCardsInTemporaryChoiceCards(){
+            
+        }
     }
     
     func choiceRightSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame) {
@@ -130,6 +139,7 @@ class Attendee: Player, PlayerRule{
             }
         }
     }
+    
     func sortDeckByNumberASC() {
         deck = Deck(cards: deck.cards.sorted{
             $0.number.rawValue < $1.number.rawValue
