@@ -9,6 +9,15 @@ import Foundation
 
 class MockPlayer: Player, PlayerRule{
     
+    func choiceLeftSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame) {
+        //
+    }
+    
+    func choiceRightSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame) {
+        //
+    }
+    
+    
     private(set) var cards: [LuckyCard]
     
     init(){

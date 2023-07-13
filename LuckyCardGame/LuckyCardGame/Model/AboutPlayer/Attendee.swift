@@ -79,6 +79,11 @@ protocol Player{
     //MARK: 카드를 오름차순으로 정렬하는 함수입니다.
     func sortDeckByNumberASC()
     
+    //MARK: 상대방의 덱 중 왼쪽의 카드를 뒤집는 함수입니다.
+    func choiceLeftSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame)
+    
+    //MARK: 상대방의 덱 중 오른쪽의 카드를 뒤집는 함수입니다.
+    func choiceRightSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame)
 }
 
 class Attendee: Player, PlayerRule{
@@ -96,6 +101,35 @@ class Attendee: Player, PlayerRule{
         return false
     }
     
+    func choiceLeftSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame){
+        if canFlipLeftMostSideCard(){
+            cards[0].flipCard()
+            luckyCardGame.appendTemporaryChoicedCards(tempSavedCardInfo: TempSavedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: false, playerIdx: playerIdx, card: cards[0]))
+        }else{
+            if canFlipSecondLeftMostSideCard(){
+                cards[1].flipCard()
+                luckyCardGame.appendTemporaryChoicedCards(tempSavedCardInfo: TempSavedCardInfo(cardIdx: 1, isBottomCardOrPlayerCard: false, playerIdx: playerIdx, card: cards[1]))
+            }else{
+                //왼쪽 두장이 이미 다 뒤집힌 경우,
+                cards[2].flipCard()
+                luckyCardGame.appendTemporaryChoicedCards(tempSavedCardInfo: TempSavedCardInfo(cardIdx: 2, isBottomCardOrPlayerCard: false, playerIdx: playerIdx, card: cards[2]))
+            }
+        }
+        
+    }
+    
+    func choiceRightSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame) {
+        if canFlipRightMostSideCard(){
+            cards.last?.flipCard()
+        }else{
+            if canFlipSecnodRightMostSideCard(){
+                cards[cards.count-2].flipCard()
+            }else{
+                //오른쪽 두장이 이미 다 뒤집힌 경우,
+                cards[cards.count-3].flipCard()
+            }
+        }
+    }
     func sortDeckByNumberASC() {
         deck = Deck(cards: deck.cards.sorted{
             $0.number.rawValue < $1.number.rawValue

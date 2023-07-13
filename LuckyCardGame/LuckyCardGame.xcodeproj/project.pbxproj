@@ -38,6 +38,7 @@
 		D4A6FAA32A5A44C600637995 /* BehindCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FAA22A5A44C600637995 /* BehindCardView.swift */; };
 		D4A6FAA52A5A44CF00637995 /* FrontCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FAA42A5A44CF00637995 /* FrontCardView.swift */; };
 		D4CBB0632A5FEDA8002ECC4C /* MockPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CBB0622A5FEDA8002ECC4C /* MockPlayer.swift */; };
+		D4CBB0652A601F42002ECC4C /* MockFinalResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CBB0642A601F42002ECC4C /* MockFinalResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		D4A6FAA22A5A44C600637995 /* BehindCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehindCardView.swift; sourceTree = "<group>"; };
 		D4A6FAA42A5A44CF00637995 /* FrontCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontCardView.swift; sourceTree = "<group>"; };
 		D4CBB0622A5FEDA8002ECC4C /* MockPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayer.swift; sourceTree = "<group>"; };
+		D4CBB0642A601F42002ECC4C /* MockFinalResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFinalResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 		D483BFF02A5F003B00264AFD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D4CBB0642A601F42002ECC4C /* MockFinalResult.swift */,
 				D4CBB0622A5FEDA8002ECC4C /* MockPlayer.swift */,
 				D47E06A22A5EF77D00273A02 /* TestingPlayerRule */,
 			);
@@ -478,6 +481,7 @@
 				D4A6FA8A2A56F2CF00637995 /* ConstantValue.swift in Sources */,
 				D4A6FA7D2A56B28B00637995 /* CardNumber.swift in Sources */,
 				D45D49D52A54727C00641A8F /* LuckyCard.swift in Sources */,
+				D4CBB0652A601F42002ECC4C /* MockFinalResult.swift in Sources */,
 				D483BFF22A5F007D00264AFD /* TempSavedCardInfo.swift in Sources */,
 				D4A6FA962A58F80E00637995 /* BottomBoardView.swift in Sources */,
 				D4A6FA852A56B93400637995 /* Attendee.swift in Sources */,

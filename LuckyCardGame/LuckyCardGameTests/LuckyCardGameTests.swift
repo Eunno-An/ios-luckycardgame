@@ -166,6 +166,15 @@ final class LuckyCardGameTests: XCTestCase {
         
     }
     
+    //MARK: 사용자별로 총 세장의 카드만 뒤집을 수 있는지 확인하는 테스트함수입니다.
+    func testPlayerShouldChooseOnlyThreeCards() throws{
+        luckyCardGame.gameStart(attendeeNum: .three)
+        
+        let attendee_me = luckyCardGame.attendees[0]
+        let attendee_theOther = luckyCardGame.attendees[1]
+        
+        //attendee_me.choice
+    }
     
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
