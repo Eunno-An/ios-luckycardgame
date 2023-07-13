@@ -10,44 +10,11 @@ import Foundation
 /*
  MARK: 카드 객체 인스턴스를 소유하는 참가자 구조체
  */
-enum AttendeeName: String{
-    case first = "A"
-    case second = "B"
-    case third = "C"
-    case fourth = "D"
-    case fifth = "E"
-    static func getPlayerName(attendeeIdx: Int) -> String{
-        switch attendeeIdx {
-        case 0:
-            return AttendeeName.first.rawValue
-        case 1:
-            return AttendeeName.second.rawValue
-        case 2:
-            return AttendeeName.third.rawValue
-        case 3:
-            return AttendeeName.fourth.rawValue
-        case 4:
-            return AttendeeName.fifth.rawValue
-        default:
-            return "?"
-        }
-    }
-}
 enum AttendeeNum: Int{
     case three = 3
     case four
     case five
     
-    static func getPlayerNames(attendeeNum: AttendeeNum) -> [String]{
-        switch attendeeNum{
-        case .three:
-            return ["A", "B", "C"]
-        case .four:
-            return ["A", "B", "C", "D"]
-        case .five:
-            return ["A", "B", "C", "D", "E"]
-        }
-    }
 }
 
 //플레이어 한명당 갖고 있는 카드 개수
@@ -104,16 +71,45 @@ enum RemainingCardNum: Int{
     }
 }
 
-class Attendee: AttendeeRule{
+protocol Player{
+    
+    //MARK: 세개의 카드의 숫자가 똑같은게 주어진 덱에 있는지 확인하는 함수입니다.
+    func checkThreeNumbersAreInDeck() -> Bool
+    
+    //MARK: 카드를 오름차순으로 정렬하는 함수입니다.
+    func sortDeckByNumberASC()
+    
+}
+
+class Attendee: Player, AttendeeRule{
+    
+    //Protocol Player stubs
+    func checkThreeNumbersAreInDeck() -> Bool {
+        var numCountArr: [Int] = Array(repeating: 0, count: 12)
+        
+        for card in deck.cards{
+            numCountArr[card.number.rawValue] += 1
+            if numCountArr[card.number.rawValue] == 3{
+                return true
+            }
+        }
+        return false
+    }
+    
+    func sortDeckByNumberASC() {
+        deck = Deck(cards: deck.cards.sorted{
+            $0.number.rawValue < $1.number.rawValue
+        })
+    }
     
     //Protocol AttendeeRule stubs
     func flipFirstNumberCard_In_PlayerCards() {
         
         // 가장 왼쪽 숫자가 현재 앞면이 보이는 상태라면 바로 오른쪽 숫자를 터치합니다.
-        if deck.getCards().first?.isFlipped == true{
-            deck.getCards()[1].flipCard()
+        if deck.cards.first?.isFlipped == true{
+            deck.cards[1].flipCard()
         }else{
-            deck.getCards().first?.flipCard()
+            deck.cards.first?.flipCard()
         }
         
     }
@@ -121,10 +117,10 @@ class Attendee: AttendeeRule{
     func flipLastNumberCard_In_PlayerCards() {
         
         // 가장 오른쪽 숫자가 현재 앞면이 보이는 상태라면, 바로 왼쪽 숫자를 터치합니다.
-        if deck.getCards().last?.isFlipped == true{
-            deck.getCards()[deck.getCards().count-2].flipCard()
+        if deck.cards.last?.isFlipped == true{
+            deck.cards[deck.cards.count-2].flipCard()
         }else{
-            deck.getCards().last?.flipCard()
+            deck.cards.last?.flipCard()
         }
         
     }
@@ -132,10 +128,10 @@ class Attendee: AttendeeRule{
     func flipFirstNumberCard_In_the_OtherPlayerCards(attendee: Attendee) {
         
         //가장 왼쪽 숫자가 현재 앞면이 보이는 상태라면 바로 오른쪽 숫자를 터치합니다.
-        if attendee.getDeck().getCards().first?.isFlipped == true{
-            attendee.getDeck().getCards()[1].flipCard()
+        if attendee.deck.cards.first?.isFlipped == true{
+            attendee.deck.cards[1].flipCard()
         }else{
-            attendee.getDeck().getCards().first?.flipCard()
+            attendee.deck.cards.first?.flipCard()
         }
         
     }
@@ -144,11 +140,11 @@ class Attendee: AttendeeRule{
         
         // 가장 오른쪽 숫자가 현재 앞면이 보이는 상태라면 바로 왼쪽 숫자를 터치합니다.
         
-        if attendee.getDeck().getCards().last?.isFlipped == true{
-            attendee.getDeck().getCards()[attendee.getDeck().getCards().count-2].flipCard()
+        if attendee.deck.cards.last?.isFlipped == true{
+            attendee.deck.cards[attendee.deck.cards.count-2].flipCard()
         }
         else{
-            attendee.getDeck().getCards().last?.flipCard()
+            attendee.deck.cards.last?.flipCard()
         }
         
     }
@@ -158,7 +154,7 @@ class Attendee: AttendeeRule{
         bottomLuckyCards[bottomLuckyCardIdx].flipCard()
     }
     
-    private var deck: Deck
+    private(set) var deck: Deck
     
     init(){
         deck = Deck()
@@ -168,22 +164,12 @@ class Attendee: AttendeeRule{
         self.deck = deck
     }
     
-    public func getDeck() -> Deck{
-        return self.deck
-    }
-    
     public func setDeck(deck: Deck){
         self.deck = deck
     }
     
-    public func sortDeckByNumberASC(){
-        deck = Deck(cards: deck.getCards().sorted{
-            $0.number.rawValue < $1.number.rawValue
-        })
-    }
-    
     public func sortDeckByNumberDESC(){
-        deck = Deck(cards: deck.getCards().sorted{
+        deck = Deck(cards: deck.cards.sorted{
             $0.number.rawValue > $1.number.rawValue
         })
     }
