@@ -100,5 +100,5 @@ class LuckyCardGame{
         }
         return answerAnimalCountArr == animalCountArr
     }
-
+    
 }

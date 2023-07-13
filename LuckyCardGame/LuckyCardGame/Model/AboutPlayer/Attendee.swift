@@ -81,7 +81,7 @@ protocol Player{
     
 }
 
-class Attendee: Player, AttendeeRule{
+class Attendee: Player, PlayerRule{
     
     //Protocol Player stubs
     func checkThreeNumbersAreInDeck() -> Bool {

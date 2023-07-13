@@ -115,7 +115,7 @@ class ViewController: UIViewController {
     ///- Parameter attendeeNum: 참가자 수 입니다.
     func drawDeckForAllBoards(attendeeNum: AttendeeNum){
         for attendeeIdx in 0..<attendeeNum.rawValue{
-            gameView?.playerBoardViews[attendeeIdx].setCardsInXthPlayerBoard(attendeeCardNum: .getAttendeeCardNum(attendeeNum: attendeeNum), deck: luckyCardGame.getMyInfo().getDeck(), attendeeIdx: attendeeIdx)//나의 플레이어 보드에 있는 카드들을 다시 그림
+            gameView?.playerBoardViews[attendeeIdx].setCardsInXthPlayerBoard(attendeeCardNum: .getAttendeeCardNum(attendeeNum: attendeeNum), deck: luckyCardGame.attendees[attendeeIdx].deck, attendeeIdx: attendeeIdx)//나의 플레이어 보드에 있는 카드들을 다시 그림
         }
     }
 }
