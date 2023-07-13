@@ -275,8 +275,8 @@
             filePath = "LuckyCardGame/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "calculateBottomFrame()"
             landmarkType = "7">
          </BreakpointContent>
@@ -291,8 +291,8 @@
             filePath = "LuckyCardGame/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "segmentedControlValueChanged(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -348,16 +348,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E4BFFFBB-02DC-4DCF-BA65-D4399A89B377"
+            uuid = "DC267913-EE39-4896-8137-3B55173E4882"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LuckyCardGame/View/Card/FrontCardView.swift"
+            filePath = "LuckyCardGame/View/Board/PlayerboardView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "init(frame:cardAnimal:cardNumber:)"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "setCardsInXthPlayerBoard(attendeeCardNum:deck:attendeeIdx:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
