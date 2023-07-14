@@ -40,7 +40,6 @@ final class LuckyCardGameTests: XCTestCase {
     
     /*
      MARK: 카드를 오름차순으로 정렬할 수 있는지를 확인하는 테스트함수입니다.
-     stub으로 일부 필요한 객체만 만들어서 테스트를 진행했습니다.
      */
     func testCanSortCardsASCbyCardNumber() throws{
         let cardsDummy:[LuckyCard] = [
@@ -51,15 +50,11 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .one, animal: .dog)
         ]
         
-        var mockPlayer: MockPlayer = MockPlayer(cards: cardsDummy)
-        mockPlayer.sortDeckByNumberASC()
+        var sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
+        sut.sortDeckByNumberASC()
+        let isArraySorted: Bool = isCardsSortedASC(cards: sut.deck.cards)
         
-        var realAttendee: Attendee = Attendee(deck: Deck(cards: cardsDummy))
-        realAttendee.sortDeckByNumberASC()
-        
-        print(mockPlayer.cards.count)
-        print(realAttendee.deck.cards.count)
-        XCTAssertEqual(realAttendee.deck.cards, mockPlayer.cards,"카드를 오름차순으로 정렬할 수 없습니다.")
+        XCTAssertTrue(isArraySorted, "카드를 오름차순으로 정렬할 수 없습니다.")
         
     }
     
@@ -76,13 +71,10 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .five, animal: .dog)
         ]
         
-        var mockPlayer: MockPlayer = MockPlayer(cards: cardsDummy)
-        let resultOfMock: Bool = mockPlayer.checkThreeNumbersAreInDeck()
+        var sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
+        let result: Bool = sut.checkThreeNumbersAreInDeck()
         
-        var realAttendee: Attendee = Attendee(deck: Deck(cards: cardsDummy))
-        let resultOfReal: Bool = realAttendee.checkThreeNumbersAreInDeck()
-        
-        XCTAssertEqual(resultOfMock, resultOfReal, "세개의 숫자가 없습니다.")
+        XCTAssertTrue(result, "세개의 숫자가 없습니다.")
     }
     
     //MARK: 덱의 가장 왼쪽에 있는 카드를 뒤집을 수 있는지 검사하는 카드입니다.
@@ -94,9 +86,9 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .five, animal: .cat),
             LuckyCard(number: .five, animal: .dog)
         ]
-        let realAttendee: Attendee = Attendee(deck: Deck(cards: cardsDummy))
+        let sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
-        let canFlipLeftMostCard: Bool = realAttendee.canFlipLeftMostSideCard()
+        let canFlipLeftMostCard: Bool = sut.canFlipLeftMostSideCard()
         XCTAssertTrue(canFlipLeftMostCard, "가장 왼쪽 카드를 뒤집을 수 없습니다.")
         //realAttendee.deck.cards[0].flipCard()
     }
@@ -110,11 +102,11 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .five, animal: .cat),
             LuckyCard(number: .five, animal: .dog)
         ]
-        let realAttendee: Attendee = Attendee(deck: Deck(cards: cardsDummy))
+        let sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
-        let canFlipLeftMostCard: Bool = realAttendee.canFlipLeftMostSideCard()
+        let canFlipLeftMostCard: Bool = sut.canFlipLeftMostSideCard()
         if canFlipLeftMostCard == false{
-            let canFlipSecondLeftMostCard: Bool = realAttendee.canFlipSecondLeftMostSideCard()
+            let canFlipSecondLeftMostCard: Bool = sut.canFlipSecondLeftMostSideCard()
             XCTAssertTrue(canFlipSecondLeftMostCard, "왼쪽에서 두번재 카드를 뒤집을 수 없습니다.")
         }
         //realAttendee.deck.cards[1].flipCard()
@@ -129,9 +121,9 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .five, animal: .cat),
             LuckyCard(number: .five, animal: .dog, isUpSide: false)
         ]
-        let realAttendee: Attendee = Attendee(deck: Deck(cards: cardsDummy))
+        let sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
-        let canFlipLeftMostCard: Bool = realAttendee.canFlipRightMostSideCard()
+        let canFlipLeftMostCard: Bool = sut.canFlipRightMostSideCard()
         XCTAssertTrue(canFlipLeftMostCard, "가장 오른쪽 카드를 뒤집을 수 없습니다.")
         //realAttendee.deck.cards[0].flipCard()
     }
@@ -145,11 +137,11 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .five, animal: .cat, isUpSide: false),
             LuckyCard(number: .five, animal: .dog, isUpSide: true)
         ]
-        let realAttendee: Attendee = Attendee(deck: Deck(cards: cardsDummy))
+        let sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
-        let canFlipLeftMostCard: Bool = realAttendee.canFlipSecnodRightMostSideCard()
+        let canFlipLeftMostCard: Bool = sut.canFlipSecnodRightMostSideCard()
         if canFlipLeftMostCard == false{
-            let canFlipSecondLeftMostCard: Bool = realAttendee.canFlipSecnodRightMostSideCard()
+            let canFlipSecondLeftMostCard: Bool = sut.canFlipSecnodRightMostSideCard()
             XCTAssertTrue(canFlipSecondLeftMostCard, "오른쪽에서 두번재 카드를 뒤집을 수 없습니다.")
         }
         //realAttendee.deck.cards[1].flipCard()
@@ -174,6 +166,15 @@ final class LuckyCardGameTests: XCTestCase {
         let attendee_theOther = luckyCardGame.attendees[1]
         
         //attendee_me.choice
+    }
+    
+    func isCardsSortedASC(cards: [LuckyCard]) -> Bool{
+        for cardIdx in 0..<cards.count-1{
+            if cards[cardIdx].number.rawValue > cards[cardIdx].number.rawValue{
+                return false
+            }
+        }
+        return true
     }
     
     func testPerformanceExample() throws {
