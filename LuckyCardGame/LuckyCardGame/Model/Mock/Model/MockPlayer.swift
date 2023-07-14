@@ -8,6 +8,18 @@
 import Foundation
 
 class MockPlayer: Player, PlayerRule{
+    func choiceCardOfTheBottom(bottomCardIdx: Int, bottomCards: [LuckyCard]) {
+        //<#code#>
+    }
+    
+    func deleteXthCardInMyDeck(cardIdx: Int) {
+        //<#code#>
+    }
+    
+    func addCardToMyDeck(card: LuckyCard) {
+        //<#code#>
+    }
+    
     
     func choiceLeftSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame) {
         //

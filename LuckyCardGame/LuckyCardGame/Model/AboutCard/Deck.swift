@@ -31,8 +31,15 @@ struct Deck{
     public mutating func setCards(cards: [LuckyCard]){
         self.cards = cards
     }
+    
     public mutating func appendCard(card: LuckyCard){
         cards.append(card)
+    }
+    
+    public mutating func removeACard(cardIdx: Int){
+        if(cards.count > cardIdx){
+            cards.remove(at: cardIdx)
+        }
     }
 }
 

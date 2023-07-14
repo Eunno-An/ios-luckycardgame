@@ -91,8 +91,16 @@ protocol Player{
      */
     func choiceRightSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame)
     
+    /*
+     MARK: 바닥 덱 중 특정한 한 카드를 뒤집는 함수입니다.
+     */
+    func choiceCardOfTheBottom(bottomCardIdx: Int, bottomCards: [LuckyCard])
+    
     //MARK: 카드를 한 장 내 덱에 넣는 함수입니다.
     func addCardToMyDeck(card: LuckyCard)
+    
+    //MARK: 특정 카드를 플레이어 덱에서 빼는 함수입니다.
+    func deleteXthCardInMyDeck(cardIdx: Int)
 }
 
 class Attendee: Player, PlayerRule{
@@ -114,6 +122,12 @@ class Attendee: Player, PlayerRule{
         return false
     }
     
+    func choiceCardOfTheBottom(bottomCardIdx: Int, bottomCards: [LuckyCard]) {
+        if canFlipDownSideCard(card: bottomCards[bottomCardIdx]){
+            
+        }
+    }
+    
     func choiceLeftSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame){
         if canFlipLeftMostSideCard(){
             cards[0].flipCard()
@@ -131,6 +145,7 @@ class Attendee: Player, PlayerRule{
         
         if luckyCardGame.checkThreeCardsInTemporaryChoiceCards(){
             luckyCardGame.sendCardsToFinalResults()
+            luckyCardGame.flushTemporaryChoicedCards()
         }
     }
     
@@ -153,6 +168,10 @@ class Attendee: Player, PlayerRule{
         }
     }
     
+    func deleteXthCardInMyDeck(cardIdx: Int) {
+        deck.removeACard(cardIdx: cardIdx)
+    }
+    
     func sortDeckByNumberASC() {
         deck = Deck(cards: deck.cards.sorted{
             $0.number.rawValue < $1.number.rawValue
@@ -167,7 +186,7 @@ class Attendee: Player, PlayerRule{
             return true
         }
     }
-
+    
     func canFlipSecondLeftMostSideCard() -> Bool {
         if deck.cards.count < 2 || deck.cards[1].isSideFront == true{
             return false

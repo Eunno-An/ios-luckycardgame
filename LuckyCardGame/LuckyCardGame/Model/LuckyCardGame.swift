@@ -82,8 +82,17 @@ class LuckyCardGame{
         if temporaryChoicedCards.count == 3{
             for temporaryChoicedCard in temporaryChoicedCards{
                 finalResult.addCardsToFinalResult(temporaryChoicedCard: temporaryChoicedCard)
+                //temporaryChoicedCard에 있는 정보로 각각의 card배열을 초기화해줘야함
+                if temporaryChoicedCard.isBottomCard == true{ // 바닥 카드일경우
+                    if belowLuckyCards.count > temporaryChoicedCard.cardIdx{
+                        belowLuckyCards.remove(at: temporaryChoicedCard.cardIdx)
+                    }
+                }
+                else{//플레이어 카드일경우
+                    attendees[temporaryChoicedCard.playerIdx].deleteXthCardInMyDeck(cardIdx: temporaryChoicedCard.cardIdx)
+                }
+                
             }
-            flushTemporaryChoicedCards()
         }
         
     }
