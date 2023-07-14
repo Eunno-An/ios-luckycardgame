@@ -13,10 +13,10 @@ import Foundation
  */
 protocol PlayerRule{
     
-    func canFlipLeftMostSideCard() -> Bool
-    func canFlipSecondLeftMostSideCard() -> Bool
-    func canFlipRightMostSideCard() -> Bool
-    func canFlipSecnodRightMostSideCard() -> Bool
-    func canFlipDownSideCard(card: LuckyCard) -> Bool
+    func canFlipLeftMostSideCard(temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool
+    func canFlipSecondLeftMostSideCard(temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool
+    func canFlipRightMostSideCard(temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool
+    func canFlipSecnodRightMostSideCard(temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool
+    func canFlipDownSideCard(card: LuckyCard, temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool
     func canChoiceThisCard(card: LuckyCard, temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool // 카드를 뽑을 수 있는지 없는지 확인하는 함수입니다. 여태까지 뽑은 숫자가 없거나, 현재 뽑은 카드가 이전에 뽑았던 카드와 같으면 Bool입니다.
 }

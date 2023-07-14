@@ -180,8 +180,8 @@ class Attendee: Player, PlayerRule{
         }
     }
     
-    func canFlipLeftMostSideCard() -> Bool {
-        if deck.cards.count < 1 || deck.cards[0].isSideFront == true{
+    func canFlipLeftMostSideCard(temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool {
+        if deck.cards.count < 1 || deck.cards[0].isSideFront == true || temporaryChoicedCards.count == 3{
             return false
         }
         else{
@@ -189,24 +189,24 @@ class Attendee: Player, PlayerRule{
         }
     }
     
-    func canFlipSecondLeftMostSideCard() -> Bool {
-        if deck.cards.count < 2 || deck.cards[1].isSideFront == true{
+    func canFlipSecondLeftMostSideCard(temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool {
+        if deck.cards.count < 2 || deck.cards[1].isSideFront == true || temporaryChoicedCards.count == 3{
             return false
         }else{
             return true
         }
     }
     
-    func canFlipRightMostSideCard() -> Bool{
-        if deck.cards.count < 1 || deck.cards.last?.isSideFront == true{
+    func canFlipRightMostSideCard(temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool{
+        if deck.cards.count < 1 || deck.cards.last?.isSideFront == true || temporaryChoicedCards.count == 3{
             return false
         }else{
             return true
         }
     }
     
-    func canFlipSecnodRightMostSideCard() -> Bool{
-        if deck.cards.count < 2 || deck.cards[deck.cards.count-2].isSideFront == true{
+    func canFlipSecnodRightMostSideCard(temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool{
+        if deck.cards.count < 2 || deck.cards[deck.cards.count-2].isSideFront == true || temporaryChoicedCards.count == 3{
             return false
         }
         else{
@@ -214,7 +214,7 @@ class Attendee: Player, PlayerRule{
         }
     }
     
-    func canFlipDownSideCard(card: LuckyCard) -> Bool {
+    func canFlipDownSideCard(card: LuckyCard, temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool {
         if card.isSideFront == true{
             return false
         }else{

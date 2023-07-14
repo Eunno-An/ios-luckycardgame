@@ -160,14 +160,20 @@ final class LuckyCardGameTests: XCTestCase {
     
     //MARK: 사용자별로 총 세장의 카드만 뒤집을 수 있는지 확인하는 테스트함수입니다.
     func testPlayerShouldChooseOnlyThreeCards() throws{
+        //given
         luckyCardGame.gameStart(attendeeNum: .three)
-        
         let attendee_me = luckyCardGame.attendees[0]
         let attendee_theOther = luckyCardGame.attendees[1]
+        attendee_me.choiceLeftSideCardOfTheOtherCard(cards: attendee_theOther.deck.cards, playerIdx: 1, luckyCardGame: luckyCardGame)
+        attendee_me.choiceLeftSideCardOfTheOtherCard(cards: attendee_theOther.deck.cards, playerIdx: 1, luckyCardGame: luckyCardGame)
+        attendee_me.choiceLeftSideCardOfTheOtherCard(cards: attendee_theOther.deck.cards, playerIdx: 1, luckyCardGame: luckyCardGame)
         
-        //attendee_me.choice
+        //when
+        let ret: Bool = attendee_me.canFlipLeftMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards) && attendee_me.canFlipSecondLeftMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards) && attendee_me.canFlipRightMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards) && attendee_me.canFlipSecnodRightMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards) && attendee_me.canFlipDownSideCard(card: luckyCardGame.belowLuckyCards[0], temporaryChoicedCards: luckyCardGame.temporaryChoicedCards)
+        //then
+        XCTAssertFalse(ret, "더 뒤집을 수 없습니다.")
     }
-    
+
     func isCardsSortedASC(cards: [LuckyCard]) -> Bool{
         for cardIdx in 0..<cards.count-1{
             if cards[cardIdx].number.rawValue > cards[cardIdx].number.rawValue{
