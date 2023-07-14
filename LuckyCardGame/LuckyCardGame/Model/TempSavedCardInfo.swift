@@ -21,4 +21,5 @@ struct TempChoicedCardInfo{
         self.card = card
     }
     
+    
 }

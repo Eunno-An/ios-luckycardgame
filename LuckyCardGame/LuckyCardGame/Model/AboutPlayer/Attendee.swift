@@ -94,13 +94,14 @@ protocol Player{
     /*
      MARK: 바닥 덱 중 특정한 한 카드를 뒤집는 함수입니다.
      */
-    func choiceCardOfTheBottom(bottomCardIdx: Int, bottomCards: [LuckyCard])
+    func choiceCardOfTheBottom(bottomCardIdx: Int, bottomCards: [LuckyCard], luckyCardGame: LuckyCardGame)
     
     //MARK: 카드를 한 장 내 덱에 넣는 함수입니다.
     func addCardToMyDeck(card: LuckyCard)
     
     //MARK: 특정 카드를 플레이어 덱에서 빼는 함수입니다.
     func deleteXthCardInMyDeck(cardIdx: Int)
+    
 }
 
 class Attendee: Player, PlayerRule{
@@ -122,9 +123,10 @@ class Attendee: Player, PlayerRule{
         return false
     }
     
-    func choiceCardOfTheBottom(bottomCardIdx: Int, bottomCards: [LuckyCard]) {
+    func choiceCardOfTheBottom(bottomCardIdx: Int, bottomCards: [LuckyCard], luckyCardGame: LuckyCardGame) {
         if canFlipDownSideCard(card: bottomCards[bottomCardIdx]){
-            
+            bottomCards[bottomCardIdx].flipCard()
+            luckyCardGame.appendTemporaryChoicedCards(tempChoicedCardInfo: TempChoicedCardInfo(cardIdx: bottomCardIdx, isBottomCardOrPlayerCard: true, playerIdx: -1, card: bottomCards[bottomCardIdx]))
         }
     }
     
@@ -142,11 +144,6 @@ class Attendee: Player, PlayerRule{
                 luckyCardGame.appendTemporaryChoicedCards(tempChoicedCardInfo: TempChoicedCardInfo(cardIdx: 2, isBottomCardOrPlayerCard: false, playerIdx: playerIdx, card: cards[2]))
             }
         }
-        
-        if luckyCardGame.checkThreeCardsInTemporaryChoiceCards(){
-            luckyCardGame.sendCardsToFinalResults()
-            luckyCardGame.flushTemporaryChoicedCards()
-        }
     }
     
     func choiceRightSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame) {
@@ -163,9 +160,6 @@ class Attendee: Player, PlayerRule{
                 luckyCardGame.appendTemporaryChoicedCards(tempChoicedCardInfo: TempChoicedCardInfo(cardIdx: cards.count-3, isBottomCardOrPlayerCard: false, playerIdx: playerIdx, card: cards.last!))
             }
         }
-        if luckyCardGame.checkThreeCardsInTemporaryChoiceCards(){
-            luckyCardGame.sendCardsToFinalResults()
-        }
     }
     
     func deleteXthCardInMyDeck(cardIdx: Int) {
@@ -176,6 +170,14 @@ class Attendee: Player, PlayerRule{
         deck = Deck(cards: deck.cards.sorted{
             $0.number.rawValue < $1.number.rawValue
         })
+    }
+    
+    func canChoiceThisCard(card: LuckyCard, temporaryChoicedCards: [TempChoicedCardInfo]) -> Bool {
+        if temporaryChoicedCards.count == 0 || temporaryChoicedCards.last?.card.number == card.number{
+            return true
+        }else {
+            return false
+        }
     }
     
     func canFlipLeftMostSideCard() -> Bool {
@@ -238,6 +240,10 @@ class Attendee: Player, PlayerRule{
         deck = Deck(cards: deck.cards.sorted{
             $0.number.rawValue > $1.number.rawValue
         })
+    }
+    
+    public func flipXthCardFlip(cardIdx: Int){
+        deck.flipXthCard(cardIdx: cardIdx)
     }
 
 }

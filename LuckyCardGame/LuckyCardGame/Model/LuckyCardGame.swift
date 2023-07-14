@@ -141,4 +141,13 @@ class LuckyCardGame{
         return answerAnimalCountArr == animalCountArr
     }
     
+    /*
+     MARK: 선택에 실패했을 경우, 원래 상태로 되돌리는 함수입니다.
+     attendee가 호출한 canChoiceThisCard()에서 false값을 반환하면 이 함수가 호출됩니다.
+     */
+    func rollBackBeforeGameState(){
+        for choiceCard in temporaryChoicedCards{
+            attendees[choiceCard.playerIdx].flipXthCardFlip(cardIdx: choiceCard.cardIdx)
+        }
+    }
 }

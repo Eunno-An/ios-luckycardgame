@@ -41,6 +41,11 @@ struct Deck{
             cards.remove(at: cardIdx)
         }
     }
+    public mutating func flipXthCard(cardIdx: Int){
+        if(cards.count > cardIdx){
+            cards[cardIdx].flipCard()
+        }
+    }
 }
 
 /*
