@@ -150,4 +150,11 @@ class LuckyCardGame{
             attendees[choiceCard.playerIdx].flipXthCardFlip(cardIdx: choiceCard.cardIdx)
         }
     }
+    
+    /*
+     */
+    
+    func checkThreeNumbersInTemporaryChoicedCardsAreSameNumber() -> Bool{
+        return temporaryChoicedCards[0].card.number == temporaryChoicedCards[1].card.number && temporaryChoicedCards[1].card.number == temporaryChoicedCards[2].card.number
+    }
 }

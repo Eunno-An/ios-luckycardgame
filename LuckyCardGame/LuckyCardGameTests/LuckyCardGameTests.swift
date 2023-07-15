@@ -42,7 +42,8 @@ final class LuckyCardGameTests: XCTestCase {
      MARK: 카드를 오름차순으로 정렬할 수 있는지를 확인하는 테스트함수입니다.
      */
     func testCanSortCardsASCbyCardNumber() throws{
-        let cardsDummy:[LuckyCard] = [
+        
+        var cardsDummy:[LuckyCard] = [
             LuckyCard(number: .five, animal: .cat),
             LuckyCard(number: .three, animal: .cow),
             LuckyCard(number: .seven, animal: .dog),
@@ -50,11 +51,19 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .one, animal: .dog)
         ]
         
-        var sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
-        sut.sortDeckByNumberASC()
-        let isArraySorted: Bool = isCardsSortedASC(cards: sut.deck.cards)
+        let sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
-        XCTAssertTrue(isArraySorted, "카드를 오름차순으로 정렬할 수 없습니다.")
+        sut.sortDeckByNumberASC()
+    
+        var flag: Bool = false
+        for cardIdx in 0..<sut.deck.cards.count-1{
+            if sut.deck.cards[cardIdx].number.rawValue > sut.deck.cards[cardIdx+1].number.rawValue{
+                flag = true
+                XCTAssertFalse(flag, "카드를 오름차순으로 정렬할 수 없습니다.")
+                break
+                
+            }
+        }
         
     }
     
@@ -75,10 +84,12 @@ final class LuckyCardGameTests: XCTestCase {
         let result: Bool = sut.checkThreeNumbersAreInDeck()
         
         XCTAssertTrue(result, "세개의 숫자가 없습니다.")
+        
     }
     
-    //MARK: 덱의 가장 왼쪽에 있는 카드를 뒤집을 수 있는지 검사하는 카드입니다.
+    //MARK: 덱의 가장 왼쪽에 있는 카드를 뒤집을 수 있는지 검사하는 테스트입니다.
     func testTouchMostLeftCardWhenDownSide() throws{
+        //given
         let cardsDummy: [LuckyCard] = [
             LuckyCard(number: .five, animal: .cat, isUpSide: false),
             LuckyCard(number: .three, animal: .cow),
@@ -86,11 +97,29 @@ final class LuckyCardGameTests: XCTestCase {
             LuckyCard(number: .five, animal: .cat),
             LuckyCard(number: .five, animal: .dog)
         ]
+        
         let sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
-        let canFlipLeftMostCard: Bool = sut.canFlipLeftMostSideCard()
+        //when
+        //어떤 turn에 두 장의 카드 번호가 같은걸 뽑았을 경우
+        let temporaryChoicedCardsWithSizeTwo : [TempChoicedCardInfo] = [
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .cat, isUpSide: true)),
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .dog, isUpSide: true))
+        ]
+        
+        //어떤 turn에 이미 세장의 같은 숫자 카드를 뽑았을 경우
+        let temporaryChoicedCardsWidthSizeThree : [TempChoicedCardInfo] = [
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .cat, isUpSide: true)),
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .dog, isUpSide: true)),
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .cow, isUpSide: true))
+        ]
+        
+        //then
+        var canFlipLeftMostCard: Bool = sut.canFlipLeftMostSideCard(temporaryChoicedCards: temporaryChoicedCardsWithSizeTwo)
         XCTAssertTrue(canFlipLeftMostCard, "가장 왼쪽 카드를 뒤집을 수 없습니다.")
-        //realAttendee.deck.cards[0].flipCard()
+        
+        canFlipLeftMostCard = sut.canFlipLeftMostSideCard(temporaryChoicedCards: temporaryChoicedCardsWidthSizeThree)
+        XCTAssertFalse(canFlipLeftMostCard, "이미 선택한 카드가 세개라서 뒤집을 수 없습니다.")
     }
     
     //MARK: 덱의 왼쪽에서 두번째 카드를 뒤집을 수 있는지 확인하는 테스트함수입니다.
@@ -104,16 +133,32 @@ final class LuckyCardGameTests: XCTestCase {
         ]
         let sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
-        let canFlipLeftMostCard: Bool = sut.canFlipLeftMostSideCard()
-        if canFlipLeftMostCard == false{
-            let canFlipSecondLeftMostCard: Bool = sut.canFlipSecondLeftMostSideCard()
-            XCTAssertTrue(canFlipSecondLeftMostCard, "왼쪽에서 두번재 카드를 뒤집을 수 없습니다.")
-        }
-        //realAttendee.deck.cards[1].flipCard()
+        
+        //어떤 turn에 두 장의 카드 번호가 같은걸 뽑았을 경우
+        let temporaryChoicedCardsWithSizeTwo : [TempChoicedCardInfo] = [
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .cat, isUpSide: true)),
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .dog, isUpSide: true))
+        ]
+        
+        //어떤 turn에 이미 세장의 같은 숫자 카드를 뽑았을 경우
+        let temporaryChoicedCardsWidthSizeThree : [TempChoicedCardInfo] = [
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .cat, isUpSide: true)),
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .dog, isUpSide: true)),
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .cow, isUpSide: true))
+        ]
+        //when
+        var canFlipRightMostCard: Bool = sut.canFlipRightMostSideCard(temporaryChoicedCards: temporaryChoicedCardsWithSizeTwo)
+        
+        //then
+        XCTAssertTrue(canFlipRightMostCard, "가장 왼쪽 카드를 뒤집을 수 없습니다.")
+        
+        canFlipRightMostCard = sut.canFlipRightMostSideCard(temporaryChoicedCards: temporaryChoicedCardsWidthSizeThree)
+        XCTAssertFalse(canFlipRightMostCard, "이미 선택한 카드가 세개라서 뒤집을 수 없습니다.")
     }
     
     //MARK: 덱의 가장 오른쪽 카드를 뒤집을 수 있는지 확인하는 테스트함수입니다.
     func testTouchMostRightCardWhenDownSide() throws{
+        //given
         let cardsDummy: [LuckyCard] = [
             LuckyCard(number: .five, animal: .cat),
             LuckyCard(number: .three, animal: .cow),
@@ -123,9 +168,29 @@ final class LuckyCardGameTests: XCTestCase {
         ]
         let sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
-        let canFlipLeftMostCard: Bool = sut.canFlipRightMostSideCard()
-        XCTAssertTrue(canFlipLeftMostCard, "가장 오른쪽 카드를 뒤집을 수 없습니다.")
-        //realAttendee.deck.cards[0].flipCard()
+        //어떤 turn에 두 장의 카드 번호가 같은걸 뽑았을 경우
+        let temporaryChoicedCardsWithSizeTwo : [TempChoicedCardInfo] = [
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .cat, isUpSide: true)),
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .dog, isUpSide: true))
+        ]
+        
+        //어떤 turn에 이미 세장의 같은 숫자 카드를 뽑았을 경우
+        let temporaryChoicedCardsWidthSizeThree : [TempChoicedCardInfo] = [
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .cat, isUpSide: true)),
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .dog, isUpSide: true)),
+            TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: true, playerIdx: 0, card: LuckyCard(number: .five, animal: .cow, isUpSide: true))
+        ]
+        //when
+        var canFlipRightMostCard: Bool = sut.canFlipRightMostSideCard(temporaryChoicedCards: temporaryChoicedCardsWithSizeTwo)
+        
+        //then
+        XCTAssertTrue(canFlipRightMostCard, "가장 왼쪽 카드를 뒤집을 수 없습니다.")
+        
+        //when
+        canFlipRightMostCard = sut.canFlipRightMostSideCard(temporaryChoicedCards: temporaryChoicedCardsWidthSizeThree)
+        //then
+        XCTAssertFalse(canFlipRightMostCard, "이미 선택한 카드가 세개라서 뒤집을 수 없습니다.")
+        
     }
     
     //MARK: 덱의 오른쪽에서 두번째 카드를 뒤집을 수 있는지 확인하는 테스트함수입니다.
@@ -139,9 +204,9 @@ final class LuckyCardGameTests: XCTestCase {
         ]
         let sut: Attendee = Attendee(deck: Deck(cards: cardsDummy))
         
-        let canFlipLeftMostCard: Bool = sut.canFlipSecnodRightMostSideCard()
+        let canFlipLeftMostCard: Bool = sut.canFlipSecnodRightMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards)
         if canFlipLeftMostCard == false{
-            let canFlipSecondLeftMostCard: Bool = sut.canFlipSecnodRightMostSideCard()
+            let canFlipSecondLeftMostCard: Bool = sut.canFlipSecnodRightMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards)
             XCTAssertTrue(canFlipSecondLeftMostCard, "오른쪽에서 두번재 카드를 뒤집을 수 없습니다.")
         }
         //realAttendee.deck.cards[1].flipCard()
@@ -150,7 +215,7 @@ final class LuckyCardGameTests: XCTestCase {
     //MARK: 뒤집혀 있는 카드를 터치하면 앞면이 될 수 있는지 확인하는 테스트함수입니다.
     func testTouchBehindCardAndFlipCard() throws{
         
-        var tempCard: LuckyCard = LuckyCard(number: .five, animal: .cat, isUpSide: true)
+        let tempCard: LuckyCard = LuckyCard(number: .five, animal: .cat, isUpSide: true)
             
         tempCard.flipCard()
         
@@ -170,10 +235,31 @@ final class LuckyCardGameTests: XCTestCase {
         
         //when
         let ret: Bool = attendee_me.canFlipLeftMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards) && attendee_me.canFlipSecondLeftMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards) && attendee_me.canFlipRightMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards) && attendee_me.canFlipSecnodRightMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards) && attendee_me.canFlipDownSideCard(card: luckyCardGame.belowLuckyCards[0], temporaryChoicedCards: luckyCardGame.temporaryChoicedCards)
+        
         //then
         XCTAssertFalse(ret, "더 뒤집을 수 없습니다.")
     }
 
+    //MARK: 만약 세장의 카드가 숫자가 같으면 표시 화면에서 제거하고, 결과 화면으로 보내버리는지를 테스트하는 함수입니다.
+    func testAllThreeNumbersSameThenEliminateThenAndSendFinalResult(){
+        //given
+        luckyCardGame.gameStart(attendeeNum: .three)
+        let attendee_me = luckyCardGame.attendees[0]
+        let attendee_theOther = luckyCardGame.attendees[1]
+        attendee_me.choiceLeftSideCardOfTheOtherCard(cards: attendee_theOther.deck.cards, playerIdx: 1, luckyCardGame: luckyCardGame)
+        attendee_me.choiceLeftSideCardOfTheOtherCard(cards: attendee_theOther.deck.cards, playerIdx: 1, luckyCardGame: luckyCardGame)
+        attendee_me.choiceLeftSideCardOfTheOtherCard(cards: attendee_theOther.deck.cards, playerIdx: 1, luckyCardGame: luckyCardGame)
+        //when
+        let ret: Bool =   luckyCardGame.checkThreeCardsInTemporaryChoiceCards()
+        //then
+        XCTAssertTrue(ret, "세장의 카드를 아직 선택하지 않았습니다.")
+        
+        //when
+        let ret2: Bool = luckyCardGame.checkThreeNumbersInTemporaryChoicedCardsAreSameNumber()
+        //then
+        XCTAssertTrue(ret2, "세장의 카드 숫자가 같지않습니다.")
+    }
+    
     func isCardsSortedASC(cards: [LuckyCard]) -> Bool{
         for cardIdx in 0..<cards.count-1{
             if cards[cardIdx].number.rawValue > cards[cardIdx].number.rawValue{

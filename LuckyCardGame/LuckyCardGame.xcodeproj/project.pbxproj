@@ -36,7 +36,6 @@
 		D4A6FA9D2A5A401C00637995 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FA9C2A5A401C00637995 /* CardView.swift */; };
 		D4A6FAA32A5A44C600637995 /* BehindCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FAA22A5A44C600637995 /* BehindCardView.swift */; };
 		D4A6FAA52A5A44CF00637995 /* FrontCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A6FAA42A5A44CF00637995 /* FrontCardView.swift */; };
-		D4CBB0632A5FEDA8002ECC4C /* MockPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CBB0622A5FEDA8002ECC4C /* MockPlayer.swift */; };
 		D4CBB0652A601F42002ECC4C /* MockFinalResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CBB0642A601F42002ECC4C /* MockFinalResult.swift */; };
 		D4CBB0672A602CF3002ECC4C /* FinalResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CBB0662A602CF2002ECC4C /* FinalResult.swift */; };
 /* End PBXBuildFile section */
@@ -100,7 +99,6 @@
 		D4A6FA9C2A5A401C00637995 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D4A6FAA22A5A44C600637995 /* BehindCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehindCardView.swift; sourceTree = "<group>"; };
 		D4A6FAA42A5A44CF00637995 /* FrontCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontCardView.swift; sourceTree = "<group>"; };
-		D4CBB0622A5FEDA8002ECC4C /* MockPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlayer.swift; sourceTree = "<group>"; };
 		D4CBB0642A601F42002ECC4C /* MockFinalResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFinalResult.swift; sourceTree = "<group>"; };
 		D4CBB0662A602CF2002ECC4C /* FinalResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,7 +189,6 @@
 			isa = PBXGroup;
 			children = (
 				D4CBB0642A601F42002ECC4C /* MockFinalResult.swift */,
-				D4CBB0622A5FEDA8002ECC4C /* MockPlayer.swift */,
 				D47E06A22A5EF77D00273A02 /* TestingPlayerRule */,
 			);
 			path = Model;
@@ -475,7 +472,6 @@
 				D4A6FAA52A5A44CF00637995 /* FrontCardView.swift in Sources */,
 				D4988B0B2A53E1D7001456FF /* ViewController.swift in Sources */,
 				D471EA152A5D3A400008D4E4 /* PlayerRule.swift in Sources */,
-				D4CBB0632A5FEDA8002ECC4C /* MockPlayer.swift in Sources */,
 				D4A6FA912A571BAD00637995 /* GameView.swift in Sources */,
 				D4A6FA8A2A56F2CF00637995 /* ConstantValue.swift in Sources */,
 				D4A6FA7D2A56B28B00637995 /* CardNumber.swift in Sources */,

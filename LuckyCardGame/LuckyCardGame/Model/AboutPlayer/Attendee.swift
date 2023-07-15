@@ -124,18 +124,18 @@ class Attendee: Player, PlayerRule{
     }
     
     func choiceCardOfTheBottom(bottomCardIdx: Int, bottomCards: [LuckyCard], luckyCardGame: LuckyCardGame) {
-        if canFlipDownSideCard(card: bottomCards[bottomCardIdx]){
+        if canFlipDownSideCard(card: bottomCards[bottomCardIdx], temporaryChoicedCards: luckyCardGame.temporaryChoicedCards){
             bottomCards[bottomCardIdx].flipCard()
             luckyCardGame.appendTemporaryChoicedCards(tempChoicedCardInfo: TempChoicedCardInfo(cardIdx: bottomCardIdx, isBottomCardOrPlayerCard: true, playerIdx: -1, card: bottomCards[bottomCardIdx]))
         }
     }
     
     func choiceLeftSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame){
-        if canFlipLeftMostSideCard(){
+        if canFlipLeftMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards){
             cards[0].flipCard()
             luckyCardGame.appendTemporaryChoicedCards(tempChoicedCardInfo: TempChoicedCardInfo(cardIdx: 0, isBottomCardOrPlayerCard: false, playerIdx: playerIdx, card: cards[0]))
         }else{
-            if canFlipSecondLeftMostSideCard(){
+            if canFlipSecondLeftMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards){
                 cards[1].flipCard()
                 luckyCardGame.appendTemporaryChoicedCards(tempChoicedCardInfo: TempChoicedCardInfo(cardIdx: 1, isBottomCardOrPlayerCard: false, playerIdx: playerIdx, card: cards[1]))
             }else{
@@ -147,11 +147,11 @@ class Attendee: Player, PlayerRule{
     }
     
     func choiceRightSideCardOfTheOtherCard(cards: [LuckyCard], playerIdx: Int, luckyCardGame: LuckyCardGame) {
-        if canFlipRightMostSideCard(){
+        if canFlipRightMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards){
             cards.last?.flipCard()
             luckyCardGame.appendTemporaryChoicedCards(tempChoicedCardInfo: TempChoicedCardInfo(cardIdx: cards.count-1, isBottomCardOrPlayerCard: false, playerIdx: playerIdx, card: cards.last!))
         }else{
-            if canFlipSecnodRightMostSideCard(){
+            if canFlipSecnodRightMostSideCard(temporaryChoicedCards: luckyCardGame.temporaryChoicedCards){
                 cards[cards.count-2].flipCard()
                 luckyCardGame.appendTemporaryChoicedCards(tempChoicedCardInfo: TempChoicedCardInfo(cardIdx: cards.count-2, isBottomCardOrPlayerCard: false, playerIdx: playerIdx, card: cards.last!))
             }else{
